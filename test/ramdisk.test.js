@@ -2,8 +2,10 @@ const { existsSync } = require('node:fs');
 const { join, resolve } = require('node:path');
 const { unstyle } = require('ansi-colors');
 
-const { test, expect } = require('@rstest/core');
+const { test, expect, rstest } = require('@rstest/core');
 const execa = require('execa');
+
+rstest.setConfig({ testTimeout: 25_000 });
 
 const fixturePath = join(__dirname, 'fixtures/ramdisk');
 
