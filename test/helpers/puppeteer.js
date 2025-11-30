@@ -1,17 +1,16 @@
-const { writeFileSync } = require('node:fs');
+const fs = require('node:fs');
 const { join } = require('node:path');
+const { unstyle } = require('ansi-colors');
 
-const copy = require('cpy');
 const mkdir = require('make-dir');
 const puppeteer = require('puppeteer');
-const strip = require('strip-ansi');
 
 const getPort = (stdout) => {
   return {
     // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r, f) {
       stdout.on('data', (data) => {
-        const content = strip(data.toString());
+        const content = unstyle(data.toString());
         const test = 'Server Listening on: ';
         if (content.includes(test)) {
           r(content.slice(content.lastIndexOf(':') + 1));
@@ -27,7 +26,7 @@ const replace = (path, content) => {
   return {
     // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r) {
-      writeFileSync(path, content);
+      fs.writeFileSync(path, content);
       setTimeout(r, 5000);
     },
   };
@@ -37,7 +36,7 @@ const setup = async (base, name) => {
   const fixturesPath = join(__dirname, '../fixtures');
   const src = join(fixturesPath, base);
   const dest = await mkdir(join(fixturesPath, `temp-${name}`));
-  await copy(`${src}/*`, dest);
+  await fs.promises.cp(src, dest, { recursive: true });
 
   return dest;
 };
@@ -47,7 +46,7 @@ const waitForBuild = (stderr) => {
     // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r) {
       stderr.on('data', (data) => {
-        const content = strip(data.toString());
+        const content = unstyle(data.toString());
         if (/webpack: Hash:/.test(content)) {
           r();
         }

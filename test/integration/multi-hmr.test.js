@@ -1,7 +1,7 @@
 const { join } = require('node:path');
+const fs = require('node:fs');
 
 const test = require('ava');
-const del = require('del');
 const execa = require('execa');
 
 const { browser } = require('../helpers/puppeteer');
@@ -39,5 +39,5 @@ test('multi compiler', browser, async (t, page, util) => {
   t.is(componentValue, 'test');
   t.is(workValue, 'test');
 
-  await del(fixturePath);
+  await fs.promises.rm(fixturePath, { recursive: true, force: true });
 });

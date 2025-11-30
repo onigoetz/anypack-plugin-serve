@@ -1,4 +1,4 @@
-const del = require('del');
+const fs = require('node:fs');
 const webpack = require('webpack');
 const test = require('ava');
 const fetch = require('node-fetch');
@@ -22,7 +22,10 @@ test.before('Starting server', async () => {
 
 test.after.always('Closing server', async () => {
   watcher.close();
-  await del('./test/fixtures/waitForBuild/output');
+  await fs.promises.rm('./test/fixtures/waitForBuild/output', {
+    recursive: true,
+    force: true,
+  });
 });
 
 test('should wait until bundle is compiled', async (t) => {

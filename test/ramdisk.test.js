@@ -1,9 +1,9 @@
 const { existsSync } = require('node:fs');
 const { join, resolve } = require('node:path');
+const { unstyle } = require('ansi-colors');
 
 const test = require('ava');
 const execa = require('execa');
-const strip = require('strip-ansi');
 
 const fixturePath = join(__dirname, 'fixtures/ramdisk');
 
@@ -12,7 +12,7 @@ const waitFor = (text, stream) => {
     // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r, f) {
       stream.on('data', (data) => {
-        const content = strip(data.toString());
+        const content = unstyle(data.toString());
         if (content.includes(text)) {
           r(content.slice(content.lastIndexOf(text) + text.length));
         }
