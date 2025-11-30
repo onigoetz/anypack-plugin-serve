@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const test = require('ava');
+const { test, expect, beforeEach, afterEach } = require('@rstest/core');
 const fetch = require('node-fetch');
 const defer = require('p-defer');
 
@@ -11,7 +11,7 @@ const compiler = webpack(webpackConfig);
 let server;
 let watcher;
 
-test.before(async () => {
+beforeEach(async () => {
   server = proxyServer([
     {
       url: '/test',
@@ -24,13 +24,13 @@ test.before(async () => {
   await deferred.promise;
 });
 
-test.after.always(() => {
+afterEach(() => {
   server.close();
   watcher.close();
 });
 
-test('should rewrite /api', async (t) => {
+test('should rewrite /api', async () => {
   const response = await fetch('http://localhost:55557/api/test');
   const result = await response.text();
-  t.snapshot(result);
+  expect(result).toMatchSnapshot();
 });

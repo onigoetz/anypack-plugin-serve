@@ -30,4 +30,4 @@ jobs:
     - run: yarn ci:lint
     #- run: yarn audit
     #- run: yarn build
-    - run: yarn ci:coverage
+    - run: yarn ci:test

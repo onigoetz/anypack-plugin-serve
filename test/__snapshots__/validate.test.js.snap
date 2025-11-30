@@ -1,0 +1,31 @@
+// Rstest Snapshot v1
+
+exports[`error 1`] = `[StructError: At path: foo -- Expected a value of type \`never\` for \`foo\`, but received: \`"bar"\`]`;
+
+exports[`promise 1`] = `[StructError: At path: host -- Expected the value to satisfy a union of \`any | string\`, but received: 0]`;
+
+exports[`promise 2`] = `
+{
+  "error": undefined,
+  "value": {
+    "host": Promise {},
+    "port": Promise {},
+  },
+}
+`;
+
+exports[`promise 3`] = `
+{
+  "error": undefined,
+  "value": {
+    "host": {
+      "then": [Function],
+    },
+    "port": {
+      "then": [Function],
+    },
+  },
+}
+`;
+
+exports[`throws 1`] = `[StructError: At path: batman -- Expected a value of type \`never\` for \`batman\`, but received: \`"nanananana"\`]`;

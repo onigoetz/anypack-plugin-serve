@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const webpack = require('webpack');
-const test = require('ava');
+const { test, expect, beforeEach, afterEach } = require('@rstest/core');
 const fetch = require('node-fetch');
 const defer = require('p-defer');
 
@@ -10,7 +10,7 @@ const { make } = require('./fixtures/wait-for-build/make-config');
 let watcher;
 let port;
 
-test.before('Starting server', async () => {
+beforeEach(async () => {
   const deferred = defer();
   port = await getPort();
   const { serve, config } = make(port);
@@ -20,7 +20,7 @@ test.before('Starting server', async () => {
   await deferred.promise;
 });
 
-test.after.always('Closing server', async () => {
+afterEach(async () => {
   watcher.close();
   await fs.promises.rm('./test/fixtures/waitForBuild/output', {
     recursive: true,
@@ -28,8 +28,8 @@ test.after.always('Closing server', async () => {
   });
 });
 
-test('should wait until bundle is compiled', async (t) => {
+test('should wait until bundle is compiled', async () => {
   const response = await fetch(`http://localhost:${port}/test`);
   const text = await response.text();
-  t.is(text, 'success');
+  expect(text).toEqual('success');
 });

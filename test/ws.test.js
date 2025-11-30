@@ -1,4 +1,4 @@
-const test = require('ava');
+const { test, expect } = require('@rstest/core');
 const Koa = require('koa');
 const router = require('koa-route');
 const defer = require('p-defer');
@@ -8,7 +8,7 @@ const { middleware } = require('../lib/ws');
 
 const { getPort } = require('./helpers/port');
 
-test('websocket middleware', async (t) => {
+test('websocket middleware', async () => {
   const app = new Koa();
   const port = await getPort();
   const uri = `ws://localhost:${port}/test`;
@@ -18,24 +18,21 @@ test('websocket middleware', async (t) => {
   app.use(middleware);
   app.use(
     router.get('/test', async (ctx) => {
-      t.truthy(ctx.ws);
+      expect(ctx.ws).toBeTruthy();
 
       const socket = await ctx.ws();
 
-      t.truthy(socket);
+      expect(socket).toBeTruthy();
       routeDeferred.resolve();
     }),
   );
 
   const server = app.listen(port);
 
-  await {
-    // biome-ignore lint/suspicious/noThenProperty: legacy
-    then(r, f) {
-      server.on('listening', r);
-      server.on('error', f);
-    },
-  };
+  await new Promise((r, f) => {
+    server.on('listening', r);
+    server.on('error', f);
+  });
 
   const socket = new WebSocket(uri);
 

@@ -1,0 +1,115 @@
+// Rstest Snapshot v1
+
+exports[`allow https null 1`] = `
+{
+  "allowMany": true,
+  "compress": null,
+  "headers": null,
+  "historyFallback": false,
+  "hmr": true,
+  "host": null,
+  "https": null,
+  "liveReload": false,
+  "log": {
+    "level": "info",
+    "name": "webpack-plugin-serve",
+    "prefix": {
+      "level": [Function],
+      "template": "{{level}}",
+    },
+  },
+  "middleware": [Function],
+  "open": false,
+  "port": {
+    "then": [Function],
+  },
+  "progress": true,
+  "publicPath": null,
+  "ramdisk": false,
+  "secure": false,
+  "static": [],
+  "status": true,
+}
+`;
+
+exports[`defaults 1`] = `
+{
+  "compress": null,
+  "headers": null,
+  "historyFallback": false,
+  "hmr": true,
+  "host": null,
+  "liveReload": false,
+  "log": {
+    "level": "info",
+    "name": "webpack-plugin-serve",
+    "prefix": {
+      "level": [Function],
+      "template": "{{level}}",
+    },
+  },
+  "middleware": [Function],
+  "open": false,
+  "port": {
+    "then": [Function],
+  },
+  "progress": true,
+  "publicPath": null,
+  "ramdisk": false,
+  "secure": false,
+  "static": [],
+  "status": true,
+}
+`;
+
+exports[`options manipulation 1`] = `
+{
+  "allowMany": true,
+  "compress": {},
+  "headers": null,
+  "historyFallback": {},
+  "hmr": true,
+  "host": null,
+  "liveReload": false,
+  "log": {
+    "level": "info",
+    "name": "webpack-plugin-serve",
+    "prefix": {
+      "level": [Function],
+      "template": "{{level}}",
+    },
+  },
+  "middleware": [Function],
+  "open": false,
+  "port": {
+    "then": [Function],
+  },
+  "progress": true,
+  "publicPath": "dist",
+  "ramdisk": false,
+  "secure": false,
+  "static": [],
+  "status": true,
+}
+`;
+
+exports[`static → array(string) 1`] = `
+[
+  "test/fixtures",
+]
+`;
+
+exports[`static → glob 1`] = `
+[
+  "test/fixtures/https",
+  "test/fixtures/multi",
+  "test/fixtures/proxy",
+  "test/fixtures/ramdisk",
+  "test/fixtures/ramdisk-empty-pkg",
+  "test/fixtures/ramdisk/cwd-error",
+  "test/fixtures/simple",
+  "test/fixtures/wait-for-build",
+]
+`;
+
+exports[`static → string 1`] = `"test/fixtures"`;

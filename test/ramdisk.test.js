@@ -2,7 +2,7 @@ const { existsSync } = require('node:fs');
 const { join, resolve } = require('node:path');
 const { unstyle } = require('ansi-colors');
 
-const test = require('ava');
+const { test, expect } = require('@rstest/core');
 const execa = require('execa');
 
 const fixturePath = join(__dirname, 'fixtures/ramdisk');
@@ -23,7 +23,7 @@ const waitFor = (text, stream) => {
   };
 };
 
-test.serial('ramdisk', async (t) => {
+test('ramdisk', async () => {
   const proc = execa('wp', [], { cwd: fixturePath });
   const { stderr, stdout } = proc;
   const pathTest = 'Build being written to ';
@@ -31,18 +31,18 @@ test.serial('ramdisk', async (t) => {
 
   const path = await waitFor(pathTest, stdout);
 
-  t.regex(path, /(volumes|mnt)\/wps\/webpack-plugin-serve\/output/i);
+  expect(path).toMatch(/(volumes|mnt)\/wps\/webpack-plugin-serve\/output/i);
 
   await waitFor(doneTest, stderr);
 
   const exists = existsSync(join(fixturePath, 'output/output.js'));
 
-  t.truthy(exists);
+  expect(exists).toBeTruthy();
 
   proc.kill('SIGTERM');
 });
 
-test.serial('ramdisk with options', async (t) => {
+test('ramdisk with options', async () => {
   const proc = execa('wp', ['--config', 'ramdisk/custom-options.js'], {
     cwd: resolve(fixturePath, '..'),
   });
@@ -52,44 +52,44 @@ test.serial('ramdisk with options', async (t) => {
 
   const path = await waitFor(pathTest, stdout);
 
-  t.regex(path, /(volumes|mnt)\/wps\/webpack-plugin-serve\/output/i);
+  expect(path).toMatch(/(volumes|mnt)\/wps\/webpack-plugin-serve\/output/i);
 
   await waitFor(doneTest, stderr);
 
   const exists = existsSync(join(fixturePath, 'output/output.js'));
 
-  t.truthy(exists);
+  expect(exists).toBeTruthy();
 
   proc.kill('SIGTERM');
 });
 
-test.serial('context error', async (t) => {
+test('context error', async () => {
   try {
     await execa('wp', ['--config', 'ramdisk/config-context-error.js'], {
       cwd: resolve(fixturePath, '..'),
     });
   } catch (e) {
-    t.regex(e.stderr, /Please set the `context` to a another path/);
-    t.is(e.exitCode, 1);
+    expect(e.stderr).toMatch(/Please set the `context` to a another path/);
+    expect(e.exitCode).toEqual(1);
     return;
   }
-  t.fail();
+  throw new Error('The test should have thrown an error');
 });
 
-test.serial('cwd error', async (t) => {
+test('cwd error', async () => {
   try {
     await execa('wp', ['--config', '../config-cwd-error.js'], {
       cwd: join(fixturePath, 'cwd-error'),
     });
   } catch (e) {
-    t.regex(e.stderr, /Please run from another path/);
-    t.is(e.exitCode, 1);
+    expect(e.stderr).toMatch(/Please run from another path/);
+    expect(e.exitCode).toEqual(1);
     return;
   }
-  t.fail();
+  throw new Error('The test should have thrown an error');
 });
 
-test.serial('ramdisk with empty package.json', async (t) => {
+test('ramdisk with empty package.json', async () => {
   const fixturePath = join(__dirname, 'fixtures/ramdisk-empty-pkg');
   const proc = execa('wp', [], { cwd: fixturePath });
   const { stderr, stdout } = proc;
@@ -98,11 +98,11 @@ test.serial('ramdisk with empty package.json', async (t) => {
 
   const path = await waitFor(pathTest, stdout);
 
-  t.regex(path, /(volumes|mnt)\/wps\/[a-f0-9]{32}\/output/i);
+  expect(path).toMatch(/(volumes|mnt)\/wps\/[a-f0-9]{32}\/output/i);
 
   await waitFor(doneTest, stderr);
 
   const exists = existsSync(join(fixturePath, 'output/output.js'));
 
-  t.truthy(exists);
+  expect(exists).toBeTruthy();
 });

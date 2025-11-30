@@ -6,6 +6,7 @@ node_modules
 .idea
 
 test/**/output*
+test/fixtures/temp-*
 output.js
 output.js.map
 *.hot-update.*

@@ -1,3 +1,5 @@
-const test = require('ava');
+const { test, expect } = require('@rstest/core');
 
-test('placeholder', (t) => t.pass());
+test('placeholder', () => {
+  expect(true).toBeTruthy();
+});

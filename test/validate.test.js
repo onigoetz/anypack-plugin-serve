@@ -1,56 +1,55 @@
-const test = require('ava');
+const { test, expect } = require('@rstest/core');
 
 const { defaults, WebpackPluginServe } = require('../lib');
 const { validate } = require('../lib/validate');
 
-test('defaults', (t) => {
+test('defaults', () => {
   delete defaults.secure;
   const result = validate(defaults);
-  t.falsy(result.error);
+  expect(result.error).toBeFalsy();
 });
 
-test('client', (t) => {
+test('client', () => {
   const result = validate({
     client: { address: '0', protocol: 'wss', retry: false, silent: false },
   });
-  t.falsy(result.error);
+  expect(result.error).toBeFalsy();
 
   const resultWs = validate({
     client: { address: '0', protocol: 'ws', retry: false, silent: false },
   });
-  t.falsy(resultWs.error);
+  expect(resultWs.error).toBeFalsy();
 
   const resultProtocolBad = validate({
     client: { address: '0', protocol: 'lala', retry: false, silent: false },
   });
-  t.truthy(resultProtocolBad.error);
+  expect(resultProtocolBad.error).toBeTruthy();
 });
 
-test('error', (t) => {
+test('error', () => {
   const result = validate({ foo: 'bar' });
-  t.snapshot(result.error);
+  expect(result.error).toMatchSnapshot();
 });
 
-test('promise', (t) => {
+test('promise', () => {
   const promise = new Promise(() => {});
   const thenable = {
     // biome-ignore lint/suspicious/noThenProperty: legacy
     then() {},
   };
   let result = validate({ host: 0, port: '0' });
-  t.truthy(result.error);
-  t.snapshot(result.error);
+  expect(result.error).toBeTruthy();
+  expect(result.error).toMatchSnapshot();
   result = validate({ host: promise, port: promise });
-  t.falsy(result.error);
-  t.snapshot(result);
+  expect(result.error).toBeFalsy();
+  expect(result).toMatchSnapshot();
   result = validate({ host: thenable, port: thenable });
-  t.falsy(result.error);
-  t.snapshot(result);
+  expect(result.error).toBeFalsy();
+  expect(result).toMatchSnapshot();
 });
 
-test('throws', (t) => {
-  const error = t.throws(
+test('throws', () => {
+  expect(
     () => new WebpackPluginServe({ batman: 'nanananana' }),
-  );
-  t.snapshot(error);
+  ).toThrowErrorMatchingSnapshot();
 });

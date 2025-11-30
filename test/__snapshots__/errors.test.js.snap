@@ -1,0 +1,5 @@
+// Rstest Snapshot v1
+
+exports[`errors 1`] = `[PluginExistsError]`;
+
+exports[`errors 2`] = `[WebpackPluginServeError]`;

@@ -1,12 +1,25 @@
 const { join } = require('node:path');
 const fs = require('node:fs');
 
-const test = require('ava');
 const execa = require('execa');
+const { test, expect, beforeEach, rstest } = require('@rstest/core');
 
-const { browser } = require('../helpers/puppeteer');
+rstest.setConfig({ testTimeout: 25_000 });
 
-test('force refresh', browser, async (t, page, util) => {
+const { startBrowser, stopBrowser } = require('../helpers/puppeteer');
+
+let page, util;
+beforeEach(async () => {
+  const browser = await startBrowser();
+  page = browser.page;
+  util = browser.util;
+
+  return async () => {
+    await stopBrowser(browser);
+  };
+});
+
+test('force refresh', async () => {
   const { getPort, replace, setup, waitForBuild } = util;
   const fixturePath = await setup('simple', 'single-hmr');
   const proc = execa('wp', [], { cwd: fixturePath });
@@ -30,7 +43,7 @@ test('force refresh', browser, async (t, page, util) => {
 
   proc.kill('SIGTERM');
 
-  t.is(value, 'test');
+  expect(value).toEqual('test');
 
   await fs.promises.rm(fixturePath, { recursive: true, force: true });
 });

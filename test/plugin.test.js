@@ -1,52 +1,52 @@
 const { join } = require('node:path');
 
-const test = require('ava');
+const { test, expect } = require('@rstest/core');
 
 const { WebpackPluginServe } = require('../lib');
 
 const reCleanDir = /^.+(serve|project)\//g;
 const fixturePath = join(__dirname, 'fixtures').replace(reCleanDir, '');
 
-test('defaults', (t) => {
+test('defaults', () => {
   const plugin = new WebpackPluginServe();
-  t.snapshot(plugin.options);
+  expect(plugin.options).toMatchSnapshot();
 });
 
-test('options manipulation', (t) => {
+test('options manipulation', () => {
   const plugin = new WebpackPluginServe({
     allowMany: true,
     compress: true,
     historyFallback: true,
     publicPath: 'dist',
   });
-  t.snapshot(plugin.options);
+  expect(plugin.options).toMatchSnapshot();
 });
 
-test('allow https null', (t) => {
+test('allow https null', () => {
   const plugin = new WebpackPluginServe({
     allowMany: true,
     https: null,
   });
-  t.snapshot(plugin.options);
+  expect(plugin.options).toMatchSnapshot();
 });
 
-test('static → string', (t) => {
+test('static → string', () => {
   const { options } = new WebpackPluginServe({
     allowMany: true,
     static: fixturePath,
   });
-  t.snapshot(options.static);
+  expect(options.static).toMatchSnapshot();
 });
 
-test('static → array(string)', (t) => {
+test('static → array(string)', () => {
   const { options } = new WebpackPluginServe({
     allowMany: true,
     static: [fixturePath],
   });
-  t.snapshot(options.static);
+  expect(options.static).toMatchSnapshot();
 });
 
-test('static → glob', (t) => {
+test('static → glob', () => {
   const { options } = new WebpackPluginServe({
     allowMany: true,
     static: {
@@ -58,5 +58,5 @@ test('static → glob', (t) => {
     .map((p) => p.replace(reCleanDir, ''))
     .filter((p) => !/temp|output/.test(p))
     .sort();
-  t.snapshot(res);
+  expect(res).toMatchSnapshot();
 });

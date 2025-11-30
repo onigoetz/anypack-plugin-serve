@@ -13,9 +13,8 @@
     "node": ">= 10.0.0 < 10.14.0 || >= 10.15.0"
   },
   "scripts": {
-    "ci:coverage": "nyc npm run test && nyc report --reporter=text-lcov > coverage.lcov",
     "ci:lint": "biome check lib test",
-    "ci:test": "npm run test -- --verbose --timeout=30000",
+    "ci:test": "npm run test --coverage",
     "dev": "npm run dev:clean && node node_modules/webpack-nano/bin/wp --config test/fixtures/simple/webpack.config.js",
     "dev:clean": "del test/fixtures/multi/output/* test/fixtures/simple/output/*",
     "dev:multi": "npm run dev:clean && node node_modules/webpack-nano/bin/wp --config test/fixtures/multi/webpack.config.js",
@@ -23,7 +22,7 @@
     "format": "biome format lib test",
     "lint": "biome check --write lib test",
     "lint-staged": "lint-staged",
-    "test": "ava"
+    "test": "rstest"
   },
   "files": [
     "client.js",
@@ -58,14 +57,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
-    "ava": "^3.13.0",
+    "@rstest/core": "^0.6.8",
+    "@rstest/coverage-istanbul": "^0.0.5",
     "del-cli": "7.0.0",
     "execa": "^4.0.0",
     "get-port": "^5.1.1",
     "lint-staged": "^10.2.2",
     "make-dir": "^3.0.0",
     "node-fetch": "^2.6.1",
-    "nyc": "^15.0.1",
     "pre-commit": "^1.2.2",
     "puppeteer": "^24.31.0",
     "random-js": "^2.1.0",
@@ -81,13 +80,6 @@
     "server",
     "webpack"
   ],
-  "ava": {
-    "files": [
-      "!**/fixtures/**",
-      "!**/helpers/**",
-      "!**/recipes/**"
-    ]
-  },
   "lint-staged": {
     "*.js": [
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off"

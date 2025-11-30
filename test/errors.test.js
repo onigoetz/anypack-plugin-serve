@@ -1,8 +1,8 @@
-const test = require('ava');
+const { test, expect } = require('@rstest/core');
 
 const { PluginExistsError, WebpackPluginServeError } = require('../lib/errors');
 
-test('errors', (t) => {
-  t.snapshot(new PluginExistsError());
-  t.snapshot(new WebpackPluginServeError());
+test('errors', () => {
+  expect(new PluginExistsError()).toMatchSnapshot();
+  expect(new WebpackPluginServeError()).toMatchSnapshot();
 });

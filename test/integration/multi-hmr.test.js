@@ -1,12 +1,25 @@
 const { join } = require('node:path');
 const fs = require('node:fs');
 
-const test = require('ava');
 const execa = require('execa');
+const { test, expect, beforeEach, rstest } = require('@rstest/core');
 
-const { browser } = require('../helpers/puppeteer');
+rstest.setConfig({ testTimeout: 25_000 });
 
-test('multi compiler', browser, async (t, page, util) => {
+const { startBrowser, stopBrowser } = require('../helpers/puppeteer');
+
+let page, util;
+beforeEach(async () => {
+  const browser = await startBrowser();
+  page = browser.page;
+  util = browser.util;
+
+  return async () => {
+    await stopBrowser(browser);
+  };
+});
+
+test('multi compiler', async () => {
   const { getPort, replace, setup, waitForBuild } = util;
   const fixturePath = await setup('multi', 'multi-hmr');
   const proc = execa('wp', [], { cwd: fixturePath });
@@ -36,8 +49,8 @@ test('multi compiler', browser, async (t, page, util) => {
 
   proc.kill('SIGTERM');
 
-  t.is(componentValue, 'test');
-  t.is(workValue, 'test');
+  expect(componentValue).toEqual('test');
+  expect(workValue).toEqual('test');
 
   await fs.promises.rm(fixturePath, { recursive: true, force: true });
 });
