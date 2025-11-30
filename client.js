@@ -14,7 +14,6 @@
  */
 
 (() => {
-  /* eslint-disable global-require */
   const { run } = require('./lib/client/client');
   let hash = '<unknown>';
   let options;
@@ -28,9 +27,8 @@
   }
 
   try {
-    // eslint-disable-next-line camelcase
     hash = __webpack_hash__;
-  } catch (e) {} // eslint-disable-line no-empty
+  } catch (e) {}
 
   run(hash, options);
 })();

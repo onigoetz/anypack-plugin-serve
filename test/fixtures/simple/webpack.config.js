@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+const { resolve } = require('node:path');
 
 const { getPort } = require('../../helpers/port');
 
@@ -11,21 +11,21 @@ module.exports = {
   output: {
     filename: './output.js',
     path: resolve(__dirname, './output'),
-    publicPath: 'output/'
+    publicPath: 'output/',
   },
   plugins: [
     new Serve({
       headers: {
-        'X-Superhero': 'batman'
+        'X-Superhero': 'batman',
       },
       host: 'localhost',
-      port: getPort()
-    })
+      port: getPort(),
+    }),
   ],
   resolve: {
     alias: {
-      'webpack-plugin-serve/client': resolve(__dirname, '../../../client')
-    }
+      'webpack-plugin-serve/client': resolve(__dirname, '../../../client'),
+    },
   },
-  watch: true
+  watch: true,
 };

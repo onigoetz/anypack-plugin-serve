@@ -1,5 +1,4 @@
-/* eslint-disable no-param-reassign */
-const { resolve } = require('path');
+const { resolve } = require('node:path');
 
 const { WebpackPluginServe: Serve } = require('../../../lib/');
 
@@ -13,16 +12,15 @@ const make = (port) => {
       app.use(async (ctx, next) => {
         if (ctx.url === '/test') {
           try {
-            // eslint-disable-next-line import/no-dynamic-require, global-require
             require(outputPath);
             ctx.body = 'success';
-          } catch (e) {
+          } catch (_e) {
             ctx.body = 'error';
           }
         }
         await next();
       });
-    }
+    },
   });
 
   const config = {
@@ -33,11 +31,11 @@ const make = (port) => {
       filename: './output.js',
       path: resolve(__dirname, './output'),
       publicPath: 'output/',
-      libraryTarget: 'commonjs2'
+      libraryTarget: 'commonjs2',
     },
     plugins: [serve],
     target: 'node',
-    watch: true
+    watch: true,
   };
 
   return { serve, config };

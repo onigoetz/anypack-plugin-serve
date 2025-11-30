@@ -24,16 +24,17 @@ test('websocket middleware', async (t) => {
 
       t.truthy(socket);
       routeDeferred.resolve();
-    })
+    }),
   );
 
   const server = app.listen(port);
 
   await {
+    // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r, f) {
       server.on('listening', r);
       server.on('error', f);
-    }
+    },
   };
 
   const socket = new WebSocket(uri);

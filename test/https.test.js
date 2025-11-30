@@ -1,10 +1,7 @@
-const https = require('https');
-
-const { readFileSync } = require('fs');
-
-const { resolve, join } = require('path');
-
-const http2 = require('http2');
+const https = require('node:https');
+const { readFileSync } = require('node:fs');
+const { resolve, join } = require('node:path');
+const http2 = require('node:http2');
 
 const webpack = require('webpack');
 const test = require('ava');
@@ -23,7 +20,7 @@ const startServe = async (serve) => {
   const deferred = defer();
   const compiler = webpack({
     ...webpackDefaultConfig,
-    plugins: [serve]
+    plugins: [serve],
   });
   const watcher = compiler.watch({}, () => {});
   serve.on('listening', deferred.resolve);
@@ -34,7 +31,7 @@ const startServe = async (serve) => {
 const checkHttpsServed = async (t, serve, port) => {
   const watcher = await startServe(serve);
   const agent = new https.Agent({
-    rejectUnauthorized: false
+    rejectUnauthorized: false,
   });
   const response = await fetch(`https://localhost:${port}`, { agent });
   watcher.close();
@@ -45,7 +42,7 @@ const checkHttp2Served = async (t, serve, port) => {
   const watcher = await startServe(serve);
   const deferred = defer();
   const client = http2.connect(`https://localhost:${port}`, {
-    rejectUnauthorized: false
+    rejectUnauthorized: false,
   });
   client.on('error', (err) => {
     t.fail(err);
@@ -80,7 +77,7 @@ test('should start https with pem', async (t) => {
     allowMany: true,
     port,
     waitForBuild: true,
-    https: { key, cert }
+    https: { key, cert },
   });
 
   await checkHttpsServed(t, serve, port);
@@ -95,7 +92,7 @@ test('should start http2 with pem', async (t) => {
     allowMany: true,
     port,
     waitForBuild: true,
-    http2: { key, cert }
+    http2: { key, cert },
   });
 
   await checkHttp2Served(t, serve, port);
@@ -109,7 +106,7 @@ test('should start https with pfx', async (t) => {
     allowMany: true,
     port,
     waitForBuild: true,
-    https: { pfx, passphrase: 'password' }
+    https: { pfx, passphrase: 'password' },
   });
 
   await checkHttpsServed(t, serve, port);
@@ -123,7 +120,7 @@ test('should start http2 with pfx', async (t) => {
     allowMany: true,
     port,
     waitForBuild: true,
-    http2: { pfx, passphrase: 'password' }
+    http2: { pfx, passphrase: 'password' },
   });
 
   await checkHttp2Served(t, serve, port);

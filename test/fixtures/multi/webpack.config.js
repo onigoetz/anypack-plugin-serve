@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+const { resolve } = require('node:path');
 
 const { getPort } = require('../../helpers/port');
 
@@ -6,7 +6,7 @@ const { WebpackPluginServe: Serve } = require('../../../lib/');
 
 const serve = new Serve({
   host: 'localhost',
-  port: getPort()
+  port: getPort(),
 });
 
 module.exports = [
@@ -17,15 +17,15 @@ module.exports = [
     output: {
       filename: './dist-app.js',
       path: resolve(__dirname, './output'),
-      publicPath: 'output/'
+      publicPath: 'output/',
     },
     plugins: [serve],
     resolve: {
       alias: {
-        'webpack-plugin-serve/client': resolve(__dirname, '../../../client')
-      }
+        'webpack-plugin-serve/client': resolve(__dirname, '../../../client'),
+      },
     },
-    watch: true
+    watch: true,
   },
   {
     context: __dirname,
@@ -34,13 +34,13 @@ module.exports = [
     output: {
       filename: './dist-worker.js',
       path: resolve(__dirname, './output'),
-      publicPath: 'output/'
+      publicPath: 'output/',
     },
     plugins: [serve.attach()],
     resolve: {
       alias: {
-        'webpack-plugin-serve/client': resolve(__dirname, '../../../client')
-      }
-    }
-  }
+        'webpack-plugin-serve/client': resolve(__dirname, '../../../client'),
+      },
+    },
+  },
 ];

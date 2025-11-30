@@ -1,5 +1,5 @@
-const { writeFileSync } = require('fs');
-const { join } = require('path');
+const { writeFileSync } = require('node:fs');
+const { join } = require('node:path');
 
 const copy = require('cpy');
 const mkdir = require('make-dir');
@@ -8,6 +8,7 @@ const strip = require('strip-ansi');
 
 const getPort = (stdout) => {
   return {
+    // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r, f) {
       stdout.on('data', (data) => {
         const content = strip(data.toString());
@@ -18,16 +19,17 @@ const getPort = (stdout) => {
       });
 
       stdout.on('error', f);
-    }
+    },
   };
 };
 
 const replace = (path, content) => {
   return {
+    // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r) {
       writeFileSync(path, content);
       setTimeout(r, 5000);
-    }
+    },
   };
 };
 
@@ -42,6 +44,7 @@ const setup = async (base, name) => {
 
 const waitForBuild = (stderr) => {
   return {
+    // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r) {
       stderr.on('data', (data) => {
         const content = strip(data.toString());
@@ -49,18 +52,20 @@ const waitForBuild = (stderr) => {
           r();
         }
       });
-    }
+    },
   };
 };
 
 const browser = async (t, run) => {
-  const instance = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const instance = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await instance.newPage();
   const util = {
     getPort,
     replace,
     setup,
-    waitForBuild
+    waitForBuild,
   };
   try {
     await run(t, page, util);

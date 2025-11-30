@@ -1,4 +1,4 @@
-const { join } = require('path');
+const { join } = require('node:path');
 
 const test = require('ava');
 const del = require('del');
@@ -16,7 +16,7 @@ test('force refresh', browser, async (t, page, util) => {
 
   await waitForBuild(stderr);
   await page.goto(url, {
-    waitUntil: 'networkidle0'
+    waitUntil: 'networkidle0',
   });
 
   const componentPath = join(fixturePath, 'component.js');
@@ -24,7 +24,9 @@ test('force refresh', browser, async (t, page, util) => {
 
   await replace(componentPath, content, true);
 
-  const value = await page.evaluate(() => document.querySelector('main').innerHTML);
+  const value = await page.evaluate(
+    () => document.querySelector('main').innerHTML,
+  );
 
   proc.kill('SIGTERM');
 

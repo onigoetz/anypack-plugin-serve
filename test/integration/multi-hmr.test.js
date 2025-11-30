@@ -1,4 +1,4 @@
-const { join } = require('path');
+const { join } = require('node:path');
 
 const test = require('ava');
 const del = require('del');
@@ -16,7 +16,7 @@ test('multi compiler', browser, async (t, page, util) => {
 
   await waitForBuild(stderr);
   await page.goto(url, {
-    waitUntil: 'networkidle0'
+    waitUntil: 'networkidle0',
   });
 
   const componentPath = join(fixturePath, 'component.js');
@@ -27,8 +27,12 @@ test('multi compiler', browser, async (t, page, util) => {
   await replace(componentPath, componentContent);
   await replace(workerPath, workerContent);
 
-  const componentValue = await page.evaluate(() => document.querySelector('main').innerHTML);
-  const workValue = await page.evaluate(() => document.querySelector('#worker').innerHTML);
+  const componentValue = await page.evaluate(
+    () => document.querySelector('main').innerHTML,
+  );
+  const workValue = await page.evaluate(
+    () => document.querySelector('#worker').innerHTML,
+  );
 
   proc.kill('SIGTERM');
 

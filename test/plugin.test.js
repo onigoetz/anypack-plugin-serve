@@ -1,4 +1,4 @@
-const { join } = require('path');
+const { join } = require('node:path');
 
 const test = require('ava');
 
@@ -17,7 +17,7 @@ test('options manipulation', (t) => {
     allowMany: true,
     compress: true,
     historyFallback: true,
-    publicPath: 'dist'
+    publicPath: 'dist',
   });
   t.snapshot(plugin.options);
 });
@@ -25,7 +25,7 @@ test('options manipulation', (t) => {
 test('allow https null', (t) => {
   const plugin = new WebpackPluginServe({
     allowMany: true,
-    https: null
+    https: null,
   });
   t.snapshot(plugin.options);
 });
@@ -33,7 +33,7 @@ test('allow https null', (t) => {
 test('static → string', (t) => {
   const { options } = new WebpackPluginServe({
     allowMany: true,
-    static: fixturePath
+    static: fixturePath,
   });
   t.snapshot(options.static);
 });
@@ -41,7 +41,7 @@ test('static → string', (t) => {
 test('static → array(string)', (t) => {
   const { options } = new WebpackPluginServe({
     allowMany: true,
-    static: [fixturePath]
+    static: [fixturePath],
   });
   t.snapshot(options.static);
 });
@@ -51,8 +51,8 @@ test('static → glob', (t) => {
     allowMany: true,
     static: {
       glob: [join(__dirname, 'fixtures')],
-      options: { onlyDirectories: true }
-    }
+      options: { onlyDirectories: true },
+    },
   });
   const res = options.static
     .map((p) => p.replace(reCleanDir, ''))

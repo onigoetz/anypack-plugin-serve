@@ -10,13 +10,19 @@ test('defaults', (t) => {
 });
 
 test('client', (t) => {
-  const result = validate({ client: { address: '0', protocol: "wss", retry: false, silent: false } });
+  const result = validate({
+    client: { address: '0', protocol: 'wss', retry: false, silent: false },
+  });
   t.falsy(result.error);
 
-  const resultWs = validate({ client: { address: '0', protocol: "ws", retry: false, silent: false } });
+  const resultWs = validate({
+    client: { address: '0', protocol: 'ws', retry: false, silent: false },
+  });
   t.falsy(resultWs.error);
 
-  const resultProtocolBad = validate({ client: { address: '0', protocol: "lala", retry: false, silent: false } });
+  const resultProtocolBad = validate({
+    client: { address: '0', protocol: 'lala', retry: false, silent: false },
+  });
   t.truthy(resultProtocolBad.error);
 });
 
@@ -27,7 +33,10 @@ test('error', (t) => {
 
 test('promise', (t) => {
   const promise = new Promise(() => {});
-  const thenable = { then() {} };
+  const thenable = {
+    // biome-ignore lint/suspicious/noThenProperty: legacy
+    then() {},
+  };
   let result = validate({ host: 0, port: '0' });
   t.truthy(result.error);
   t.snapshot(result.error);
@@ -40,6 +49,8 @@ test('promise', (t) => {
 });
 
 test('throws', (t) => {
-  const error = t.throws(() => new WebpackPluginServe({ batman: 'nanananana' }));
+  const error = t.throws(
+    () => new WebpackPluginServe({ batman: 'nanananana' }),
+  );
   t.snapshot(error);
 });

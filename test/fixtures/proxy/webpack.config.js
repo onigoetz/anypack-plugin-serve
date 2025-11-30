@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+const { resolve } = require('node:path');
 
 const { WebpackPluginServe: Serve } = require('../../../lib/');
 
@@ -11,7 +11,7 @@ module.exports = {
   output: {
     filename: './output.js',
     path: resolve(__dirname, './output'),
-    publicPath: 'output/'
+    publicPath: 'output/',
   },
   plugins: [
     new Serve({
@@ -21,28 +21,28 @@ module.exports = {
         app.use(
           builtins.proxy('/api', {
             logLevel,
-            target: 'http://localhost:8888'
-          })
+            target: 'http://localhost:8888',
+          }),
         );
         app.use(
           builtins.proxy('/wps', {
             logLevel,
-            target: 'http://localhost:8888'
-          })
+            target: 'http://localhost:8888',
+          }),
         );
         app.use(
           builtins.proxy('/wp', {
             logLevel,
-            target: 'http://localhost:8888'
-          })
+            target: 'http://localhost:8888',
+          }),
         );
-      }
-    })
+      },
+    }),
   ],
   resolve: {
     alias: {
-      'webpack-plugin-serve/client': resolve(__dirname, '../../../lib/client')
-    }
+      'webpack-plugin-serve/client': resolve(__dirname, '../../../lib/client'),
+    },
   },
-  watch: true
+  watch: true,
 };

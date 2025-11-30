@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+const { resolve } = require('node:path');
 
 module.exports = {
   context: __dirname,
@@ -7,12 +7,12 @@ module.exports = {
   output: {
     filename: './output.js',
     path: resolve(__dirname, './output'),
-    publicPath: 'output/'
+    publicPath: 'output/',
   },
   resolve: {
     alias: {
-      'webpack-plugin-serve/client': resolve(__dirname, '../../../client')
-    }
+      'webpack-plugin-serve/client': resolve(__dirname, '../../../client'),
+    },
   },
-  watch: true
+  watch: true,
 };

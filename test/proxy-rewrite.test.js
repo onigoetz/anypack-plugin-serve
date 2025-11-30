@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 const webpack = require('webpack');
 const test = require('ava');
 const fetch = require('node-fetch');
@@ -18,8 +17,8 @@ test.before(async () => {
       url: '/test',
       handler: async (ctx) => {
         ctx.body = '/test endpoint rewrite';
-      }
-    }
+      },
+    },
   ]).listen(8889);
   watcher = compiler.watch({}, deferred.resolve);
   await deferred.promise;

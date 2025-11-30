@@ -1,5 +1,5 @@
-const { existsSync } = require('fs');
-const { join, resolve } = require('path');
+const { existsSync } = require('node:fs');
+const { join, resolve } = require('node:path');
 
 const test = require('ava');
 const execa = require('execa');
@@ -9,6 +9,7 @@ const fixturePath = join(__dirname, 'fixtures/ramdisk');
 
 const waitFor = (text, stream) => {
   return {
+    // biome-ignore lint/suspicious/noThenProperty: legacy
     then(r, f) {
       stream.on('data', (data) => {
         const content = strip(data.toString());
@@ -18,7 +19,7 @@ const waitFor = (text, stream) => {
       });
 
       stream.on('error', f);
-    }
+    },
   };
 };
 
@@ -43,7 +44,7 @@ test.serial('ramdisk', async (t) => {
 
 test.serial('ramdisk with options', async (t) => {
   const proc = execa('wp', ['--config', 'ramdisk/custom-options.js'], {
-    cwd: resolve(fixturePath, '..')
+    cwd: resolve(fixturePath, '..'),
   });
   const { stderr, stdout } = proc;
   const pathTest = 'Build being written to ';
@@ -65,7 +66,7 @@ test.serial('ramdisk with options', async (t) => {
 test.serial('context error', async (t) => {
   try {
     await execa('wp', ['--config', 'ramdisk/config-context-error.js'], {
-      cwd: resolve(fixturePath, '..')
+      cwd: resolve(fixturePath, '..'),
     });
   } catch (e) {
     t.regex(e.stderr, /Please set the `context` to a another path/);
@@ -78,7 +79,7 @@ test.serial('context error', async (t) => {
 test.serial('cwd error', async (t) => {
   try {
     await execa('wp', ['--config', '../config-cwd-error.js'], {
-      cwd: join(fixturePath, 'cwd-error')
+      cwd: join(fixturePath, 'cwd-error'),
     });
   } catch (e) {
     t.regex(e.stderr, /Please run from another path/);
