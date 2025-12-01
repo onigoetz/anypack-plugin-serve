@@ -1,5 +1,4 @@
 const fs = require('node:fs');
-const timers = require('node:timers/promises');
 const { join } = require('node:path');
 const { unstyle } = require('ansi-colors');
 
@@ -22,8 +21,6 @@ function getPort(stdout) {
 
 async function replace(path, content) {
   await fs.promises.writeFile(path, content);
-  // FIXME: replace with a proper wait of compilation done
-  await timers.setTimeout(5000);
 }
 
 async function setup(base, name) {

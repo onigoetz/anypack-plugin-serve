@@ -1,5 +1,6 @@
 const { join } = require('node:path');
 const fs = require('node:fs');
+const timers = require('node:timers/promises');
 
 const execa = require('execa');
 const { test, expect, beforeEach, rstest } = require('@rstest/core');
@@ -36,6 +37,8 @@ test('single compiler', async () => {
   const content = `const main = document.querySelector('main'); main.innerHTML = 'test';`;
 
   await replace(componentPath, content);
+  await waitForBuild(stderr);
+  await timers.setTimeout(2_000);
 
   const value = await page.evaluate(
     () => document.querySelector('main').innerHTML,

@@ -9,21 +9,20 @@ rstest.setConfig({ testTimeout: 25_000 });
 
 const fixturePath = join(__dirname, 'fixtures/ramdisk');
 
-const waitFor = (text, stream) => {
-  return {
-    // biome-ignore lint/suspicious/noThenProperty: legacy
-    then(r, f) {
-      stream.on('data', (data) => {
-        const content = unstyle(data.toString());
-        if (content.includes(text)) {
-          r(content.slice(content.lastIndexOf(text) + text.length));
-        }
-      });
+function waitFor(text, stream) {
+  return new Promise((resolve, reject) => {
+    console.log('Waiting for', text);
+    stream.on('data', (data) => {
+      const content = unstyle(data.toString());
+      if (content.includes(text)) {
+        console.log('Found', text);
+        resolve(content.slice(content.lastIndexOf(text) + text.length));
+      }
+    });
 
-      stream.on('error', f);
-    },
-  };
-};
+    stream.on('error', reject);
+  });
+}
 
 test('ramdisk', async () => {
   const proc = execa('wp', [], { cwd: fixturePath });
