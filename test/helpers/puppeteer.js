@@ -2,7 +2,6 @@ const fs = require('node:fs');
 const { join } = require('node:path');
 const { unstyle } = require('ansi-colors');
 
-const mkdir = require('make-dir');
 const puppeteer = require('puppeteer');
 
 function getPort(stdout) {
@@ -26,7 +25,8 @@ async function replace(path, content) {
 async function setup(base, name) {
   const fixturesPath = join(__dirname, '../fixtures');
   const src = join(fixturesPath, base);
-  const dest = await mkdir(join(fixturesPath, `temp-${name}`));
+  const dest = join(fixturesPath, `temp-${name}`);
+  await fs.promises.mkdir(dest, { recursive: true });
   await fs.promises.cp(src, dest, { recursive: true });
 
   return dest;
