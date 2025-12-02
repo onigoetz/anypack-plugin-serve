@@ -1,6 +1,7 @@
 const { join } = require('node:path');
 const fs = require('node:fs');
 const timers = require('node:timers/promises');
+const { logReader, waitFor } = require('../helpers/logs.js');
 
 const execa = require('execa');
 const { test, expect, beforeEach, rstest } = require('@rstest/core');
@@ -21,14 +22,14 @@ beforeEach(async () => {
 });
 
 test('multi compiler', async () => {
-  const { getPort, replace, setup, waitForBuild } = util;
+  const { getPort, replace, setup } = util;
   const fixturePath = await setup('multi', 'multi-hmr');
   const proc = execa('wp', [], { cwd: fixturePath });
-  const { stdout, stderr } = proc;
-  const port = await getPort(stdout);
+  const errReader = logReader(proc.stderr);
+  const port = await getPort(proc.stdout);
   const url = `http://localhost:${port}`;
 
-  await waitForBuild(stderr);
+  await waitFor('webpack: Hash:', errReader);
   await page.goto(url, {
     waitUntil: 'networkidle0',
   });
@@ -39,9 +40,9 @@ test('multi compiler', async () => {
   const workerContent = `const worker = document.querySelector('#worker'); worker.innerHTML = 'test';`;
 
   await replace(componentPath, componentContent);
-  await waitForBuild(stderr);
+  await waitFor('webpack: Hash:', errReader);
   await replace(workerPath, workerContent);
-  await waitForBuild(stderr);
+  await waitFor('webpack: Hash:', errReader);
   await timers.setTimeout(2_000);
 
   const componentValue = await page.evaluate(

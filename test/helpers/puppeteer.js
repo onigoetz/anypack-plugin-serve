@@ -32,17 +32,6 @@ async function setup(base, name) {
   return dest;
 }
 
-function waitForBuild(stderr) {
-  return new Promise((resolve) => {
-    stderr.on('data', (data) => {
-      const content = unstyle(data.toString());
-      if (/webpack: Hash:/.test(content)) {
-        resolve();
-      }
-    });
-  });
-}
-
 async function startBrowser() {
   const instance = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -52,7 +41,6 @@ async function startBrowser() {
     getPort,
     replace,
     setup,
-    waitForBuild,
   };
 
   return { instance, page, util };
