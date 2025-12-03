@@ -63,7 +63,7 @@
     "execa": "^4.0.0",
     "get-port": "^5.1.1",
     "line-by-line": "^0.1.6",
-    "lint-staged": "^10.2.2",
+    "lint-staged": "^16.2.7",
     "node-fetch": "^2.6.1",
     "pre-commit": "^1.2.2",
     "puppeteer": "^24.31.0",
