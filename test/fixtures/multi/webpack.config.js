@@ -18,6 +18,7 @@ module.exports = [
       filename: './dist-app.js',
       path: resolve(__dirname, './output'),
       publicPath: 'output/',
+      uniqueName: 'app',
     },
     plugins: [serve],
     resolve: {
@@ -35,6 +36,7 @@ module.exports = [
       filename: './dist-worker.js',
       path: resolve(__dirname, './output'),
       publicPath: 'output/',
+      uniqueName: 'worker',
     },
     plugins: [serve.attach()],
     resolve: {

@@ -1,21 +1,12 @@
 const fs = require('node:fs');
 const { join } = require('node:path');
-const { unstyle } = require('ansi-colors');
+const { waitFor } = require('./logs.js');
 
 const puppeteer = require('puppeteer');
 
-function getPort(stdout) {
-  return new Promise((resolve, reject) => {
-    stdout.on('data', (data) => {
-      const content = unstyle(data.toString());
-      const test = 'Server Listening on: ';
-      if (content.includes(test)) {
-        resolve(content.slice(content.lastIndexOf(':') + 1));
-      }
-    });
-
-    stdout.on('error', reject);
-  });
+async function getPort(stream) {
+  const content = await waitFor('Server Listening on: ', stream);
+  return content.slice(content.lastIndexOf(':') + 1);
 }
 
 async function replace(path, content) {

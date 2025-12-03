@@ -29,7 +29,7 @@ function waitFor(text, stream) {
       console.log(`[${text}]: LINE ${content}`);
 
       if (content.includes(text)) {
-        console.log(`[${text}]: FOUND`);
+        console.log(`[${text}]: FOUND '${content}'`);
 
         stream.off('line', reader);
         stream.off('error', reject);
