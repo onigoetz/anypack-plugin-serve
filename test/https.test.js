@@ -5,7 +5,7 @@ const http2 = require('node:http2');
 
 const webpack = require('webpack');
 const { test, expect, afterEach } = require('@rstest/core');
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 const defer = require('p-defer');
 
 const { WebpackPluginServe } = require('../lib');

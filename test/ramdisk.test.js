@@ -2,7 +2,7 @@ const { existsSync } = require('node:fs');
 const { join, resolve } = require('node:path');
 
 const { test, expect, rstest } = require('@rstest/core');
-const execa = require('execa');
+const { execa } = require('execa');
 
 const { logReader, waitFor } = require('./helpers/logs.js');
 

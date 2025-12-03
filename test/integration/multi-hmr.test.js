@@ -1,7 +1,7 @@
 const { join } = require('node:path');
 const fs = require('node:fs');
 
-const execa = require('execa');
+const { execa } = require('execa');
 const { test, expect, beforeEach, afterEach, rstest } = require('@rstest/core');
 
 const { logReader, waitFor } = require('../helpers/logs.js');

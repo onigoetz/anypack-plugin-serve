@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const webpack = require('webpack');
 const { test, expect, beforeEach, afterEach } = require('@rstest/core');
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 const defer = require('p-defer');
 
 const { getPort } = require('./helpers/port');

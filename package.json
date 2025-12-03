@@ -3,14 +3,14 @@
   "version": "1.6.0",
   "description": "A Development Server in a Webpack Plugin",
   "license": "MPL-2.0",
-  "repository": "shellscape/webpack-plugin-serve",
+  "repository": "onigoetz/anypack-plugin-serve",
   "author": "shellscape",
   "homepage": "https://github.com/shellscape/webpack-plugin-serve",
   "bugs": "https://github.com/shellscape/webpack-plugin-serve/issues",
   "bin": "",
   "main": "lib/index.js",
   "engines": {
-    "node": ">= 10.0.0 < 10.14.0 || >= 10.15.0"
+    "node": ">= 20.0.0"
   },
   "scripts": {
     "ci:lint": "biome check lib test",
@@ -60,15 +60,14 @@
     "@rstest/core": "^0.6.8",
     "@rstest/coverage-istanbul": "^0.0.5",
     "del-cli": "7.0.0",
-    "execa": "^4.0.0",
-    "get-port": "^5.1.1",
+    "execa": "^9.0.0",
+    "get-port": "^7.1.0",
     "line-by-line": "^0.1.6",
     "lint-staged": "^16.2.7",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.3.2",
     "pre-commit": "^1.2.2",
-    "puppeteer": "^24.31.0",
+    "puppeteer": "^24.32.0",
     "random-js": "^2.1.0",
-    "react-refresh": "^0.9.0",
     "webpack": "^5.0.0",
     "webpack-nano": "^1.0.0"
   },
@@ -81,7 +80,7 @@
     "webpack"
   ],
   "lint-staged": {
-    "*.js": [
+    "*.{js,mjs}": [
       "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off"
     ]
   },

@@ -1,4 +1,4 @@
-const getPort = require('get-port');
+const getPort = require('get-port').default;
 const { Random } = require('random-js');
 
 const random = new Random();
