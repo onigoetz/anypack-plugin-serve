@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const webpack = require('webpack');
 const { test, expect, beforeEach, afterEach } = require('@rstest/core');
 const fetch = require('node-fetch').default;
-const defer = require('p-defer');
+const defer = require('../lib/helpers.js').defer;
 
 const { getPort } = require('./helpers/port');
 const { make } = require('./fixtures/wait-for-build/make-config');

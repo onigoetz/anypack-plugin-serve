@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const { test, expect, beforeEach, afterEach } = require('@rstest/core');
 const fetch = require('node-fetch').default;
-const defer = require('p-defer');
+const defer = require('../lib/helpers.js').defer;
 
 const { proxyServer } = require('./fixtures/proxy/proxy-server');
 const webpackConfig = require('./fixtures/proxy/webpack.config');

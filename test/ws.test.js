@@ -1,7 +1,7 @@
 const { test, expect } = require('@rstest/core');
 const Koa = require('koa');
 const router = require('koa-route');
-const defer = require('p-defer');
+const defer = require('../lib/helpers.js').defer;
 const WebSocket = require('ws');
 
 const { middleware } = require('../lib/ws');
