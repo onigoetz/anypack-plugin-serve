@@ -2908,6 +2908,11 @@ superstruct@^0.12.1:
   resolved "https://registry.yarnpkg.com/superstruct/-/superstruct-0.12.2.tgz#214d419e2c1eabd87d7a3774150664dfe53506e0"
   integrity sha512-yu+WNa/nSbFa+VBeR2KibfCeIQSKh/aD7G5eFD4Rx4W36MWE3G6SzU3BixDOArLv56u2bz6YEePsHSsioojuXw==
 
+superstruct@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/superstruct/-/superstruct-2.0.2.tgz#3f6d32fbdc11c357deff127d591a39b996300c54"
+  integrity sha512-uV+TFRZdXsqXTL2pRvujROjdZQ4RAlBUS5BTh9IGm+jTqQntYThciG/qu57Gs69yjnVUSqdxF9YLmSnpupBW9A==
+
 supports-color@^7.1.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-7.2.0.tgz#1b7dcdcb32b8138801b3e478ba6a51caa89648da"
