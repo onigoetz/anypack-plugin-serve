@@ -101,6 +101,7 @@ exports[`static → array(string) 1`] = `
 
 exports[`static → glob 1`] = `
 [
+  "test/fixtures",
   "test/fixtures/https",
   "test/fixtures/multi",
   "test/fixtures/proxy",
