@@ -51,7 +51,7 @@
     "superstruct": "^2.0.2",
     "tinyglobby": "^0.2.15",
     "webpack-plugin-ramdisk": "^0.2.0",
-    "ws": "^7.5.3"
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
