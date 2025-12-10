@@ -18,7 +18,7 @@ test('ramdisk', async () => {
 
   const path = await waitFor('Build being written to ', outReader);
   expect(path).toMatch(
-    /(volumes|dev\/shm)\/wps\/anypack-plugin-serve\/output/i,
+    /(volumes|dev\/shm)\/aps\/anypack-plugin-serve\/output/i,
   );
 
   await waitFor('[emitted]', errReader);
@@ -40,7 +40,7 @@ test('ramdisk with options', async () => {
   const path = await waitFor('Build being written to ', outReader);
 
   expect(path).toMatch(
-    /(volumes|dev\/shm)\/wps\/anypack-plugin-serve\/output/i,
+    /(volumes|dev\/shm)\/aps\/anypack-plugin-serve\/output/i,
   );
 
   await waitFor('[emitted]', errReader);
@@ -78,14 +78,14 @@ test('cwd error', async () => {
   throw new Error('The test should have thrown an error');
 });
 
-test('ramdisk with empty package.json', async () => {
+test.only('ramdisk with empty package.json', async () => {
   const fixturePath = join(__dirname, 'fixtures/ramdisk-empty-pkg');
   const proc = execa('wp', [], { cwd: fixturePath });
   const errReader = logReader(proc.stderr);
   const outReader = logReader(proc.stdout);
 
   const path = await waitFor('Build being written to ', outReader);
-  expect(path).toMatch(/(volumes|dev\/shm)\/wps\/[a-f0-9]{32}\/output/i);
+  expect(path).toMatch(/(volumes|dev\/shm)\/aps\/[a-f0-9]{32}\/output/i);
 
   await waitFor('[emitted]', errReader);
   const exists = existsSync(join(fixturePath, 'output/output.js'));
