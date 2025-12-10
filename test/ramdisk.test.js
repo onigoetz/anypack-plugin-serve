@@ -17,14 +17,16 @@ test('ramdisk', async () => {
   const outReader = logReader(proc.stdout);
 
   const path = await waitFor('Build being written to ', outReader);
-  expect(path).toMatch(/(volumes|mnt)\/wps\/webpack-plugin-serve\/output/i);
+  expect(path).toMatch(
+    /(volumes|dev\/shm)\/wps\/webpack-plugin-serve\/output/i,
+  );
 
   await waitFor('[emitted]', errReader);
   const exists = existsSync(join(fixturePath, 'output/output.js'));
 
   expect(exists).toBeTruthy();
 
-  proc.kill('SIGTERM');
+  proc.kill('SIGINT');
 });
 
 test('ramdisk with options', async () => {
@@ -37,7 +39,9 @@ test('ramdisk with options', async () => {
 
   const path = await waitFor('Build being written to ', outReader);
 
-  expect(path).toMatch(/(volumes|mnt)\/wps\/webpack-plugin-serve\/output/i);
+  expect(path).toMatch(
+    /(volumes|dev\/shm)\/wps\/webpack-plugin-serve\/output/i,
+  );
 
   await waitFor('[emitted]', errReader);
 
@@ -45,7 +49,7 @@ test('ramdisk with options', async () => {
 
   expect(exists).toBeTruthy();
 
-  proc.kill('SIGTERM');
+  proc.kill('SIGINT');
 });
 
 test('context error', async () => {
@@ -81,7 +85,7 @@ test('ramdisk with empty package.json', async () => {
   const outReader = logReader(proc.stdout);
 
   const path = await waitFor('Build being written to ', outReader);
-  expect(path).toMatch(/(volumes|mnt)\/wps\/[a-f0-9]{32}\/output/i);
+  expect(path).toMatch(/(volumes|dev\/shm)\/wps\/[a-f0-9]{32}\/output/i);
 
   await waitFor('[emitted]', errReader);
   const exists = existsSync(join(fixturePath, 'output/output.js'));
