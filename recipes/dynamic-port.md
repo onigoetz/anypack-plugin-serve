@@ -1,14 +1,14 @@
 ## 🍲 Using a Dynamic Port
 
-Most of the time using a static, predefined port number will work just fine. There can be situations in which fetching an unused, free port for use with `webpack-plugin-server` can come in handy. We're going to use the [get-port](https://www.npmjs.com/package/get-port) module to demonstrate how that can be set that up with `webpack-plugin-serve`.
+Most of the time using a static, predefined port number will work just fine. There can be situations in which fetching an unused, free port for use with `anypack-plugin-server` can come in handy. We're going to use the [get-port](https://www.npmjs.com/package/get-port) module to demonstrate how that can be set that up with `anypack-plugin-serve`.
 
 ### Meat and Potatoes
 
-To get started, your `webpack` configuration should already be setup and building successfully without using `webpack-plugin-serve`. Next, let's get the plugin setup:
+To get started, your `webpack` configuration should already be setup and building successfully without using `anypack-plugin-serve`. Next, let's get the plugin setup:
 
 ```js
 const getPort = require('get-port');
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   ...,

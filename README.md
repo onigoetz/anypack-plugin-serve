@@ -1,55 +1,60 @@
-[tests]: 	https://img.shields.io/circleci/project/github/shellscape/webpack-plugin-serve.svg
-[tests-url]: https://circleci.com/gh/shellscape/webpack-plugin-serve
+[tests]: https://img.shields.io/github/actions/workflow/status/onigoetz/anypack-plugin-serve/node.js.yml
+[tests-url]: https://github.com/onigoetz/anypack-plugin-serve/actions/workflows/node.js.yml
 
-[cover]: https://codecov.io/gh/shellscape/webpack-plugin-serve/branch/master/graph/badge.svg
-[cover-url]: https://codecov.io/gh/shellscape/webpack-plugin-serve
-
-[size]: https://packagephobia.now.sh/badge?p=webpack-plugin-serve
-[size-url]: https://packagephobia.now.sh/result?p=webpack-plugin-serve
+[size]: https://packagephobia.now.sh/badge?p=anypack-plugin-serve
+[size-url]: https://packagephobia.now.sh/result?p=anypack-plugin-serve
 
 [https]: https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
 [http2]: https://nodejs.org/api/http2.html#http2_http2_createserver_options_onrequesthandler
 [http2tls]: https://nodejs.org/api/http2.html#http2_http2_createsecureserver_options_onrequesthandler
 
 <div align="center">
-	<img width="256" src="https://raw.githubusercontent.com/shellscape/webpack-plugin-serve/master/assets/serve.svg?sanitize=true" alt="webpack-plugin-serve"><br/><br/>
+	<img width="256" src="https://raw.githubusercontent.com/onigoetz/anypack-plugin-serve/master/assets/serve.svg?sanitize=true" alt="anypack-plugin-serve"><br/><br/>
 </div>
 
 [![tests][tests]][tests-url]
-[![cover][cover]][cover-url]
 [![size][size]][size-url]
 [![libera manifesto](https://img.shields.io/badge/libera-manifesto-lightgrey.svg)](https://liberamanifesto.com)
 
-# webpack-plugin-serve
+# anypack-plugin-serve
 
 A Webpack development server in a plugin.
 
 Be sure to [browse our recipes](./recipes/README.md) and peruse the [FAQ](./.github/FAQ.md) after reading the documentation below.
 
-<a href="https://www.patreon.com/shellscape">
-  <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-</a>
+> This is a fork of [`webpack-plugin-serve`](https://www.npmjs.com/package/webpack-plugin-serve) by [@shellscape](https://www.patreon.com/shellscape)
+> All credits for the initial work fo to him
 
-_Please consider donating if you find this project useful._
+## Goals of this fork
+
+1. Be compatible with both Webpack and Rspack (in progress)
+2. Be very lightweight (in progress)
+
+### Current effort on size
+
+1. `anypack-plugin-serve@0.1.0-alpha.1`: 91.1kB Publish / 5.27MB Install
+2. `webpack-plugin-serve@1.6.0`: 89.2kB Publish / 5.00MB Install
+3. `webpack-dev-server@5.2.2`: 536kB Publish / 13.7MB Install
+4. `@rspack/dev-server@1.1.4`: 42.5kB Publish / 15.5MB Install
 
 ## Requirements
 
-`webpack-plugin-serve` is an [evergreen 🌲](./.github/FAQ.md#what-does-evergreen-mean) module.
+`anypack-plugin-serve` is an [evergreen 🌲](./.github/FAQ.md#what-does-evergreen-mean) module.
 
 This module requires an [Active LTS](https://github.com/nodejs/Release) Node version (v10.0.0+). The client scripts in this module require [browsers which support `async/await`](https://caniuse.com/#feat=async-functions). Users may also choose to compile the client script via an appropriately configured [Babel](https://babeljs.io/) webpack loader for use in older browsers.
 
 ## Feature Parity
 
-In many ways, `webpack-plugin-serve` stands out from the alternatives. Feature parity with existing solutions is a high priority. If a feature you've come to expect in an alternative isn't directly available, it's likely easy to implement via middleware. Feel free to open an issue for direction.
+In many ways, `anypack-plugin-serve` stands out from the alternatives. Feature parity with existing solutions is a high priority. If a feature you've come to expect in an alternative isn't directly available, it's likely easy to implement via middleware. Feel free to open an issue for direction.
 
-For those interested in direct comparisons, please see the [Feature Grid](./.github/FEATURES.md) for a breakdown of feature comparisons between `webpack-plugin-serve` and the alternatives.
+For those interested in direct comparisons, please see the [Feature Grid](./.github/FEATURES.md) for a breakdown of feature comparisons between `anypack-plugin-serve` and the alternatives.
 
 ## Install
 
 Using npm:
 
 ```console
-npm install webpack-nano webpack-plugin-serve --save-dev
+npm install webpack-nano anypack-plugin-serve --save-dev
 ```
 
 _Note: We recommend using [webpack-nano](https://github.com/shellscape/webpack-nano), a very tiny, very clean webpack CLI._
@@ -59,13 +64,13 @@ _Note: We recommend using [webpack-nano](https://github.com/shellscape/webpack-n
 Create a `webpack.config.js` file:
 
 ```js
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 const options = { ... };
 
 module.exports = {
 	// an example entry definition
 	entry: [
-		'webpack-plugin-serve/client' // ← important: this is required, where the magic happens in the browser
+		'anypack-plugin-serve/client' // ← important: this is required, where the magic happens in the browser
 		'app.js'
 	]
   ...
@@ -84,7 +89,7 @@ And run `webpack`:
 ```console
 $ npx wp
 ...
-⬡ wps: Server Listening on: http://[::]:55555
+⬡ aps: Server Listening on: http://[::]:55555
 ...
 ```
 
@@ -266,7 +271,7 @@ static: {
 Type: `boolean`<br>
 Default: `true`
 
-By default, `webpack-plugin-serve` will display a status overlay when a build results in errors and/or warnings. To disable this feature, set `status: false` in the options.
+By default, `anypack-plugin-serve` will display a status overlay when a build results in errors and/or warnings. To disable this feature, set `status: false` in the options.
 
 <div align="center">
 	<img height="244" src="assets/status-overlay.png" alt="status overlay"><br/><br/>
@@ -286,7 +291,7 @@ If `true`, instructs the server to halt middleware processing until the current 
 
 ## Proxying
 
-Proxying with `webpack-plugin-serve` is supported via the [`middleware`](#middleware) option, specifically the [`proxy` built-in](./recipes/proxies.md). But while this plugin module doesn't contain any fancy options processing for proxying, it does include access to the [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) module by default, and the rest should look familiar to users of `http-proxy-middleware`.
+Proxying with `anypack-plugin-serve` is supported via the [`middleware`](#middleware) option, specifically the [`proxy` built-in](./recipes/proxies.md). But while this plugin module doesn't contain any fancy options processing for proxying, it does include access to the [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) module by default, and the rest should look familiar to users of `http-proxy-middleware`.
 
 ```js
 // webpack.config.js

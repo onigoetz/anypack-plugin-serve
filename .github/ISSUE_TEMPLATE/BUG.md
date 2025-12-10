@@ -14,10 +14,10 @@ about: Something went awry and you'd like to tell us about it.
   👉🏽 Need help or support? Open a SUPPORT issue instead.
 -->
 
-- Webpack Version:
+- Webpack/Rspack Version:
 - Operating System (or Browser):
 - Node Version:
-- webpack-plugin-serve Version:
+- anypack-plugin-serve Version:
 
 ### How Do We Reproduce?
 

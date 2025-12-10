@@ -6,7 +6,7 @@ const { WebpackPluginServe: Serve } = require('../../../lib/');
 
 module.exports = {
   context: __dirname,
-  entry: ['./app.js', 'webpack-plugin-serve/client'],
+  entry: ['./app.js', 'anypack-plugin-serve/client'],
   mode: 'development',
   output: {
     filename: './output.js',
@@ -24,7 +24,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'webpack-plugin-serve/client': resolve(__dirname, '../../../client'),
+      'anypack-plugin-serve/client': resolve(__dirname, '../../../client'),
     },
   },
   watch: true,

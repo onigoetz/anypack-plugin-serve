@@ -10,14 +10,14 @@ _Note: The `app.use(...)` call here is slightly different than what Express user
 
 To get started, your `webpack` configuration should be setup and building successfully. Next, you have to know which local path you wan't to proxy to which location target. We are going to setup this using the middleware option.
 
-_Note: We assume that the configuration for `webpack-plugin-serve` is the dafault one, i.e, `port:55555` and `host:localhost`_
+_Note: We assume that the configuration for `anypack-plugin-serve` is the dafault one, i.e, `port:55555` and `host:localhost`_
 
 #### Simple route
 
 We want to proxy our local  urls (`/api`) to `http://localhost:3000`. When a request to `localhost:55555/api` is done, it is going to be proxied to `localhost:3000/api`.
 
 ```js
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   ...,

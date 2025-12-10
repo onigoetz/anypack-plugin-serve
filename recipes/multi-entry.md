@@ -1,6 +1,6 @@
 ## 🍲 Setting up Multiple entries
 
-Certain applications or bundles may require several separate entries. Depending on a user's needs, it may be desirable to make Hot Module Replacement, live-reload, or any other client feature available for each entries, or specific entries other than the default. To accomplish that, the `webpack-plugin-serve/client` file must be included with entries on which client features are needed. We'll show you how that should look below.
+Certain applications or bundles may require several separate entries. Depending on a user's needs, it may be desirable to make Hot Module Replacement, live-reload, or any other client feature available for each entries, or specific entries other than the default. To accomplish that, the `anypack-plugin-serve/client` file must be included with entries on which client features are needed. We'll show you how that should look below.
 
 
 ### Meat and Potatoes
@@ -25,15 +25,15 @@ module.exports = {
 We'll now add the client script to the entries we'd like to have client-side features added to:
 
 ```js
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 
 const serve = new Serve();
 
 module.exports = {
   entry: {
-    landing: ['./landing.js', 'webpack-plugin-serve/client'],
+    landing: ['./landing.js', 'anypack-plugin-serve/client'],
     checkout: './checkout.js',
-    worker: ['./worker.js', 'webpack-plugin-serve/client']
+    worker: ['./worker.js', 'anypack-plugin-serve/client']
   },
   // ...rest of your config
 };

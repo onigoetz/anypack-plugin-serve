@@ -6,10 +6,10 @@ _Note: There are many options for utility modules that provide clean interfaces 
 
 ### Meat and Potatoes
 
-We're going to assume that you're using a ["zero-config"](https://webpack.js.org/configuration/) setup, in which `webpack` assumes that your bundle entrypoint(s) are located in a `src` directory, and your bundle output will be written to a `dist` directory. So let's setup a `webpack` config file for `webpack-plugin-serve` with that in mind:
+We're going to assume that you're using a ["zero-config"](https://webpack.js.org/configuration/) setup, in which `webpack` assumes that your bundle entrypoint(s) are located in a `src` directory, and your bundle output will be written to a `dist` directory. So let's setup a `webpack` config file for `anypack-plugin-serve` with that in mind:
 
 ```js
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 
 const serve = new Serve();
 
@@ -37,7 +37,7 @@ Then let's get our hands dirty and make this do something. We'll assume that you
 
 ```js
 const sane = require('sane');
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 
 const serve = new Serve({ static: ['/app/assets'] });
 const watcher = sane('/app/assets', { glob: [ '**/*.md' ] });
@@ -57,7 +57,7 @@ module.exports = {
 };
 ```
 
-So we've setup our `webpack-plugin-serve` instance to serve static content from `/app/assets`. That's important; otherwise the plugin will just assume the context (in this case the location of `webpack.config.js`) is the root for the static assets.
+So we've setup our `anypack-plugin-serve` instance to serve static content from `/app/assets`. That's important; otherwise the plugin will just assume the context (in this case the location of `webpack.config.js`) is the root for the static assets.
 
 Next, we've subscribed to two events: `listening`, which fires when the underlying `Koa` server is listening, and `close`, which will fire when `webpack` is done watching files and the process is about to end. The `listening` event fires at the correct time to start watching files. The `close` event is important so that `watcher.close()` can be called and the associated handles cleaned up. Failing to do so may result in funky error messages from Node. So that's all well and good, and we have some console output telling us that a file has changed. Let's switch that up so it's actually making a difference for us:
 

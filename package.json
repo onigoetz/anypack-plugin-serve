@@ -1,13 +1,12 @@
 {
-  "name": "webpack-plugin-serve",
-  "version": "1.6.0",
+  "name": "anypack-plugin-serve",
+  "version": "0.1.0-alpha.1",
   "description": "A Development Server in a Webpack Plugin",
   "license": "MPL-2.0",
   "repository": "onigoetz/anypack-plugin-serve",
-  "author": "shellscape",
-  "homepage": "https://github.com/shellscape/webpack-plugin-serve",
-  "bugs": "https://github.com/shellscape/webpack-plugin-serve/issues",
-  "bin": "",
+  "author": "onigoetz",
+  "homepage": "https://github.com/onigoetz/anypack-plugin-serve",
+  "bugs": "https://github.com/onigoetz/anypack-plugin-serve/issues",
   "main": "lib/index.js",
   "engines": {
     "node": ">= 20.0.0"

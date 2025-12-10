@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 const removeWebpackPlugins = require('react-app-rewire-unplug');
 const { paths } = require('react-app-rewired');
 
@@ -78,13 +78,13 @@ module.exports = {
     return {
       ...config,
       mode: 'development',
-      // Used by webpack-plugin-serve
+      // Used by anypack-plugin-serve
       watch: true,
       entry: [
         // webpackHotDevClient is removed here; other entries are the same
         paths.appIndexJs,
         //...config.entry,
-        'webpack-plugin-serve/client',
+        'anypack-plugin-serve/client',
       ],
       resolve: {
         ...resolve,

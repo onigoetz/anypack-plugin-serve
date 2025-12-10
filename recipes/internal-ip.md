@@ -1,14 +1,14 @@
 ## 🍲 Using an Internal IP Address
 
-When on systems or setups which limit use of `localhost`, or in scenarios where the server should listen on the address of the internet-facing interface, the host can be set dynamically. We're going to use the [internal-ip](https://www.npmjs.com/package/internal-ip) module to demonstrate how to set that up with `webpack-plugin-serve`.
+When on systems or setups which limit use of `localhost`, or in scenarios where the server should listen on the address of the internet-facing interface, the host can be set dynamically. We're going to use the [internal-ip](https://www.npmjs.com/package/internal-ip) module to demonstrate how to set that up with `anypack-plugin-serve`.
 
 ### Meat and Potatoes
 
-To get started, your `webpack` configuration should already be setup and building successfully without using `webpack-plugin-serve`. Next, let's get the plugin setup:
+To get started, your `webpack` configuration should already be setup and building successfully without using `anypack-plugin-serve`. Next, let's get the plugin setup:
 
 ```js
 const internalIp = require('internal-ip');
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   ...,

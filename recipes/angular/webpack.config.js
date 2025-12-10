@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ContextReplacementPlugin } = require('webpack');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve/client');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve/client');
 
 const outputPath = path.resolve(__dirname, 'dist');
 const watch = process.env.SERVE === 'true';
@@ -12,7 +12,7 @@ const watch = process.env.SERVE === 'true';
 module.exports = {
   entry: {
     polyfills: './src/polyfills.ts',
-    main: ['./src/app.ts', 'webpack-plugin-serve/client']
+    main: ['./src/app.ts', 'anypack-plugin-serve/client']
   },
   mode: 'development',
   module: {

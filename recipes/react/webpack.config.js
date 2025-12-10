@@ -1,14 +1,14 @@
 const { resolve } = require('path');
 
 const webpack = require('webpack');
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const watch = process.env.NODE_ENV === 'development';
 const outputPath = resolve(__dirname, 'dist');
 
 module.exports = {
-  entry: ['@babel/polyfill', './src/index.js', 'webpack-plugin-serve/client'],
+  entry: ['@babel/polyfill', './src/index.js', 'anypack-plugin-serve/client'],
   mode: process.env.NODE_ENV,
   devtool: 'cheap-eval-source-map',
   module: {

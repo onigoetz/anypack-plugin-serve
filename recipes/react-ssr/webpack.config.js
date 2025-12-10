@@ -1,6 +1,6 @@
 const path = require('path');
 
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 const importFresh = require('import-fresh');
 const nodeExternals = require('webpack-node-externals');
 
@@ -30,7 +30,7 @@ function createConfig(opts) {
     mode: optimize ? 'production' : 'development',
     entry: isServer
       ? { server: './server/main.js' }
-      : { client: ['./client/index.js', ...(optimize ? [] : ['webpack-plugin-serve/client'])] },
+      : { client: ['./client/index.js', ...(optimize ? [] : ['anypack-plugin-serve/client'])] },
     output: {
       path: DIST_DIR,
       filename: '[name].js',

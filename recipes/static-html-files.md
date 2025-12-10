@@ -26,11 +26,11 @@ Where `/the-app/dist` is the `output` webpack output directory. A configuration 
 
 ```js
 const path = require('path');
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 const outputPath = path.resolve('./dist');
 
 module.exports = {
-  entry: ['./js/app.js', 'webpack-plugin-serve/client'],
+  entry: ['./js/app.js', 'anypack-plugin-serve/client'],
   output: {
     filename: 'bundle.js'
     path: outputPath

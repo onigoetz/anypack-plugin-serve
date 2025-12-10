@@ -18,7 +18,7 @@ test('ramdisk', async () => {
 
   const path = await waitFor('Build being written to ', outReader);
   expect(path).toMatch(
-    /(volumes|dev\/shm)\/wps\/webpack-plugin-serve\/output/i,
+    /(volumes|dev\/shm)\/wps\/anypack-plugin-serve\/output/i,
   );
 
   await waitFor('[emitted]', errReader);
@@ -40,7 +40,7 @@ test('ramdisk with options', async () => {
   const path = await waitFor('Build being written to ', outReader);
 
   expect(path).toMatch(
-    /(volumes|dev\/shm)\/wps\/webpack-plugin-serve\/output/i,
+    /(volumes|dev\/shm)\/wps\/anypack-plugin-serve\/output/i,
   );
 
   await waitFor('[emitted]', errReader);

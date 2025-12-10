@@ -47,7 +47,7 @@ The grid below represents a comparison of features from the available and most u
 
 ## Standout Features
 
-- Fully functional **Hot Module Replacement with MultiCompilers**. `webpack-plugin-serve` is the only development server for Webpack which applies HMR updates from multiple compilers/configurations to the page _without a page reload_.
+- Fully functional **Hot Module Replacement with MultiCompilers**. `anypack-plugin-serve` is the only development server for Webpack which applies HMR updates from multiple compilers/configurations to the page _without a page reload_.
 - Host and Port can be set to a `Promise`, which allows for dynamic host and port resolution before the server starts.
 - The client (browser) WebSocket host can be set, allowing full customization for contain environments.
 - Fully customizable middleware, including execution order of built-in middleware. Users may implement whichever middleware they desire in the order which works best for them.

@@ -1,12 +1,12 @@
 ## 🍲 Create-React-App App
 
-Since it was built to hide configuration from developers, `create-react-app` actually makes it harder to use great plugins like this one. In this recipe, we'll show how to use `create-react-app` with `webpack-plugin-serve` without having to eject.
+Since it was built to hide configuration from developers, `create-react-app` actually makes it harder to use great plugins like this one. In this recipe, we'll show how to use `create-react-app` with `anypack-plugin-serve` without having to eject.
 
 ### ☠️ Warning ☠️
 
 This recipe is definitely neither vegan nor gluten-free. It can neither be confirmed nor denied whether it contains traces of lead or arsenic. Develop at your own risk.
 
-If you find that implementing this recipe causes unintended side effects or problems, please open a new [Documentation Issue](https://github.com/shellscape/webpack-plugin-serve/issues/new?template=DOCS.md).
+If you find that implementing this recipe causes unintended side effects or problems, please open a new [Documentation Issue](https://github.com/onigoetz/anypack-plugin-serve/issues/new?template=DOCS.md).
 
 If you're working on a new project, *it is strongly advised* that you consider
 one of the following alternatives:
@@ -18,7 +18,7 @@ one of the following alternatives:
 
 ## Recipe
 
-With that out of the way, let's use `webpack-plugin-serve` with `create-react-app`.
+With that out of the way, let's use `anypack-plugin-serve` with `create-react-app`.
 
 _Note: this entire section has already been taken care of, and the artifacts now live within this codebase. However, in order for you to effectively replicate what has been created here, it will help to write down these steps._
 
@@ -35,8 +35,8 @@ npm install -D react-app-rewired react-app-rewire-unplug
 # keep track of this installation in package.json
 npm install -D mini-css-extract-plugin
 
-# Add webpack-plugin-serve specific packages
-npm install -D webpack-nano webpack-plugin-serve
+# Add anypack-plugin-serve specific packages
+npm install -D webpack-nano anypack-plugin-serve
 
 # Install react-hot-loader dependencies
 npm install -D @hot-loader/react-dom

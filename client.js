@@ -22,7 +22,7 @@
   } catch (e) {
     const { log } = require('./lib/client/log');
     log.error(
-      'The entry for webpack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.'
+      'The entry for anypack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.'
     );
   }
 

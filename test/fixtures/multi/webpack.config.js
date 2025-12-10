@@ -12,7 +12,7 @@ const serve = new Serve({
 module.exports = [
   {
     context: __dirname,
-    entry: ['./app.js', 'webpack-plugin-serve/client'],
+    entry: ['./app.js', 'anypack-plugin-serve/client'],
     mode: 'development',
     output: {
       filename: './dist-app.js',
@@ -23,14 +23,14 @@ module.exports = [
     plugins: [serve],
     resolve: {
       alias: {
-        'webpack-plugin-serve/client': resolve(__dirname, '../../../client'),
+        'anypack-plugin-serve/client': resolve(__dirname, '../../../client'),
       },
     },
     watch: true,
   },
   {
     context: __dirname,
-    entry: ['./worker.js', 'webpack-plugin-serve/client'],
+    entry: ['./worker.js', 'anypack-plugin-serve/client'],
     mode: 'development',
     output: {
       filename: './dist-worker.js',
@@ -41,7 +41,7 @@ module.exports = [
     plugins: [serve.attach()],
     resolve: {
       alias: {
-        'webpack-plugin-serve/client': resolve(__dirname, '../../../client'),
+        'anypack-plugin-serve/client': resolve(__dirname, '../../../client'),
       },
     },
   },

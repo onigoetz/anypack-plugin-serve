@@ -1,7 +1,7 @@
 const { resolve } = require('path');
 
 const webpack = require('webpack');
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
@@ -10,7 +10,7 @@ const isDev = mode === 'development';
 const outputPath = resolve(__dirname, 'dist');
 
 module.exports = {
-  entry: ['./src/index.js', ...(isDev ? ['webpack-plugin-serve/client'] : [])],
+  entry: ['./src/index.js', ...(isDev ? ['anypack-plugin-serve/client'] : [])],
   mode,
   devtool: 'cheap-eval-source-map',
   module: {

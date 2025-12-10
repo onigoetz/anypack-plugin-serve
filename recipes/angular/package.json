@@ -1,9 +1,9 @@
 {
   "name": "Angular-Recipe",
   "version": "1.0.0",
-  "description": "A webpack-plugin-serve Recipe",
+  "description": "A anypack-plugin-serve Recipe",
   "license": "GPL-3.0-or-later",
-  "repository": "shellscape/webpack-plugin-serve/recipes/angular",
+  "repository": "onigoetz/anypack-plugin-serve/recipes/angular",
   "engines": {
     "node": ">= 10.11.0"
   },
@@ -44,7 +44,7 @@
     "webpack": "^4.20.2",
     "webpack-filter-warnings-plugin": "^1.2.0",
     "webpack-nano": "^0.6.1",
-    "webpack-plugin-serve": "^0.4.0",
+    "anypack-plugin-serve": "^0.4.0",
     "zone.js": "^0.8.26"
   }
 }

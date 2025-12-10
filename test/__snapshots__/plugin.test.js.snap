@@ -12,7 +12,7 @@ exports[`allow https null 1`] = `
   "liveReload": false,
   "log": {
     "level": "info",
-    "name": "webpack-plugin-serve",
+    "name": "anypack-plugin-serve",
     "prefix": {
       "level": [Function],
       "template": "{{level}}",
@@ -42,7 +42,7 @@ exports[`defaults 1`] = `
   "liveReload": false,
   "log": {
     "level": "info",
-    "name": "webpack-plugin-serve",
+    "name": "anypack-plugin-serve",
     "prefix": {
       "level": [Function],
       "template": "{{level}}",
@@ -73,7 +73,7 @@ exports[`options manipulation 1`] = `
   "liveReload": false,
   "log": {
     "level": "info",
-    "name": "webpack-plugin-serve",
+    "name": "anypack-plugin-serve",
     "prefix": {
       "level": [Function],
       "template": "{{level}}",

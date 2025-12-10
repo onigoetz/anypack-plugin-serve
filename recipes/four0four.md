@@ -7,7 +7,7 @@ It requires a function that receives the `Koa` context! This function is execute
 With this middleware you can for example render a custom 404 page.
 
 ```js
-const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   ...,

@@ -1,4 +1,4 @@
-## 🍲 `webpack-plugin-serve` Recipies
+## 🍲 `anypack-plugin-serve` Recipies
 
 Recipes are snippets of code and useful tidbits that may be helpful to developers working to accomplish goals in similar scenarios. If you would like to submit a recipe, please open a `documentation` Pull Request.
 
