@@ -78,7 +78,7 @@ test('cwd error', async () => {
   throw new Error('The test should have thrown an error');
 });
 
-test.only('ramdisk with empty package.json', async () => {
+test('ramdisk with empty package.json', async () => {
   const fixturePath = join(__dirname, 'fixtures/ramdisk-empty-pkg');
   const proc = execa('wp', [], { cwd: fixturePath });
   const errReader = logReader(proc.stderr);
