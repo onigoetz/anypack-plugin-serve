@@ -3,11 +3,11 @@ const path = require('path');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { MiniHtmlWebpackPlugin } = require('mini-html-webpack-plugin');
 
-const { WebpackPluginServe: Serve } = require('../../');
+const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   mode: 'development',
-  entry: ['./src', '../../client'],
+  entry: ['./src', 'anypack-plugin-serve/client'],
   plugins: [
     new Serve({ hmr: 'refresh-on-failure', static: ['./dist'], status: false }),
     new ReactRefreshPlugin({

@@ -1,15 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 
 import Root from './Root';
 
 const elem = document.getElementById('react');
 
-ReactDOM.hydrate(<Root />, elem);
+const root = hydrateRoot(elem, <Root />);
 
 if (module.hot) {
   module.hot.accept('./Root', () => {
     const NextRoot = require('./Root').default;
-    ReactDOM.hydrate(<NextRoot />, elem);
+    root.render(<NextRoot />);
   });
 }

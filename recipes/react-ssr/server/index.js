@@ -4,7 +4,7 @@ const polka = require('polka');
 const sirv = require('sirv');
 
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
-const renderer = require(path.resolve(DIST_DIR, 'server.js'));
+const renderer = require(path.resolve(DIST_DIR, 'server.js')).default;
 
 const app = polka();
 app.use(renderer);

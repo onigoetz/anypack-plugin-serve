@@ -1,7 +1,7 @@
-const React = require('react');
-const { renderToString } = require('react-dom/server');
+import React from "react";
+import { renderToString } from "react-dom/server";
 
-const Root = require('../client/Root').default;
+import Root from "../client/Root";
 
 function render() {
   const markup = renderToString(<Root />);
@@ -17,7 +17,7 @@ function render() {
   `;
 }
 
-module.exports = async (req, res, next) => {
-  await next();
+export default async function renderHome(req, res) {
+  res.statusCode = 200;
   res.end(render());
-};
+}

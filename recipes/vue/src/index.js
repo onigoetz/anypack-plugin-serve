@@ -1,14 +1,11 @@
-import Vue from 'vue';
-import App from './App';
+import { createApp } from 'vue';
+import App from './App.vue';
 
 const render = () => {
   const el = document.createElement('div');
   document.body.appendChild(el);
 
-  new Vue({
-    el,
-    render: h => h(App)
-  })
+  createApp(App).mount(el)
 }
 
-render()
+render();

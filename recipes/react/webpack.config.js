@@ -1,16 +1,16 @@
-const { resolve } = require('path');
+const { resolve } = require('node:path');
 
-const webpack = require('webpack');
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { WebpackPluginServe } = require('anypack-plugin-serve');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const watch = process.env.NODE_ENV === 'development';
 const outputPath = resolve(__dirname, 'dist');
 
 module.exports = {
-  entry: ['@babel/polyfill', './src/index.js', 'anypack-plugin-serve/client'],
+  entry: ['./src/index.js', 'anypack-plugin-serve/client'],
   mode: process.env.NODE_ENV,
-  devtool: 'cheap-eval-source-map',
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -21,64 +21,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.woff(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            name: 'fonts/[name].[ext]',
-            mimetype: 'application/font-woff'
-          }
-        }
-      },
-      {
-        test: /\.woff2(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            name: 'fonts/[name].[ext]',
-            mimetype: 'application/font-woff2'
-          }
-        }
-      },
-      {
-        test: /\.(otf)(\?.*)?$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[ext]'
-          }
-        }
-      },
-      {
-        test: /\.ttf(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            name: 'fonts/[name].[ext]',
-            mimetype: 'application/octet-stream'
-          }
-        }
-      },
-      {
-        test: /\.svg(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            name: 'images/[name].[ext]',
-            mimetype: 'image/svg+xml'
-          }
-        }
-      },
-      {
-        test: /\.(png|jpg)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            name: 'images/[name].[ext]'
-          }
-        }
       }
     ]
   },
@@ -89,16 +31,14 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-      }
-    }),
-    new Serve({
+    new ReactRefreshPlugin({
+          overlay: false
+        }),
+    new WebpackPluginServe({
       // note: this value is true by default
       hmr: true,
       historyFallback: true,
-      static: [outputPath]
+      static: [outputPath],
     })
   ],
   watch

@@ -113,9 +113,11 @@ const getBuiltins = (app, options) => {
       // When using Firefox, the browser sends an accept header for /wps when using connect-history-api-fallback
       app.use(async (req, _res, next) => {
         if (req.path.match(/^\/wps/)) {
-          // biome-ignore lint/correctness/noUnusedVariables: excluded on purpose
-          const { accept, ...reqHeaders } = req.header;
-          req.header = reqHeaders;
+          const origHeaders = Object.entries(req.headers);
+          const filteredHeaders = origHeaders.filter(
+            ([key]) => key !== 'accept',
+          );
+          req.headers = Object.fromEntries(filteredHeaders);
         }
         await next();
       });
