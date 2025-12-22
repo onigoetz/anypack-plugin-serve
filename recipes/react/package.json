@@ -17,6 +17,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "anypack-plugin-serve": "0.1.0-alpha.1",
     "babel-loader": "^8.0.4",
     "cross-env": "^5.2.0",
     "css-loader": "^3.2.0",
@@ -27,8 +28,7 @@
     "react-hot-loader": "^4.3.11",
     "style-loader": "^1.0.0",
     "url-loader": "^2.1.0",
-    "webpack": "^4.23.1",
-    "webpack-nano": "^0.7.1",
-    "anypack-plugin-serve": "^0.12.1"
+    "webpack": "^5.0.0",
+    "webpack-nano": "^1.1.0"
   }
 }
