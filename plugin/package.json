@@ -12,13 +12,10 @@
     "node": ">= 20.0.0"
   },
   "scripts": {
-    "ci:lint": "biome check lib test",
     "ci:test": "npm run test --coverage",
     "dev": "npm run dev:clean && node ../node_modules/webpack-nano/bin/wp --config test/fixtures/simple/webpack.config.js",
     "dev:clean": "del test/fixtures/multi/output/* test/fixtures/simple/output/*",
     "dev:multi": "npm run dev:clean && ../node node_modules/webpack-nano/bin/wp --config test/fixtures/multi/webpack.config.js",
-    "format": "biome format lib test",
-    "lint": "biome check --write lib test",
     "test": "rstest"
   },
   "files": [

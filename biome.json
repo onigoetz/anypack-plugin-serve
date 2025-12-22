@@ -2,11 +2,11 @@
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "includes": [
-      "lib/**",
-      "test/**",
+      "plugin/lib/**",
+      "plugin/test/**",
       "!dist",
       "!*.snap",
-      "!output.js",
+      "!**/output.js",
       "!*-wps-hm4.*",
       "!*.hot-update.js",
       "!test/**/output"

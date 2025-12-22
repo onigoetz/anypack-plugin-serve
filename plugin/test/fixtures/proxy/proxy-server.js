@@ -3,14 +3,14 @@ const polka = require('polka');
 const defaultRoutes = [
   {
     url: '/api',
-    handler: (req, res) => {
+    handler: (_req, res) => {
       res.statusCode = 200;
       res.end('/api endpoint');
     },
   },
   {
     url: '/api/test',
-    handler: (req, res) => {
+    handler: (_req, res) => {
       res.statusCode = 200;
       res.end('/api/test endpoint');
     },

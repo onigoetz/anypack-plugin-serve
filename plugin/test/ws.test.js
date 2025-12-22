@@ -15,7 +15,7 @@ test('websocket middleware', async () => {
   const resultDeferred = defer();
 
   app.use(middleware);
-  app.get('/test', async (req, res) => {
+  app.get('/test', async (req, _res) => {
     expect(req.ws).toBeTruthy();
 
     const socket = await req.ws();

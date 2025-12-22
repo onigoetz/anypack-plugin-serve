@@ -4,11 +4,12 @@
   "description": "A Development Server in a Webpack Plugin",
   "license": "MPL-2.0",
   "scripts": {
-    "lint": "yarn workspaces foreach --all -pt run lint",
-    "ci:lint": "yarn workspaces foreach --all -pt run ci:lint",
     "test": "yarn workspaces foreach --all -pt run test",
     "ci:test": "yarn workspaces foreach --all -pt run ci:test",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "format": "biome format plugin/lib plugin/test",
+    "lint": "biome check --write plugin/lib plugin/test",
+    "ci:lint": "biome check plugin/lib plugin/test"
   },
   "private": true,
   "devDependencies": {

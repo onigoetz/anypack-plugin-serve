@@ -19,7 +19,6 @@ const defaults = {
   bytes: 2.56e8,
   name: 'wpr',
 };
-const name = 'WebpackPluginRamdisk';
 
 function getCommands() {
   const { platform } = process;

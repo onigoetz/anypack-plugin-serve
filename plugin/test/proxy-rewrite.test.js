@@ -15,7 +15,7 @@ beforeEach(async () => {
   server = proxyServer([
     {
       url: '/test',
-      handler: async (req, res) => {
+      handler: async (_req, res) => {
         res.statusCode = 200;
         res.end('/test endpoint rewrite');
       },
