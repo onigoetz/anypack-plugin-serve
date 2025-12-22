@@ -33,7 +33,7 @@ afterEach(async () => {
 
 test('force refresh', async () => {
   const { getPort, replace, setup } = util;
-  fixturePath = await setup('simple', 'single-hmr');
+  fixturePath = await setup('simple', 'force-refresh');
   proc = execa('wp', [], { cwd: fixturePath });
   const errReader = logReader(proc.stderr);
   const port = await getPort(logReader(proc.stdout));

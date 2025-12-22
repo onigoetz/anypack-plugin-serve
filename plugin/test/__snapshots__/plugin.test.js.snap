@@ -95,7 +95,7 @@ exports[`options manipulation 1`] = `
 
 exports[`static → array(string) 1`] = `
 [
-  "test/fixtures",
+  "plugin/test/fixtures",
 ]
 `;
 
@@ -113,4 +113,4 @@ exports[`static → glob 1`] = `
 ]
 `;
 
-exports[`static → string 1`] = `"test/fixtures"`;
+exports[`static → string 1`] = `"plugin/test/fixtures"`;
