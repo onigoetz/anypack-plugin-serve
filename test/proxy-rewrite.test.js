@@ -15,8 +15,9 @@ beforeEach(async () => {
   server = proxyServer([
     {
       url: '/test',
-      handler: async (ctx) => {
-        ctx.body = '/test endpoint rewrite';
+      handler: async (req, res) => {
+        res.statusCode = 200;
+        res.end('/test endpoint rewrite');
       },
     },
   ]).listen(8889);
@@ -25,7 +26,7 @@ beforeEach(async () => {
 });
 
 afterEach(() => {
-  server.close();
+  server.server.close();
   watcher.close();
 });
 

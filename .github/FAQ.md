@@ -42,7 +42,7 @@ This plugin is used by a plethora of different users with different needs. As so
 
 ### What does the "Not Found / 404" error mean?
 
-In a nutshell, this means that the static file middleware (`koa-static`) attempted to serve an index file, but couldn't find one. By default, the server will use the path of the webpack compiler `context` property. This error is typically seen when using `HtmlWebpackPlugin` and when the `output` path is different from the `context` (see [this question](#why-does-the-static-option-default-to-compilercontext) for why we use `context`). To remedy this, add your output path to the `static` option when instantiating the plugin. e.g.
+In a nutshell, this means that the static file middleware (`sirv`) attempted to serve an index file, but couldn't find one. By default, the server will use the path of the webpack compiler `context` property. This error is typically seen when using `HtmlWebpackPlugin` and when the `output` path is different from the `context` (see [this question](#why-does-the-static-option-default-to-compilercontext) for why we use `context`). To remedy this, add your output path to the `static` option when instantiating the plugin. e.g.
 
 ```js
 // webpack.config.js

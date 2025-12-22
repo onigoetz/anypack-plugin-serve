@@ -13,7 +13,7 @@ module.exports = {
   ...,
   plugins: [new Serve({
     middleware: (app, builtins) => {
-      builtins.four0four((ctx) => {
+      builtins.four0four((req, res) => {
           // render Custom error page
           // do something else.
       })

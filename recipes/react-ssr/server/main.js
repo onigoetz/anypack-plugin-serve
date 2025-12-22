@@ -17,7 +17,7 @@ function render() {
   `;
 }
 
-module.exports = async (ctx, next) => {
-  ctx.body = `${render()}`;
+module.exports = async (req, res, next) => {
   await next();
+  res.end(render());
 };

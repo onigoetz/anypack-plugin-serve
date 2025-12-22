@@ -1,26 +1,27 @@
-const Koa = require('koa');
-const router = require('koa-route');
-
-const app = new Koa();
+const polka = require('polka');
 
 const defaultRoutes = [
   {
     url: '/api',
-    handler: async (ctx) => {
-      ctx.body = '/api endpoint';
+    handler: (req, res) => {
+      res.statusCode = 200;
+      res.end('/api endpoint');
     },
   },
   {
     url: '/api/test',
-    handler: async (ctx) => {
-      ctx.body = '/api/test endpoint';
+    handler: (req, res) => {
+      res.statusCode = 200;
+      res.end('/api/test endpoint');
     },
   },
 ];
 
 const proxyServer = (routes = defaultRoutes) => {
+  const app = polka();
+
   routes.forEach((route) => {
-    app.use(router.get(route.url, route.handler));
+    app.get(route.url, route.handler);
   });
   return app;
 };

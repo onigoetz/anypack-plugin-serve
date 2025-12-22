@@ -1,3 +1,4 @@
+const timers = require('node:timers/promises');
 const webpack = require('webpack');
 const { test, expect, beforeEach, afterEach } = require('@rstest/core');
 const fetch = require('node-fetch').default;
@@ -12,14 +13,25 @@ let watcher;
 let server;
 
 beforeEach(async () => {
-  server = proxyServer().listen(8888);
+  server = proxyServer();
+
+  server.listen(8888);
+
   watcher = compiler.watch({}, deferred.resolve);
   await deferred.promise;
 });
 
-afterEach(() => {
-  server.close();
+afterEach(async () => {
+  await new Promise((resolve) => {
+    server.server.close(() => {
+      resolve();
+    });
+  });
+
   watcher.close();
+
+  // Server needs a small timeout to finish stopping properly
+  await timers.setTimeout(500);
 });
 
 test('should reach /api proxy endpoint', async () => {

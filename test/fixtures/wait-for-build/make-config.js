@@ -9,13 +9,13 @@ const make = (port) => {
     port,
     waitForBuild: true,
     middleware: (app) => {
-      app.use(async (ctx, next) => {
-        if (ctx.url === '/test') {
+      app.use(async (req, res, next) => {
+        if (req.url === '/test') {
           try {
             require(outputPath);
-            ctx.body = 'success';
+            res.end('success');
           } catch (_e) {
-            ctx.body = 'error';
+            res.end('error');
           }
         }
         await next();

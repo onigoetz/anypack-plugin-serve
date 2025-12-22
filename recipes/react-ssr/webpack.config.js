@@ -13,9 +13,9 @@ const serve = new Serve({
   static: [DIST_DIR],
   waitForBuild: true,
   middleware(app) {
-    app.use(async (ctx, next) => {
+    app.use(async (req, res, next) => {
       const renderer = importFresh(path.resolve(DIST_DIR, 'server.js'));
-      await renderer(ctx, next);
+      await renderer(req, res, next);
     });
   }
 });
