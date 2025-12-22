@@ -30,7 +30,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.28.5, @babel/core@npm:^7.1.2, @babel/core@npm:^7.11.6, @babel/core@npm:^7.23.9":
+"@babel/core@npm:7.28.5, @babel/core@npm:^7.1.2, @babel/core@npm:^7.11.6":
   version: 7.28.5
   resolution: "@babel/core@npm:7.28.5"
   dependencies:
@@ -267,7 +267,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.23.9, @babel/parser@npm:^7.27.2, @babel/parser@npm:^7.28.5":
+"@babel/parser@npm:^7.27.2, @babel/parser@npm:^7.28.5":
   version: 7.28.5
   resolution: "@babel/parser@npm:7.28.5"
   dependencies:
@@ -1186,18 +1186,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@biomejs/biome@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/biome@npm:2.3.8"
+"@biomejs/biome@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/biome@npm:2.3.10"
   dependencies:
-    "@biomejs/cli-darwin-arm64": "npm:2.3.8"
-    "@biomejs/cli-darwin-x64": "npm:2.3.8"
-    "@biomejs/cli-linux-arm64": "npm:2.3.8"
-    "@biomejs/cli-linux-arm64-musl": "npm:2.3.8"
-    "@biomejs/cli-linux-x64": "npm:2.3.8"
-    "@biomejs/cli-linux-x64-musl": "npm:2.3.8"
-    "@biomejs/cli-win32-arm64": "npm:2.3.8"
-    "@biomejs/cli-win32-x64": "npm:2.3.8"
+    "@biomejs/cli-darwin-arm64": "npm:2.3.10"
+    "@biomejs/cli-darwin-x64": "npm:2.3.10"
+    "@biomejs/cli-linux-arm64": "npm:2.3.10"
+    "@biomejs/cli-linux-arm64-musl": "npm:2.3.10"
+    "@biomejs/cli-linux-x64": "npm:2.3.10"
+    "@biomejs/cli-linux-x64-musl": "npm:2.3.10"
+    "@biomejs/cli-win32-arm64": "npm:2.3.10"
+    "@biomejs/cli-win32-x64": "npm:2.3.10"
   dependenciesMeta:
     "@biomejs/cli-darwin-arm64":
       optional: true
@@ -1217,62 +1217,62 @@ __metadata:
       optional: true
   bin:
     biome: bin/biome
-  checksum: 10c0/a6bae2db99cc2bd7146a93a97f1185b343d3538284d990e8cec796a94e10b88436cca846568a5d464db4bdd790d4282d3ad67da757f7e3fc4c958d5398a6b914
+  checksum: 10c0/317bf8f8051f4030dc52855159bbd058db5cf2c9d5e7b212271f3d91842e0fc5bbc05495e47943676481325d4081cd41cf25dfa18a437d2b6e27f72dacfd41b4
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-arm64@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/cli-darwin-arm64@npm:2.3.8"
+"@biomejs/cli-darwin-arm64@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/cli-darwin-arm64@npm:2.3.10"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-x64@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/cli-darwin-x64@npm:2.3.8"
+"@biomejs/cli-darwin-x64@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/cli-darwin-x64@npm:2.3.10"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64-musl@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/cli-linux-arm64-musl@npm:2.3.8"
+"@biomejs/cli-linux-arm64-musl@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/cli-linux-arm64-musl@npm:2.3.10"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/cli-linux-arm64@npm:2.3.8"
+"@biomejs/cli-linux-arm64@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/cli-linux-arm64@npm:2.3.10"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64-musl@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/cli-linux-x64-musl@npm:2.3.8"
+"@biomejs/cli-linux-x64-musl@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/cli-linux-x64-musl@npm:2.3.10"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/cli-linux-x64@npm:2.3.8"
+"@biomejs/cli-linux-x64@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/cli-linux-x64@npm:2.3.10"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-arm64@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/cli-win32-arm64@npm:2.3.8"
+"@biomejs/cli-win32-arm64@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/cli-win32-arm64@npm:2.3.10"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-x64@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@biomejs/cli-win32-x64@npm:2.3.8"
+"@biomejs/cli-win32-x64@npm:2.3.10":
+  version: 2.3.10
+  resolution: "@biomejs/cli-win32-x64@npm:2.3.10"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -1309,13 +1309,6 @@ __metadata:
   version: 1.0.0
   resolution: "@epic-web/invariant@npm:1.0.0"
   checksum: 10c0/72dbeb026e4e4eb3bc9c65739b91408ca77ab7d603a2494fa2eff3790ec22892c4caba751cffdf30f5ccf0e7ba79c1e9c96cf0a357404b9432bf1365baac23ca
-  languageName: node
-  linkType: hard
-
-"@istanbuljs/schema@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@istanbuljs/schema@npm:0.1.3"
-  checksum: 10c0/61c5286771676c9ca3eb2bd8a7310a9c063fb6e0e9712225c8471c582d157392c88f5353581c8c9adbe0dff98892317d2fdfc56c3499aa42e0194405206a963a
   languageName: node
   linkType: hard
 
@@ -1540,107 +1533,107 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rsbuild/core@npm:1.6.12-canary-20251204065915":
-  version: 1.6.12-canary-20251204065915
-  resolution: "@rsbuild/core@npm:1.6.12-canary-20251204065915"
+"@rsbuild/core@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rsbuild/core@npm:1.7.0-beta.0"
   dependencies:
-    "@rspack/core": "npm:@rspack-canary/core@1.6.7-canary-63b4dae2-20251204065915"
+    "@rspack/core": "npm:1.7.0-beta.0"
     "@rspack/lite-tapable": "npm:~1.1.0"
     "@swc/helpers": "npm:^0.5.17"
     core-js: "npm:~3.47.0"
     jiti: "npm:^2.6.1"
   bin:
     rsbuild: bin/rsbuild.js
-  checksum: 10c0/66ff1c4cbf0d18c47c2d52b9c362dd5bf19210a85fdac330475de2d59f9fcd3ffa006bace164902171d3f762b073f6cf093ccdea881b501020238cbd4e214629
+  checksum: 10c0/cf2a5e93d2a5398c4fc5f720380f9f73c7ca16a3dde31d30cda1ce394a150538b52db5f4170e7bdc5471ba20b5865217fa1913a3fd45b2ebe99c8468cc03f5e3
   languageName: node
   linkType: hard
 
-"@rspack/binding-darwin-arm64@npm:@rspack-canary/binding-darwin-arm64@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-darwin-arm64@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-darwin-arm64@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-darwin-arm64@npm:1.7.0-beta.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rspack/binding-darwin-x64@npm:@rspack-canary/binding-darwin-x64@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-darwin-x64@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-darwin-x64@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-darwin-x64@npm:1.7.0-beta.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@rspack/binding-linux-arm64-gnu@npm:@rspack-canary/binding-linux-arm64-gnu@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-linux-arm64-gnu@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-linux-arm64-gnu@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-linux-arm64-gnu@npm:1.7.0-beta.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rspack/binding-linux-arm64-musl@npm:@rspack-canary/binding-linux-arm64-musl@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-linux-arm64-musl@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-linux-arm64-musl@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-linux-arm64-musl@npm:1.7.0-beta.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@rspack/binding-linux-x64-gnu@npm:@rspack-canary/binding-linux-x64-gnu@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-linux-x64-gnu@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-linux-x64-gnu@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-linux-x64-gnu@npm:1.7.0-beta.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rspack/binding-linux-x64-musl@npm:@rspack-canary/binding-linux-x64-musl@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-linux-x64-musl@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-linux-x64-musl@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-linux-x64-musl@npm:1.7.0-beta.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@rspack/binding-wasm32-wasi@npm:@rspack-canary/binding-wasm32-wasi@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-wasm32-wasi@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-wasm32-wasi@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-wasm32-wasi@npm:1.7.0-beta.0"
   dependencies:
     "@napi-rs/wasm-runtime": "npm:1.0.7"
   conditions: cpu=wasm32
   languageName: node
   linkType: hard
 
-"@rspack/binding-win32-arm64-msvc@npm:@rspack-canary/binding-win32-arm64-msvc@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-win32-arm64-msvc@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-win32-arm64-msvc@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-win32-arm64-msvc@npm:1.7.0-beta.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rspack/binding-win32-ia32-msvc@npm:@rspack-canary/binding-win32-ia32-msvc@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-win32-ia32-msvc@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-win32-ia32-msvc@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-win32-ia32-msvc@npm:1.7.0-beta.0"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@rspack/binding-win32-x64-msvc@npm:@rspack-canary/binding-win32-x64-msvc@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding-win32-x64-msvc@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding-win32-x64-msvc@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding-win32-x64-msvc@npm:1.7.0-beta.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@rspack/binding@npm:@rspack-canary/binding@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/binding@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/binding@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/binding@npm:1.7.0-beta.0"
   dependencies:
-    "@rspack/binding-darwin-arm64": "npm:@rspack-canary/binding-darwin-arm64@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-darwin-x64": "npm:@rspack-canary/binding-darwin-x64@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-linux-arm64-gnu": "npm:@rspack-canary/binding-linux-arm64-gnu@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-linux-arm64-musl": "npm:@rspack-canary/binding-linux-arm64-musl@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-linux-x64-gnu": "npm:@rspack-canary/binding-linux-x64-gnu@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-linux-x64-musl": "npm:@rspack-canary/binding-linux-x64-musl@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-wasm32-wasi": "npm:@rspack-canary/binding-wasm32-wasi@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-win32-arm64-msvc": "npm:@rspack-canary/binding-win32-arm64-msvc@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-win32-ia32-msvc": "npm:@rspack-canary/binding-win32-ia32-msvc@1.6.7-canary-63b4dae2-20251204065915"
-    "@rspack/binding-win32-x64-msvc": "npm:@rspack-canary/binding-win32-x64-msvc@1.6.7-canary-63b4dae2-20251204065915"
+    "@rspack/binding-darwin-arm64": "npm:1.7.0-beta.0"
+    "@rspack/binding-darwin-x64": "npm:1.7.0-beta.0"
+    "@rspack/binding-linux-arm64-gnu": "npm:1.7.0-beta.0"
+    "@rspack/binding-linux-arm64-musl": "npm:1.7.0-beta.0"
+    "@rspack/binding-linux-x64-gnu": "npm:1.7.0-beta.0"
+    "@rspack/binding-linux-x64-musl": "npm:1.7.0-beta.0"
+    "@rspack/binding-wasm32-wasi": "npm:1.7.0-beta.0"
+    "@rspack/binding-win32-arm64-msvc": "npm:1.7.0-beta.0"
+    "@rspack/binding-win32-ia32-msvc": "npm:1.7.0-beta.0"
+    "@rspack/binding-win32-x64-msvc": "npm:1.7.0-beta.0"
   dependenciesMeta:
     "@rspack/binding-darwin-arm64":
       optional: true
@@ -1662,23 +1655,23 @@ __metadata:
       optional: true
     "@rspack/binding-win32-x64-msvc":
       optional: true
-  checksum: 10c0/bb95f714186acabee1a91b3a03b121eb2f798458d247bcb638bb0f8626f4c1c9e130f7b23382c4d14d30de3745d23de07811f0178cfbed00d869df1c9e1cb63a
+  checksum: 10c0/0a3b3b1809107b1b9d9398ae08309023fc979e6df7334e8e2e0b422d9ae7ff158558a9fdbe7a8fc480b5415faff621b973f1a4cc95071f6be864626fefad836f
   languageName: node
   linkType: hard
 
-"@rspack/core@npm:@rspack-canary/core@1.6.7-canary-63b4dae2-20251204065915":
-  version: 1.6.7-canary-63b4dae2-20251204065915
-  resolution: "@rspack-canary/core@npm:1.6.7-canary-63b4dae2-20251204065915"
+"@rspack/core@npm:1.7.0-beta.0":
+  version: 1.7.0-beta.0
+  resolution: "@rspack/core@npm:1.7.0-beta.0"
   dependencies:
     "@module-federation/runtime-tools": "npm:0.21.6"
-    "@rspack/binding": "npm:@rspack-canary/binding@1.6.7-canary-63b4dae2-20251204065915"
+    "@rspack/binding": "npm:1.7.0-beta.0"
     "@rspack/lite-tapable": "npm:1.1.0"
   peerDependencies:
     "@swc/helpers": ">=0.5.1"
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: 10c0/f2d639d8916e65b249d02028623e7c19b251f3e4fd38b88363779f50633b82b298a07e61e422823dfd70b50360ed8b37751f97e65c12628ff0efa37abdeefc26
+  checksum: 10c0/2b2b83f345c3ef6b3f51547b900b7b30238adb20f0e0a58526469c340420763a140068bb84034e28d302565dd75dec5ed4eea65e52c27ad0ed72a25d60a480bd
   languageName: node
   linkType: hard
 
@@ -1689,11 +1682,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rstest/core@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@rstest/core@npm:0.7.0"
+"@rstest/core@npm:^0.7.5":
+  version: 0.7.5
+  resolution: "@rstest/core@npm:0.7.5"
   dependencies:
-    "@rsbuild/core": "npm:1.6.12-canary-20251204065915"
+    "@rsbuild/core": "npm:1.7.0-beta.0"
     "@types/chai": "npm:^5.2.3"
     tinypool: "npm:^1.1.1"
   peerDependencies:
@@ -1706,22 +1699,21 @@ __metadata:
       optional: true
   bin:
     rstest: bin/rstest.js
-  checksum: 10c0/156162c7b25517d25adf2d1be5522156f9916affcb77687708797a3f900593f6c5f3c6dc9f8a724257511d77ab84e7ecc41cdec161b2a270d41ae6799827a6bd
+  checksum: 10c0/44cdb9d810c9cafdbf956bbb6852f09826eb83b68fb27f2caf0eaff1f6a61a6c6ff2c975972965e08e5230228165ffc862cb77d558c559e649101e11878810c8
   languageName: node
   linkType: hard
 
-"@rstest/coverage-istanbul@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@rstest/coverage-istanbul@npm:0.1.0"
+"@rstest/coverage-istanbul@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@rstest/coverage-istanbul@npm:0.1.3"
   dependencies:
     istanbul-lib-coverage: "npm:^3.2.2"
-    istanbul-lib-instrument: "npm:6.0.3"
     istanbul-lib-report: "npm:^3.0.1"
     istanbul-reports: "npm:^3.2.0"
     swc-plugin-coverage-instrument: "npm:0.0.32"
   peerDependencies:
-    "@rstest/core": ~0.7.0
-  checksum: 10c0/b3e2667d1b905683143ee9b374383b559a1d4144b6dafa11453db41dc16fad6d727b99b7c5ef8c0e979ca46378db31de1bd4c1fc911cd0be42e51681564d15f9
+    "@rstest/core": ~0.7.5
+  checksum: 10c0/3bc6766dcd6531b25c3952a4e6f9e26769b7f18e59e02a616195db96a87920f93f499e46b618b004f3d0f560665c40f1489390e34100d52e05bc2d911fcbe182
   languageName: node
   linkType: hard
 
@@ -2240,7 +2232,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "anypack-plugin-serve-aggregator@workspace:."
   dependencies:
-    "@biomejs/biome": "npm:2.3.8"
+    "@biomejs/biome": "npm:2.3.10"
     lint-staged: "npm:^16.2.7"
     pre-commit: "npm:^1.2.2"
   languageName: unknown
@@ -2251,8 +2243,8 @@ __metadata:
   resolution: "anypack-plugin-serve@workspace:plugin"
   dependencies:
     "@polka/compression": "npm:^1.0.0-next.25"
-    "@rstest/core": "npm:^0.7.0"
-    "@rstest/coverage-istanbul": "npm:^0.1.0"
+    "@rstest/core": "npm:^0.7.5"
+    "@rstest/coverage-istanbul": "npm:^0.1.3"
     ansi-colors: "npm:^4.1.3"
     connect-history-api-fallback: "npm:^2.0.0"
     del-cli: "npm:7.0.0"
@@ -2268,7 +2260,7 @@ __metadata:
     onetime: "npm:^7.0.0"
     open: "npm:^11.0.0"
     polka: "npm:^0.5.2"
-    puppeteer: "npm:^24.32.0"
+    puppeteer: "npm:^24.34.0"
     random-js: "npm:^2.1.0"
     sirv: "npm:^3.0.2"
     superstruct: "npm:^2.0.2"
@@ -2585,15 +2577,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromium-bidi@npm:11.0.0":
-  version: 11.0.0
-  resolution: "chromium-bidi@npm:11.0.0"
+"chromium-bidi@npm:12.0.1":
+  version: 12.0.1
+  resolution: "chromium-bidi@npm:12.0.1"
   dependencies:
     mitt: "npm:^3.0.1"
     zod: "npm:^3.24.1"
   peerDependencies:
     devtools-protocol: "*"
-  checksum: 10c0/3da4a0db0c375464a8cafec31b6676fcc7f692f82246c6eb431d4e97cc6e89ad14e2989f5875ccecb57138df3b873ed7b517ef6f1c116607760019f688611765
+  checksum: 10c0/cc278125a6ad4d4010f4c093442c6da608d0b18be483efbfad67def029a73f0bd16a7deccd9bf848e26dbd47119e3415724abdd7da497a80f886127494fb40b9
   languageName: node
   linkType: hard
 
@@ -3909,23 +3901,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"istanbul-lib-coverage@npm:^3.0.0, istanbul-lib-coverage@npm:^3.2.0, istanbul-lib-coverage@npm:^3.2.2":
+"istanbul-lib-coverage@npm:^3.0.0, istanbul-lib-coverage@npm:^3.2.2":
   version: 3.2.2
   resolution: "istanbul-lib-coverage@npm:3.2.2"
   checksum: 10c0/6c7ff2106769e5f592ded1fb418f9f73b4411fd5a084387a5410538332b6567cd1763ff6b6cadca9b9eb2c443cce2f7ea7d7f1b8d315f9ce58539793b1e0922b
-  languageName: node
-  linkType: hard
-
-"istanbul-lib-instrument@npm:6.0.3":
-  version: 6.0.3
-  resolution: "istanbul-lib-instrument@npm:6.0.3"
-  dependencies:
-    "@babel/core": "npm:^7.23.9"
-    "@babel/parser": "npm:^7.23.9"
-    "@istanbuljs/schema": "npm:^0.1.3"
-    istanbul-lib-coverage: "npm:^3.2.0"
-    semver: "npm:^7.5.4"
-  checksum: 10c0/a1894e060dd2a3b9f046ffdc87b44c00a35516f5e6b7baf4910369acca79e506fc5323a816f811ae23d82334b38e3ddeb8b3b331bd2c860540793b59a8689128
   languageName: node
   linkType: hard
 
@@ -4825,34 +4804,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:24.32.0":
-  version: 24.32.0
-  resolution: "puppeteer-core@npm:24.32.0"
+"puppeteer-core@npm:24.34.0":
+  version: 24.34.0
+  resolution: "puppeteer-core@npm:24.34.0"
   dependencies:
     "@puppeteer/browsers": "npm:2.11.0"
-    chromium-bidi: "npm:11.0.0"
+    chromium-bidi: "npm:12.0.1"
     debug: "npm:^4.4.3"
     devtools-protocol: "npm:0.0.1534754"
     typed-query-selector: "npm:^2.12.0"
-    webdriver-bidi-protocol: "npm:0.3.9"
+    webdriver-bidi-protocol: "npm:0.3.10"
     ws: "npm:^8.18.3"
-  checksum: 10c0/1b1b7a5288d9b3a3f9cc6b81a31775cdfaf62f567956e401d1b9dd55ecedbe4bef9552d261dc0acb1f2213ee94e893315c22582654d1c00ca41d564a8244508d
+  checksum: 10c0/232d1e7d6af2099650fdaa849a487dae7bbb6df43ce35381849e7c08ca4eaf919a77fbb927bb416715fb5c6e396b5539ddc90d6d2d9750fe8fea558d82817801
   languageName: node
   linkType: hard
 
-"puppeteer@npm:^24.32.0":
-  version: 24.32.0
-  resolution: "puppeteer@npm:24.32.0"
+"puppeteer@npm:^24.34.0":
+  version: 24.34.0
+  resolution: "puppeteer@npm:24.34.0"
   dependencies:
     "@puppeteer/browsers": "npm:2.11.0"
-    chromium-bidi: "npm:11.0.0"
+    chromium-bidi: "npm:12.0.1"
     cosmiconfig: "npm:^9.0.0"
     devtools-protocol: "npm:0.0.1534754"
-    puppeteer-core: "npm:24.32.0"
+    puppeteer-core: "npm:24.34.0"
     typed-query-selector: "npm:^2.12.0"
   bin:
     puppeteer: lib/cjs/puppeteer/node/cli.js
-  checksum: 10c0/99532667d481bfc473247bcf0fa250936ae9cdfe05d373b8454a5cf04b1225a388ae68d5377fdad26f7b20ea184c74b76a9747f8f01f40416e16d0be2c006777
+  checksum: 10c0/bba31e2839a703e03ef7f0865dee8fc82836eac0a889e57a29d3493c0010bddccd6f3a7359ff9191d447fbd13db35895bfb866c23da8e648a2404aafdf6d2726
   languageName: node
   linkType: hard
 
@@ -5750,10 +5729,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webdriver-bidi-protocol@npm:0.3.9":
-  version: 0.3.9
-  resolution: "webdriver-bidi-protocol@npm:0.3.9"
-  checksum: 10c0/2a87ca276d6eb75d4a8c2f5f7f9efff2964970484bdf7945525785ab965853d3c6877a542707bff17e8008ea16386ee5c20ef107cba7080fa9519f18a6e88577
+"webdriver-bidi-protocol@npm:0.3.10":
+  version: 0.3.10
+  resolution: "webdriver-bidi-protocol@npm:0.3.10"
+  checksum: 10c0/fc66ba53b31c78a73ff7841303948894b77263051c146fed4331596b95f67a2e96dfaeb895483002bb152317d9cfbd215d9a66ef114f66dc17de2c32ac5ef33c
   languageName: node
   linkType: hard
 
