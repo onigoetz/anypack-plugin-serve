@@ -13,11 +13,15 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
+        os: [ubuntu-latest]
         node-version: [20.x, 22.x, 24.x]
+        include:
+        - os: macos-latest
+          node-version: 24.x
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v5
