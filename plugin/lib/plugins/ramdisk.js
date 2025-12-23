@@ -89,7 +89,10 @@ module.exports = {
       fs.lstatSync(path, { throwIfNoEntry: false }) ||
       fs.statSync(path, { throwIfNoEntry: false })
     ) {
+      console.log('Removing', path);
       fs.rmSync(path, { recursive: true });
+    } else {
+      console.log('Path does not exist', path);
     }
 
     const ramdiskPath = join(plugin.diskPath, newPath);
@@ -100,7 +103,19 @@ module.exports = {
     }
 
     // We symlink the target to the ramdisk
-    fs.symlinkSync(ramdiskPath, path, 'dir');
+    try {
+      fs.symlinkSync(ramdiskPath, path, 'dir');
+    } catch (error) {
+      if (error.code === 'EEXIST') {
+        console.log(
+          'Path already exists',
+          path,
+          fs.statSync(path, { throwIfNoEntry: false }),
+        );
+      } else {
+        throw error;
+      }
+    }
 
     console.info(
       colors.blue(`⬡ aps:`),
