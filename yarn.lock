@@ -2254,7 +2254,6 @@ __metadata:
     http-proxy-middleware: "npm:^1.0.3"
     json-stringify-safe: "npm:^5.0.1"
     line-by-line: "npm:^0.1.6"
-    loglevelnext: "npm:^4.0.1"
     nanoid: "npm:^5.1.6"
     node-fetch: "npm:^3.3.2"
     onetime: "npm:^7.0.0"
@@ -4122,13 +4121,6 @@ __metadata:
     strip-ansi: "npm:^7.1.0"
     wrap-ansi: "npm:^9.0.0"
   checksum: 10c0/4b350c0a83d7753fea34dcac6cd797d1dc9603291565de009baa4aa91c0447eab0d3815a05c8ec9ac04fdfffb43c82adcdb03ec1fceafd8518e1a8c1cff4ff89
-  languageName: node
-  linkType: hard
-
-"loglevelnext@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "loglevelnext@npm:4.0.1"
-  checksum: 10c0/7be6b84711d07e83bb4d4476af669f6ac92d3ba086fd4ba6d7c80364b2e301519235a9802f9835cbbc3c5bac8329743a6bf061c43df6fd364d55784ded4b6692
   languageName: node
   linkType: hard
 

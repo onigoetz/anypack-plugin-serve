@@ -12,11 +12,6 @@ exports[`allow https null 1`] = `
   "liveReload": false,
   "log": {
     "level": "info",
-    "name": "anypack-plugin-serve",
-    "prefix": {
-      "level": [Function],
-      "template": "{{level}}",
-    },
   },
   "middleware": [Function],
   "open": false,
@@ -42,11 +37,6 @@ exports[`defaults 1`] = `
   "liveReload": false,
   "log": {
     "level": "info",
-    "name": "anypack-plugin-serve",
-    "prefix": {
-      "level": [Function],
-      "template": "{{level}}",
-    },
   },
   "middleware": [Function],
   "open": false,
@@ -73,11 +63,6 @@ exports[`options manipulation 1`] = `
   "liveReload": false,
   "log": {
     "level": "info",
-    "name": "anypack-plugin-serve",
-    "prefix": {
-      "level": [Function],
-      "template": "{{level}}",
-    },
   },
   "middleware": [Function],
   "open": false,

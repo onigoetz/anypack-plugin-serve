@@ -34,7 +34,6 @@
     "empathic": "^2.0.0",
     "http-proxy-middleware": "^1.0.3",
     "json-stringify-safe": "^5.0.1",
-    "loglevelnext": "^4.0.1",
     "nanoid": "^5.1.6",
     "onetime": "^7.0.0",
     "open": "^11.0.0",

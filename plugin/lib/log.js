@@ -9,16 +9,8 @@
   included in all copies or substantial portions of this Source Code Form.
 */
 const colors = require('ansi-colors');
-const loglevel = require('loglevelnext');
 
 const symbols = { ok: '⬡', whoops: '⬢' };
-const levelToColors = {
-  trace: 'cyan',
-  debug: 'magenta',
-  info: 'blue',
-  warn: 'yellow',
-  error: 'red',
-};
 
 /* istanbul ignore next */
 const forceError = (...args) => {
@@ -26,30 +18,49 @@ const forceError = (...args) => {
   error(colors.red(`${symbols.whoops} aps:`), ...args);
 };
 
-const getLogger = (options) => {
-  const prefix = {
-    level({ level }) {
-      const color = levelToColors[level];
-      /* istanbul ignore next */
-      const symbol = ['error', 'warn'].includes(level)
-        ? symbols.whoops
-        : symbols.ok;
-      return colors[color](`${symbol} aps: `);
-    },
-    template: '{{level}}',
-  };
+function prefix(color, symbol) {
+  return colors[color](`${symbol} aps:`);
+}
 
-  /* istanbul ignore if */
-  if (options.timestamp) {
-    prefix.template = `[{{time}}] ${prefix.template}`;
-  }
-
-  options.prefix = prefix;
-  options.name = 'anypack-plugin-serve';
-
-  const log = loglevel.create(options);
-
-  return log;
+const LOGLEVELS = {
+  TRACE: 0,
+  DEBUG: 1,
+  INFO: 2,
+  WARN: 3,
+  ERROR: 4,
+  SILENT: 5,
 };
+
+function getLogger(options) {
+  const CURRENTLEVEL = LOGLEVELS[(options.level ?? 'info').toUpperCase()];
+
+  return {
+    warn(...args) {
+      if (LOGLEVELS.WARN >= CURRENTLEVEL) {
+        console.warn(prefix('yellow', symbols.whoops), ...args);
+      }
+    },
+    error(...args) {
+      if (LOGLEVELS.ERROR >= CURRENTLEVEL) {
+        console.error(prefix('red', symbols.whoops), ...args);
+      }
+    },
+    info(...args) {
+      if (LOGLEVELS.INFO >= CURRENTLEVEL) {
+        console.info(prefix('blue', symbols.ok), ...args);
+      }
+    },
+    trace(...args) {
+      if (LOGLEVELS.TRACE >= CURRENTLEVEL) {
+        console.trace(prefix('cyan', symbols.ok), ...args);
+      }
+    },
+    debug(...args) {
+      if (LOGLEVELS.DEBUG >= CURRENTLEVEL) {
+        console.debug(prefix('magenta', symbols.ok), ...args);
+      }
+    },
+  };
+}
 
 module.exports = { forceError, getLogger };
