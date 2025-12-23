@@ -85,7 +85,10 @@ module.exports = {
         : defaultOptions,
     );
 
-    if (fs.lstatSync(path, { throwIfNoEntry: false })) {
+    if (
+      fs.lstatSync(path, { throwIfNoEntry: false }) ||
+      fs.statSync(path, { throwIfNoEntry: false })
+    ) {
       fs.rmSync(path, { recursive: true });
     }
 
