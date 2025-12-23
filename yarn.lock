@@ -2238,7 +2238,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"anypack-plugin-serve@npm:0.1.0-alpha.1, anypack-plugin-serve@workspace:plugin":
+"anypack-plugin-serve@workspace:*, anypack-plugin-serve@workspace:plugin":
   version: 0.0.0-use.local
   resolution: "anypack-plugin-serve@workspace:plugin"
   dependencies:
@@ -2936,7 +2936,7 @@ __metadata:
     "@babel/core": "npm:7.28.5"
     "@babel/preset-env": "npm:7.28.5"
     "@babel/preset-react": "npm:7.28.5"
-    anypack-plugin-serve: "npm:0.1.0-alpha.1"
+    anypack-plugin-serve: "workspace:*"
     babel-loader: "npm:10.0.0"
     cross-env: "npm:10.1.0"
     import-fresh: "npm:3.3.1"
@@ -2958,7 +2958,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.1.0"
     "@babel/preset-react": "npm:^7.0.0"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.6.2"
-    anypack-plugin-serve: "npm:0.1.0-alpha.1"
+    anypack-plugin-serve: "workspace:*"
     babel-loader: "npm:^10.0.0"
     cross-env: "npm:10.1.0"
     css-loader: "npm:^7.1.2"
@@ -2975,7 +2975,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "demo-vue@workspace:recipes/vue"
   dependencies:
-    anypack-plugin-serve: "npm:0.1.0-alpha.1"
+    anypack-plugin-serve: "workspace:*"
     cross-env: "npm:10.1.0"
     css-loader: "npm:^7.1.2"
     html-webpack-plugin: "npm:^5.6.5"
@@ -4907,7 +4907,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.11.5"
     "@babel/preset-react": "npm:^7.10.4"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.6.2"
-    anypack-plugin-serve: "npm:0.1.0-alpha.1"
+    anypack-plugin-serve: "workspace:*"
     babel-loader: "npm:^10.0.0"
     mini-html-webpack-plugin: "npm:^3.1.0"
     react: "npm:^19.0.0"

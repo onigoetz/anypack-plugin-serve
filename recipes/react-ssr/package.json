@@ -1,5 +1,6 @@
 {
   "name": "demo-react-ssr",
+  "private": true,
   "version": "1.0.0",
   "description": "A anypack-plugin-serve recipe",
   "repository": "onigoetz/anypack-plugin-serve/recipes/react-ssr",
@@ -17,7 +18,7 @@
     "@babel/core": "7.28.5",
     "@babel/preset-env": "7.28.5",
     "@babel/preset-react": "7.28.5",
-    "anypack-plugin-serve": "0.1.0-alpha.1",
+    "anypack-plugin-serve": "workspace:*",
     "babel-loader": "10.0.0",
     "cross-env": "10.1.0",
     "import-fresh": "3.3.1",
