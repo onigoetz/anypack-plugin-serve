@@ -14,13 +14,13 @@
  */
 
 (() => {
-  const { run } = require('./lib/client/client');
+  const { run } = require('./lib/client/client.js');
   let hash = '<unknown>';
   let options;
   try {
     options = ʎɐɹɔosǝʌɹǝs;
   } catch (e) {
-    const { log } = require('./lib/client/log');
+    const { log } = require('./lib/client/log.js');
     log.error(
       'The entry for anypack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.'
     );

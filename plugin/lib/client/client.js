@@ -18,9 +18,9 @@ const run = (buildHash, options) => {
   };
   window.webpackPluginServe.silent = !!client.silent;
 
-  const { ClientSocket } = require('./ClientSocket');
-  const { replace } = require('./hmr');
-  const { error, info, warn } = require('./log')();
+  const { ClientSocket } = require('./ClientSocket.js');
+  const { replace } = require('./hmr.js');
+  const { error, info, warn } = require('./log.js')();
 
   const protocol = secure ? 'wss' : 'ws';
   const socket = new ClientSocket(
@@ -83,15 +83,15 @@ const run = (buildHash, options) => {
 
   if (options.firstInstance) {
     if (progress === 'minimal') {
-      const { init } = require('./overlays/progress-minimal');
+      const { init } = require('./overlays/progress-minimal.js');
       init(options, socket);
     } else if (progress) {
-      const { init } = require('./overlays/progress');
+      const { init } = require('./overlays/progress.js');
       init(options, socket);
     }
 
     if (status) {
-      const { init } = require('./overlays/status');
+      const { init } = require('./overlays/status.js');
       init(options, socket);
     }
 
