@@ -21,13 +21,10 @@ function logReader(stream) {
  */
 function waitFor(text, stream) {
   return new Promise((resolve, reject) => {
-    console.log('Waiting for', text);
     const reader = (line) => {
       const content = unstyle(line);
-      console.log(`[${text}]: LINE ${content}`);
 
       if (content.includes(text)) {
-        console.log(`[${text}]: FOUND '${content}'`);
         stream.off('line', reader);
         stream.off('error', reject);
         stream.pause();

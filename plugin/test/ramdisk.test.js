@@ -1,7 +1,7 @@
 const { existsSync } = require('node:fs');
 const { join, resolve } = require('node:path');
 
-const { test, expect, rstest } = require('@rstest/core');
+const { test, expect, rstest, afterEach } = require('@rstest/core');
 const { execa } = require('execa');
 
 const { logReader, waitFor } = require('./helpers/logs.js');
@@ -10,8 +10,24 @@ rstest.setConfig({ testTimeout: 25_000 });
 
 const fixturePath = join(__dirname, 'fixtures/ramdisk');
 
+let proc;
+
+afterEach(async () => {
+  if (proc) {
+    proc.kill('SIGINT');
+
+    // Wait for process shutdown and cleanup
+    if (!proc.exitCode) {
+      await new Promise((resolve) => {
+        proc.on('exit', resolve);
+      });
+    }
+    proc = null;
+  }
+});
+
 test('ramdisk', async () => {
-  const proc = execa('wp', [], { cwd: fixturePath });
+  proc = execa('wp', [], { cwd: fixturePath });
 
   const errReader = logReader(proc.stderr);
   const outReader = logReader(proc.stdout);
@@ -25,12 +41,10 @@ test('ramdisk', async () => {
   const exists = existsSync(join(fixturePath, 'output/output.js'));
 
   expect(exists).toBeTruthy();
-
-  proc.kill('SIGINT');
 });
 
 test('ramdisk with options', async () => {
-  const proc = execa('wp', ['--config', 'ramdisk/custom-options.js'], {
+  proc = execa('wp', ['--config', 'ramdisk/custom-options.js'], {
     cwd: resolve(fixturePath, '..'),
   });
 
@@ -48,8 +62,6 @@ test('ramdisk with options', async () => {
   const exists = existsSync(join(fixturePath, 'output/output.js'));
 
   expect(exists).toBeTruthy();
-
-  proc.kill('SIGINT');
 });
 
 test('context error', async () => {
@@ -80,7 +92,7 @@ test('cwd error', async () => {
 
 test('ramdisk with empty package.json', async () => {
   const fixturePath = join(__dirname, 'fixtures/ramdisk-empty-pkg');
-  const proc = execa('wp', [], { cwd: fixturePath });
+  proc = execa('wp', [], { cwd: fixturePath });
   const errReader = logReader(proc.stderr);
   const outReader = logReader(proc.stdout);
 
