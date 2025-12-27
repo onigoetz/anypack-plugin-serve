@@ -18,6 +18,7 @@ module.exports = {
       host: 'localhost',
       port: getPort(),
       ramdisk: true,
+      allowMany: true,
     }),
   ],
   resolve: {

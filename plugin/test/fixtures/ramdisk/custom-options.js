@@ -20,6 +20,7 @@ module.exports = {
       ramdisk: {
         bytes: 1024 * 1024,
       },
+      allowMany: true,
     }),
   ],
   resolve: {

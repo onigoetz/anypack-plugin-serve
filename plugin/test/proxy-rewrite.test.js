@@ -1,18 +1,11 @@
-const webpack = require('webpack');
-const { test, expect, beforeEach, afterEach } = require('@rstest/core');
-const fetch = require('node-fetch').default;
-const defer = require('../lib/helpers.js').defer;
+const { test, expect } = require('@rstest/core');
 
-const { proxyServer } = require('./fixtures/proxy/proxy-server');
+const { startProxyServer } = require('./fixtures/proxy/proxy-server');
 const webpackConfig = require('./fixtures/proxy/proxy-rewrite.config');
+const { startWatcher } = require('./helpers/watcher.js');
 
-const deferred = defer();
-const compiler = webpack(webpackConfig);
-let server;
-let watcher;
-
-beforeEach(async () => {
-  server = proxyServer([
+test('should rewrite /api', async () => {
+  await startProxyServer(8889, [
     {
       url: '/test',
       handler: async (_req, res) => {
@@ -20,17 +13,10 @@ beforeEach(async () => {
         res.end('/test endpoint rewrite');
       },
     },
-  ]).listen(8889);
-  watcher = compiler.watch({}, deferred.resolve);
-  await deferred.promise;
-});
+  ]);
 
-afterEach(() => {
-  server.server.close();
-  watcher.close();
-});
+  await startWatcher(webpackConfig);
 
-test('should rewrite /api', async () => {
   const response = await fetch('http://localhost:55557/api/test');
   const result = await response.text();
   expect(result).toMatchSnapshot();

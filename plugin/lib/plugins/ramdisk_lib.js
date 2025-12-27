@@ -125,18 +125,6 @@ class Ramdisk {
       );
       this.commands?.mount(this.options);
     }
-
-    process.on('SIGINT', () => {
-      this.cleanup();
-    });
-
-    process.on('SIGTERM', () => {
-      this.cleanup();
-    });
-
-    process.on('exit', () => {
-      this.cleanup();
-    });
   }
 
   get diskPath() {

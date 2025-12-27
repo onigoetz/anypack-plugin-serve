@@ -92,22 +92,12 @@ class WebpackPluginServe extends EventEmitter {
     // returns a promise
     if (typeof options.host === 'string') {
       const { host } = options;
-      options.host = {
-        // biome-ignore lint/suspicious/noThenProperty: legacy
-        then(r) {
-          r(host);
-        },
-      };
+      options.host = Promise.resolve(host);
     }
 
     if (Number.isInteger(options.port)) {
       const { port } = options;
-      options.port = {
-        // biome-ignore lint/suspicious/noThenProperty: legacy
-        then(r) {
-          r(port);
-        },
-      };
+      options.port = Promise.resolve(port);
     }
 
     if (!options.static) {

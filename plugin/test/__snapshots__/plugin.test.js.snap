@@ -15,9 +15,7 @@ exports[`allow https null 1`] = `
   },
   "middleware": [Function],
   "open": false,
-  "port": {
-    "then": [Function],
-  },
+  "port": Promise {},
   "progress": true,
   "publicPath": null,
   "ramdisk": false,
@@ -40,9 +38,7 @@ exports[`defaults 1`] = `
   },
   "middleware": [Function],
   "open": false,
-  "port": {
-    "then": [Function],
-  },
+  "port": Promise {},
   "progress": true,
   "publicPath": null,
   "ramdisk": false,
@@ -66,9 +62,7 @@ exports[`options manipulation 1`] = `
   },
   "middleware": [Function],
   "open": false,
-  "port": {
-    "then": [Function],
-  },
+  "port": Promise {},
   "progress": true,
   "publicPath": "dist",
   "ramdisk": false,

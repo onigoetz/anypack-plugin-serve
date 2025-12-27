@@ -1,10 +1,11 @@
-const { existsSync } = require('node:fs');
+const fs = require('node:fs');
 const { join, resolve } = require('node:path');
 
 const { test, expect, rstest, afterEach } = require('@rstest/core');
 const { execa } = require('execa');
 
-const { logReader, waitFor } = require('./helpers/logs.js');
+const { setupFixtures, readConfig } = require('./helpers/config.js');
+const { startWatcher } = require('./helpers/watcher.js');
 
 rstest.setConfig({ testTimeout: 25_000 });
 
@@ -27,39 +28,38 @@ afterEach(async () => {
 });
 
 test('ramdisk', async () => {
-  proc = execa('wp', [], { cwd: fixturePath });
+  const fixturePath = await setupFixtures('ramdisk');
 
-  const errReader = logReader(proc.stderr);
-  const outReader = logReader(proc.stdout);
+  const config = await readConfig(fixturePath);
+  const { onCompilationDone, compiler } = await startWatcher(config);
 
-  const path = await waitFor('Build being written to ', outReader);
-  expect(path).toMatch(
+  const ramdisk = fs.readlinkSync(compiler.outputPath);
+  expect(ramdisk).toMatch(
     /(volumes|dev\/shm)\/aps\/anypack-plugin-serve\/output/i,
   );
 
-  await waitFor('[emitted]', errReader);
-  const exists = existsSync(join(fixturePath, 'output/output.js'));
+  await onCompilationDone();
+  const exists = fs.existsSync(join(fixturePath, 'output/output.js'));
 
   expect(exists).toBeTruthy();
 });
 
 test('ramdisk with options', async () => {
-  proc = execa('wp', ['--config', 'ramdisk/custom-options.js'], {
-    cwd: resolve(fixturePath, '..'),
-  });
+  const fixturePath = await setupFixtures('ramdisk');
+  process.chdir(fixturePath);
 
-  const errReader = logReader(proc.stderr);
-  const outReader = logReader(proc.stdout);
+  const config = await readConfig(fixturePath, 'custom-options.js');
+  const { onCompilationDone, compiler } = await startWatcher(config);
 
-  const path = await waitFor('Build being written to ', outReader);
+  const ramdisk = fs.readlinkSync(compiler.outputPath);
 
-  expect(path).toMatch(
+  expect(ramdisk).toMatch(
     /(volumes|dev\/shm)\/aps\/anypack-plugin-serve\/output/i,
   );
 
-  await waitFor('[emitted]', errReader);
+  await onCompilationDone();
 
-  const exists = existsSync(join(fixturePath, 'output/output.js'));
+  const exists = fs.existsSync(join(fixturePath, 'output/output.js'));
 
   expect(exists).toBeTruthy();
 });
@@ -91,16 +91,17 @@ test('cwd error', async () => {
 });
 
 test('ramdisk with empty package.json', async () => {
-  const fixturePath = join(__dirname, 'fixtures/ramdisk-empty-pkg');
-  proc = execa('wp', [], { cwd: fixturePath });
-  const errReader = logReader(proc.stderr);
-  const outReader = logReader(proc.stdout);
+  const fixturePath = await setupFixtures('ramdisk-empty-pkg');
+  process.chdir(fixturePath);
 
-  const path = await waitFor('Build being written to ', outReader);
-  expect(path).toMatch(/(volumes|dev\/shm)\/aps\/[a-f0-9]{32}\/output/i);
+  const config = await readConfig(fixturePath);
+  const { onCompilationDone, compiler } = await startWatcher(config);
 
-  await waitFor('[emitted]', errReader);
-  const exists = existsSync(join(fixturePath, 'output/output.js'));
+  const ramdisk = fs.readlinkSync(compiler.outputPath);
+  expect(ramdisk).toMatch(/(volumes|dev\/shm)\/aps\/[a-f0-9]{32}\/output/i);
+
+  await onCompilationDone();
+  const exists = fs.existsSync(join(fixturePath, 'output/output.js'));
 
   expect(exists).toBeTruthy();
 });

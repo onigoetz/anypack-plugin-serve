@@ -2,4 +2,4 @@
 
 exports[`should reach /api proxy endpoint 1`] = `"/api endpoint"`;
 
-exports[`should reach /api/test proxy endpoint 1`] = `"/api/test endpoint"`;
+exports[`should reach /api proxy endpoint 2`] = `"/api/test endpoint"`;

@@ -8,7 +8,7 @@
   The above copyright notice and this permission notice shall be
   included in all copies or substantial portions of this Source Code Form.
 */
-const defer = require('./helpers.js').defer;
+const { defer } = require('./helpers.js');
 const WebSocket = require('ws');
 
 const socketServer = new WebSocket.Server({ noServer: true });

@@ -3,10 +3,10 @@ const fs = require('node:fs');
 const { resolve, join } = require('node:path');
 const http2 = require('node:http2');
 
-const webpack = require('webpack');
 const { test, expect, afterEach } = require('@rstest/core');
 const fetch = require('node-fetch').default;
-const defer = require('../lib/helpers.js').defer;
+const { defer } = require('../lib/helpers.js');
+const { startWatcher } = require('./helpers/watcher.js');
 
 const { WebpackPluginServe } = require('../lib');
 
@@ -16,29 +16,23 @@ const webpackDefaultConfig = require('./fixtures/https/webpack.config');
 const httpsFixturePath = resolve(__dirname, './fixtures/https');
 
 const startServe = async (serve) => {
-  const deferred = defer();
-  const compiler = webpack({
+  await startWatcher({
     ...webpackDefaultConfig,
     plugins: [serve],
   });
-  const watcher = compiler.watch({}, () => {});
-  serve.on('listening', deferred.resolve);
-  await deferred.promise;
-  return watcher;
 };
 
 const checkHttpsServed = async (serve, port) => {
-  const watcher = await startServe(serve);
+  await startServe(serve);
   const agent = new https.Agent({
     rejectUnauthorized: false,
   });
   const response = await fetch(`https://localhost:${port}`, { agent });
-  watcher.close();
   expect(response.ok).toBeTruthy();
 };
 
 const checkHttp2Served = async (serve, port) => {
-  const watcher = await startServe(serve);
+  await startServe(serve);
   const deferred = defer();
   const client = http2.connect(`https://localhost:${port}`, {
     rejectUnauthorized: false,
@@ -50,7 +44,6 @@ const checkHttp2Served = async (serve, port) => {
   const req = client.request({ ':path': '/' });
   req.on('response', () => {
     expect(true).toBeTruthy();
-    watcher.close();
     client.close();
     deferred.resolve();
   });

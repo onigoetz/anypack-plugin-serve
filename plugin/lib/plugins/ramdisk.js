@@ -85,6 +85,8 @@ module.exports = {
         : defaultOptions,
     );
 
+    compiler.hooks.shutdown.tap('clean-ramdisk', () => plugin.cleanup());
+
     if (
       fs.lstatSync(path, { throwIfNoEntry: false }) ||
       fs.statSync(path, { throwIfNoEntry: false })

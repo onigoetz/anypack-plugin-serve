@@ -1,6 +1,6 @@
 const { test, expect } = require('@rstest/core');
 const polka = require('polka');
-const defer = require('../lib/helpers.js').defer;
+const { defer } = require('../lib/helpers.js');
 const WebSocket = require('ws');
 
 const { middleware } = require('../lib/ws');

@@ -49,7 +49,6 @@
     "del-cli": "7.0.0",
     "execa": "^9.0.0",
     "get-port": "^7.1.0",
-    "line-by-line": "^0.1.6",
     "node-fetch": "^3.3.2",
     "puppeteer": "^24.34.0",
     "random-js": "^2.1.0",

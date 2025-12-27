@@ -1,60 +1,41 @@
-const { join } = require('node:path');
 const fs = require('node:fs');
+const { join } = require('node:path');
 
-const { execa } = require('execa');
-const { test, expect, beforeEach, afterEach, rstest } = require('@rstest/core');
+const { test, expect, beforeEach, rstest } = require('@rstest/core');
 
-const { logReader, waitFor } = require('../helpers/logs.js');
-const { startBrowser, stopBrowser } = require('../helpers/puppeteer');
+const { setupFixtures, readConfig, findPort } = require('../helpers/config.js');
+const { startBrowser } = require('../helpers/puppeteer.js');
+const { startWatcher } = require('../helpers/watcher.js');
 
 rstest.setConfig({ testTimeout: 25_000 });
 
-let page, util;
+let page;
 beforeEach(async () => {
   const browser = await startBrowser();
   page = browser.page;
-  util = browser.util;
-
-  return async () => {
-    await stopBrowser(browser);
-  };
-});
-
-let fixturePath, proc;
-afterEach(async () => {
-  if (proc) {
-    proc.kill('SIGTERM');
-  }
-
-  if (fixturePath) {
-    await fs.promises.rm(fixturePath, { recursive: true, force: true });
-  }
 });
 
 test('multi compiler', async () => {
-  const { getPort, replace, setup } = util;
-  fixturePath = await setup('multi', 'multi-hmr');
-  proc = execa('wp', [], { cwd: fixturePath });
-  const errReader = logReader(proc.stderr);
-  const port = await getPort(logReader(proc.stdout));
+  const fixturePath = await setupFixtures('multi');
+  const config = await readConfig(fixturePath);
+  const port = await findPort(config);
+  const { onCompilationDone } = await startWatcher(config);
   const url = `http://localhost:${port}`;
 
-  // As two compilers are running we need to wait for two events to finish
-  await waitFor('compiled successfully', errReader);
-  await waitFor('compiled successfully', errReader);
+  await onCompilationDone();
   await page.goto(url, {
     waitUntil: 'networkidle0',
   });
 
   const componentPath = join(fixturePath, 'component.js');
   const componentContent = `const main = document.querySelector('main'); main.innerHTML = 'test';`;
-  await replace(componentPath, componentContent);
-  await waitFor('compiled successfully', errReader);
+  await fs.promises.writeFile(componentPath, componentContent);
+  await onCompilationDone();
 
   const workerPath = join(fixturePath, 'work.js');
   const workerContent = `const worker = document.querySelector('#worker'); worker.innerHTML = 'test';`;
-  await replace(workerPath, workerContent);
-  await waitFor('compiled successfully', errReader);
+  await fs.promises.writeFile(workerPath, workerContent);
+  await onCompilationDone();
 
   await expect
     .poll(async () =>
