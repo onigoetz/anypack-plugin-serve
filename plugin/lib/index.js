@@ -45,12 +45,10 @@ const defaults = {
 };
 
 const key = 'anypack-plugin-serve';
-const newline = () => console.log();
 const nanoid = customAlphabet('1234567890abcdef', 7);
 
 let instance = null;
 
-// TODO: test this on a multicompiler setup
 class WebpackPluginServe extends EventEmitter {
   constructor(opts = {}) {
     super();
@@ -239,7 +237,6 @@ class WebpackPluginServe extends EventEmitter {
       if (!this.state.starting) {
         // ensure we're only trying to start the server once
         this.state.starting = start.bind(this)();
-        this.state.starting.then(() => newline());
       }
 
       // wait for the server to startup so we can get our client connection info from it

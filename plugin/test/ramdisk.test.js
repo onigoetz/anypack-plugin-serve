@@ -1,8 +1,8 @@
 const fs = require('node:fs');
 const { join, resolve } = require('node:path');
+const childProcess = require('node:child_process');
 
 const { test, expect, rstest, afterEach } = require('@rstest/core');
-const { execa } = require('execa');
 
 const { setupFixtures, readConfig } = require('./helpers/config.js');
 const { startWatcher } = require('./helpers/watcher.js');
@@ -65,29 +65,33 @@ test('ramdisk with options', async () => {
 });
 
 test('context error', async () => {
-  try {
-    await execa('wp', ['--config', 'ramdisk/config-context-error.js'], {
+  const result = childProcess.spawnSync(
+    'wp',
+    ['--config', 'ramdisk/config-context-error.js'],
+    {
       cwd: resolve(fixturePath, '..'),
-    });
-  } catch (e) {
-    expect(e.stderr).toMatch(/Please set the `context` to a another path/);
-    expect(e.exitCode).toEqual(1);
-    return;
-  }
-  throw new Error('The test should have thrown an error');
+    },
+  );
+
+  expect(result.status).toEqual(1);
+  expect(result.stderr.toString('utf-8')).toMatch(
+    /Please set the `context` to a another path/,
+  );
 });
 
 test('cwd error', async () => {
-  try {
-    await execa('wp', ['--config', '../config-cwd-error.js'], {
+  const result = childProcess.spawnSync(
+    'wp',
+    ['--config', '../config-cwd-error.js'],
+    {
       cwd: join(fixturePath, 'cwd-error'),
-    });
-  } catch (e) {
-    expect(e.stderr).toMatch(/Please run from another path/);
-    expect(e.exitCode).toEqual(1);
-    return;
-  }
-  throw new Error('The test should have thrown an error');
+    },
+  );
+
+  expect(result.status).toEqual(1);
+  expect(result.stderr.toString('utf-8')).toMatch(
+    /Please run from another path/,
+  );
 });
 
 test('ramdisk with empty package.json', async () => {

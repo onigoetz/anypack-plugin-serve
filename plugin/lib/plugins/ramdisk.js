@@ -91,10 +91,7 @@ module.exports = {
       fs.lstatSync(path, { throwIfNoEntry: false }) ||
       fs.statSync(path, { throwIfNoEntry: false })
     ) {
-      console.log('Removing', path);
       fs.rmSync(path, { recursive: true });
-    } else {
-      console.log('Path does not exist', path);
     }
 
     const ramdiskPath = join(plugin.diskPath, newPath);
