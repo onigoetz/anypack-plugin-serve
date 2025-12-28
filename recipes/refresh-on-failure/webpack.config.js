@@ -3,7 +3,7 @@ const path = require('path');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { MiniHtmlWebpackPlugin } = require('mini-html-webpack-plugin');
 
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   mode: 'development',

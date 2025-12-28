@@ -2,7 +2,7 @@ const { resolve } = require('node:path');
 
 const { getPort } = require('../../helpers/port');
 
-const { WebpackPluginServe: Serve } = require('../../../lib/');
+const { AnypackPluginServe: Serve } = require('../../../lib/');
 
 const serve = new Serve({
   host: 'localhost',

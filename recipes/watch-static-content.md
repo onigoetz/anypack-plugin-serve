@@ -9,7 +9,7 @@ _Note: There are many options for utility modules that provide clean interfaces 
 We're going to assume that you're using a ["zero-config"](https://webpack.js.org/configuration/) setup, in which `webpack` assumes that your bundle entrypoint(s) are located in a `src` directory, and your bundle output will be written to a `dist` directory. So let's setup a `webpack` config file for `anypack-plugin-serve` with that in mind:
 
 ```js
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 const serve = new Serve();
 
@@ -37,7 +37,7 @@ Then let's get our hands dirty and make this do something. We'll assume that you
 
 ```js
 const sane = require('sane');
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 const serve = new Serve({ static: ['/app/assets'] });
 const watcher = sane('/app/assets', { glob: [ '**/*.md' ] });
@@ -69,7 +69,7 @@ serve.on('listening', () => {
 });
 ```
 
-The important change there is `serve.emit('reload')`. The `reload` event isn't actually handled by the `WebpackPluginServe` instance, but the plugin _does_ forward on unhandled, emitted events to all connected `WebSocket`s. The `reload` event is already handled in the client scripts as part of the `liveReload` option, so we can utilize that `WebSocket` message to reload the page. Alternatively, you might choose to connect your own `WebSocket`, use a different action (such as `static-change`), and add more magic than a plain old `window.location.reload()`.
+The important change there is `serve.emit('reload')`. The `reload` event isn't actually handled by the `AnypackPluginServe` instance, but the plugin _does_ forward on unhandled, emitted events to all connected `WebSocket`s. The `reload` event is already handled in the client scripts as part of the `liveReload` option, so we can utilize that `WebSocket` message to reload the page. Alternatively, you might choose to connect your own `WebSocket`, use a different action (such as `static-change`), and add more magic than a plain old `window.location.reload()`.
 
 We're also including some sugar data there in `{source: 'config' }` so that any listeners know where the event originated. That could be useful in an app that has multiple instruction points calling for reloads.
 

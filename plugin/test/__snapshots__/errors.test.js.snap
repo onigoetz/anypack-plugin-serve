@@ -2,4 +2,4 @@
 
 exports[`errors 1`] = `[PluginExistsError]`;
 
-exports[`errors 2`] = `[WebpackPluginServeError]`;
+exports[`errors 2`] = `[AnypackPluginServeError]`;

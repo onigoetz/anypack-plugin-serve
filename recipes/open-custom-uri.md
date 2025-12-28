@@ -10,9 +10,9 @@ To get started, your `webpack` configuration should already be setup and buildin
 
 ```js
 const open = require('open');
-const { WebpackPluginServe } = require('anypack-plugin-serve');
+const { AnypackPluginServe } = require('anypack-plugin-serve');
 
-const serve = new WebpackPluginServe();
+const serve = new AnypackPluginServe();
 
 // we'll listen for the `listening` event, which tells us the server is up and running
 serve.on('listening', () => {

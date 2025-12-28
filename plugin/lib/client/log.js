@@ -22,4 +22,4 @@ const silent = {
   warn: noop,
 };
 
-module.exports = () => (window.webpackPluginServe.silent ? silent : log);
+module.exports = () => (window.anypackPluginServe.silent ? silent : log);

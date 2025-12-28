@@ -8,14 +8,14 @@
   The above copyright notice and this permission notice shall be
   included in all copies or substantial portions of this Source Code Form.
 */
-class WebpackPluginServeError extends Error {
+class AnypackPluginServeError extends Error {
   constructor(...args) {
     super(...args);
-    this.name = 'WebpackPluginServeError';
+    this.name = 'AnypackPluginServeError';
   }
 }
 
-class PluginExistsError extends WebpackPluginServeError {
+class PluginExistsError extends AnypackPluginServeError {
   constructor(...args) {
     super(...args);
     this.name = 'PluginExistsError';
@@ -23,7 +23,7 @@ class PluginExistsError extends WebpackPluginServeError {
   }
 }
 
-class RamdiskPathError extends WebpackPluginServeError {
+class RamdiskPathError extends AnypackPluginServeError {
   constructor(...args) {
     super(...args);
     this.name = 'RamdiskPathError';
@@ -34,5 +34,5 @@ class RamdiskPathError extends WebpackPluginServeError {
 module.exports = {
   PluginExistsError,
   RamdiskPathError,
-  WebpackPluginServeError,
+  AnypackPluginServeError,
 };

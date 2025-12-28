@@ -25,7 +25,7 @@ module.exports = {
 We'll now add the client script to the entries we'd like to have client-side features added to:
 
 ```js
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 const serve = new Serve();
 

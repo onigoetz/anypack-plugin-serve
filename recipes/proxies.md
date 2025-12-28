@@ -17,7 +17,7 @@ _Note: We assume that the configuration for `anypack-plugin-serve` is the dafaul
 We want to proxy our local  urls (`/api`) to `http://localhost:3000`. When a request to `localhost:55555/api` is done, it is going to be proxied to `localhost:3000/api`.
 
 ```js
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   ...,

@@ -14,7 +14,7 @@ Next, let's get the plugin setup, and the events wired up for broadcasting:
 
 ```js
 const bonjour = require('bonjour')();
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 const serve = new Serve();
 const port = 3000; // or whichever port your services are running on

@@ -366,7 +366,7 @@ const init = (options, socket) => {
       return;
     }
 
-    const { compilers } = window.webpackPluginServe;
+    const { compilers } = window.anypackPluginServe;
 
     switch (action) {
       case 'build':

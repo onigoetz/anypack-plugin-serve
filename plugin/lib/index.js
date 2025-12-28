@@ -49,7 +49,7 @@ const nanoid = customAlphabet('1234567890abcdef', 7);
 
 let instance = null;
 
-class WebpackPluginServe extends EventEmitter {
+class AnypackPluginServe extends EventEmitter {
   constructor(opts = {}) {
     super();
 
@@ -57,7 +57,7 @@ class WebpackPluginServe extends EventEmitter {
 
     if (valid.error) {
       forceError(
-        'An option was passed to WebpackPluginServe that is not valid',
+        'An option was passed to AnypackPluginServe that is not valid',
       );
       throw valid.error;
     }
@@ -268,4 +268,4 @@ class WebpackPluginServe extends EventEmitter {
   }
 }
 
-module.exports = { defaults, WebpackPluginServe };
+module.exports = { defaults, AnypackPluginServe };

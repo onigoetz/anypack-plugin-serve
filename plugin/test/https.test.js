@@ -8,7 +8,7 @@ const fetch = require('node-fetch').default;
 const { defer } = require('../lib/helpers.js');
 const { startWatcher } = require('./helpers/watcher.js');
 
-const { WebpackPluginServe } = require('../lib');
+const { AnypackPluginServe } = require('../lib');
 
 const { getPort } = require('./helpers/port');
 const webpackDefaultConfig = require('./fixtures/https/webpack.config');
@@ -67,7 +67,7 @@ test('should start https with pem', async () => {
   const port = await getPort();
   const key = fs.readFileSync(join(httpsFixturePath, 'localhost.key'));
   const cert = fs.readFileSync(join(httpsFixturePath, 'localhost.crt'));
-  const serve = new WebpackPluginServe({
+  const serve = new AnypackPluginServe({
     host: 'localhost',
     allowMany: true,
     port,
@@ -82,7 +82,7 @@ test('should start http2 with pem', async () => {
   const port = await getPort();
   const key = fs.readFileSync(join(httpsFixturePath, 'localhost.key'));
   const cert = fs.readFileSync(join(httpsFixturePath, 'localhost.crt'));
-  const serve = new WebpackPluginServe({
+  const serve = new AnypackPluginServe({
     host: 'localhost',
     allowMany: true,
     port,
@@ -96,7 +96,7 @@ test('should start http2 with pem', async () => {
 test('should start https with pfx', async () => {
   const port = await getPort();
   const pfx = fs.readFileSync(join(httpsFixturePath, 'localhost.pfx'));
-  const serve = new WebpackPluginServe({
+  const serve = new AnypackPluginServe({
     host: 'localhost',
     allowMany: true,
     port,
@@ -110,7 +110,7 @@ test('should start https with pfx', async () => {
 test('should start http2 with pfx', async () => {
   const port = await getPort();
   const pfx = fs.readFileSync(join(httpsFixturePath, 'localhost.pfx'));
-  const serve = new WebpackPluginServe({
+  const serve = new AnypackPluginServe({
     host: 'localhost',
     allowMany: true,
     port,

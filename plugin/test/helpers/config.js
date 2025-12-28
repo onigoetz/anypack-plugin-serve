@@ -11,7 +11,7 @@ function findServe(config) {
   const plugins = configs.flatMap((config) => config.plugins);
 
   return plugins.find(
-    (plugin) => plugin.constructor.name === 'WebpackPluginServe',
+    (plugin) => plugin.constructor.name === 'AnypackPluginServe',
   );
 }
 

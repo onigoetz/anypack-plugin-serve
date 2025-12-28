@@ -9,7 +9,7 @@ Occasionally a development environment needs to mirror certain aspects of the pr
 To get started, your `webpack` configuration should already be setup and building successfully without using `anypack-plugin-serve`. Next, let's get the plugin setup for custom headers using `polka` options directly:
 
 ```js
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 // webpack.config.js
 module.exports = {
@@ -30,7 +30,7 @@ Notice that we're tapping into the middleware chain to do our thing. In this exa
 Or you could just use a simple `builtin` function we have added. To use this helper you just need an object containing all the headers and its values.
 
 ```js
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 // webpack.config.js
 module.exports = {

@@ -8,7 +8,7 @@ To get started, your `webpack` configuration should already be setup and buildin
 
 ```js
 const getPort = require('get-port');
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   ...,

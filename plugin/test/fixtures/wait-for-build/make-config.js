@@ -1,6 +1,6 @@
 const { resolve } = require('node:path');
 
-const { WebpackPluginServe: Serve } = require('../../../lib/');
+const { AnypackPluginServe: Serve } = require('../../../lib/');
 
 const make = (port) => {
   const outputPath = resolve(__dirname, './output/output.js');

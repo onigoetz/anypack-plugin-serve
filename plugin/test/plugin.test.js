@@ -2,18 +2,18 @@ const { join } = require('node:path');
 
 const { test, expect } = require('@rstest/core');
 
-const { WebpackPluginServe } = require('../lib');
+const { AnypackPluginServe } = require('../lib');
 
 const reCleanDir = /^.+(serve|project)\//g;
 const fixturePath = join(__dirname, 'fixtures').replace(reCleanDir, '');
 
 test('defaults', () => {
-  const plugin = new WebpackPluginServe();
+  const plugin = new AnypackPluginServe();
   expect(plugin.options).toMatchSnapshot();
 });
 
 test('options manipulation', () => {
-  const plugin = new WebpackPluginServe({
+  const plugin = new AnypackPluginServe({
     allowMany: true,
     compress: true,
     historyFallback: true,
@@ -23,7 +23,7 @@ test('options manipulation', () => {
 });
 
 test('allow https null', () => {
-  const plugin = new WebpackPluginServe({
+  const plugin = new AnypackPluginServe({
     allowMany: true,
     https: null,
   });
@@ -31,7 +31,7 @@ test('allow https null', () => {
 });
 
 test('static → string', () => {
-  const { options } = new WebpackPluginServe({
+  const { options } = new AnypackPluginServe({
     allowMany: true,
     static: fixturePath,
   });
@@ -39,7 +39,7 @@ test('static → string', () => {
 });
 
 test('static → array(string)', () => {
-  const { options } = new WebpackPluginServe({
+  const { options } = new AnypackPluginServe({
     allowMany: true,
     static: [fixturePath],
   });
@@ -47,7 +47,7 @@ test('static → array(string)', () => {
 });
 
 test('static → glob', () => {
-  const { options } = new WebpackPluginServe({
+  const { options } = new AnypackPluginServe({
     allowMany: true,
     static: {
       glob: [join(__dirname, 'fixtures')],

@@ -8,7 +8,7 @@ To get started, your `webpack` configuration should already be setup and buildin
 
 ```js
 const internalIp = require('internal-ip');
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 
 module.exports = {
   ...,

@@ -1,6 +1,6 @@
 const { test, expect } = require('@rstest/core');
 
-const { defaults, WebpackPluginServe } = require('../lib');
+const { defaults, AnypackPluginServe } = require('../lib');
 const { validate } = require('../lib/validate');
 
 test('defaults', () => {
@@ -50,6 +50,6 @@ test('promise', () => {
 
 test('throws', () => {
   expect(
-    () => new WebpackPluginServe({ batman: 'nanananana' }),
+    () => new AnypackPluginServe({ batman: 'nanananana' }),
   ).toThrowErrorMatchingSnapshot();
 });

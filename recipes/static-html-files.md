@@ -26,7 +26,7 @@ Where `/the-app/dist` is the `output` webpack output directory. A configuration 
 
 ```js
 const path = require('path');
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 const outputPath = path.resolve('./dist');
 
 module.exports = {
@@ -59,7 +59,7 @@ An HTML file for this setup might resemble:
 
 Webpack provides for a multitude of different output configurations, and your needs will likely vary from the examples in this recipe. The important parts to assert are configured correctly are:
 
-- the `static` path(s) for `WebpackPluginServe. Any path(s) specified will be be accessible from the website root.
+- the `static` path(s) for `AnypackPluginServe. Any path(s) specified will be be accessible from the website root.
 - the `output.publicPath` property, which should be set if your build directory is within a directory specified in `static`
 - the `src` property for the `<script>` tag in the static HTML file. This needs to point to where the bundle is located, as defined by all other configuration. In this recipe, we're adding the `outputPath` as a static directory, so the bundle is served from the website root.
 

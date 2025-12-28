@@ -1,6 +1,6 @@
 const { resolve } = require('node:path');
 
-const { WebpackPluginServe } = require('anypack-plugin-serve');
+const { AnypackPluginServe } = require('anypack-plugin-serve');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
@@ -34,7 +34,7 @@ module.exports = {
     new ReactRefreshPlugin({
           overlay: false
         }),
-    new WebpackPluginServe({
+    new AnypackPluginServe({
       // note: this value is true by default
       hmr: true,
       historyFallback: true,

@@ -64,7 +64,7 @@ _Note: We recommend using [webpack-nano](https://github.com/shellscape/webpack-n
 Create a `webpack.config.js` file:
 
 ```js
-const { WebpackPluginServe: Serve } = require('anypack-plugin-serve');
+const { AnypackPluginServe: Serve } = require('anypack-plugin-serve');
 const options = { ... };
 
 module.exports = {
@@ -198,7 +198,7 @@ Allows users to implement custom middleware, and manipulate the order in which b
 // webpack.config.js
 module.exports = {
   plugins: [
-    new WebpackPluginServe({
+    new AnypackPluginServe({
       middleware: (app, builtins) =>
         app.use(async (req, res, next) => {
           await next();
@@ -296,7 +296,7 @@ Proxying with `anypack-plugin-serve` is supported via the [`middleware`](#middle
 module.exports = {
   ...,
   plugins: [
-    new WebpackPluginServe({
+    new AnypackPluginServe({
       middleware: (app, builtins) => {
         app.use(builtins.proxy('/api', { target: 'http://10.10.10.1:1337' }));
       }

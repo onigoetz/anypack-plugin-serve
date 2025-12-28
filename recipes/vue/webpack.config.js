@@ -1,6 +1,6 @@
 const { resolve } = require('path');
 
-const { WebpackPluginServe } = require('anypack-plugin-serve');
+const { AnypackPluginServe } = require('anypack-plugin-serve');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 
@@ -35,7 +35,7 @@ module.exports = {
     new HtmlWebpackPlugin(),
     ...(isDev
       ? [
-          new WebpackPluginServe({
+          new AnypackPluginServe({
             // note: this value is true by default
             hmr: true,
             historyFallback: true,

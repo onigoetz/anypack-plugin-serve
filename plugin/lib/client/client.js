@@ -11,12 +11,12 @@
 const run = (buildHash, options) => {
   const { address, client = {}, hmr, progress, secure, status } = options;
 
-  options.firstInstance = !window.webpackPluginServe;
+  options.firstInstance = !window.anypackPluginServe;
 
-  window.webpackPluginServe = window.webpackPluginServe || {
+  window.anypackPluginServe = window.anypackPluginServe || {
     compilers: {},
   };
-  window.webpackPluginServe.silent = !!client.silent;
+  window.anypackPluginServe.silent = !!client.silent;
 
   const { ClientSocket } = require('./ClientSocket.js');
   const { replace } = require('./hmr.js');
@@ -30,7 +30,7 @@ const run = (buildHash, options) => {
 
   const { compilerName } = options;
 
-  window.webpackPluginServe.compilers[compilerName] = {};
+  window.anypackPluginServe.compilers[compilerName] = {};
 
   // prevents ECONNRESET errors on the server
   window.addEventListener('beforeunload', () => socket.close());
@@ -42,7 +42,7 @@ const run = (buildHash, options) => {
     const identifier = options.compilerName
       ? `(Compiler: ${options.compilerName}) `
       : '';
-    const compiler = window.webpackPluginServe.compilers[compilerName];
+    const compiler = window.anypackPluginServe.compilers[compilerName];
     const { wpsId } = data;
 
     switch (action) {

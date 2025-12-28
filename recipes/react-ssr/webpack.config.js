@@ -1,6 +1,6 @@
 const path = require("node:path");
 
-const { WebpackPluginServe } = require("anypack-plugin-serve");
+const { AnypackPluginServe } = require("anypack-plugin-serve");
 const importFresh = require("import-fresh");
 const nodeExternals = require("webpack-node-externals");
 
@@ -8,7 +8,7 @@ const SRC_DIR_CLIENT = path.resolve(__dirname, "client");
 const SRC_DIR_SERVER = path.resolve(__dirname, "server");
 const DIST_DIR = path.resolve(__dirname, "dist");
 
-const serve = new WebpackPluginServe({
+const serve = new AnypackPluginServe({
   port: 3000,
   static: [DIST_DIR],
   waitForBuild: true,

@@ -10,7 +10,7 @@ To leverage built-in middleware, the available middleware methods need but be ca
 // webpack.config.js
 module.exports = {
   plugins: [
-    new WebpackPluginServe({
+    new AnypackPluginServe({
       middleware: (app, builtins) =>
 				const glob = [
 					'dist/**/public',
