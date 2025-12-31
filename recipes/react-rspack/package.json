@@ -1,0 +1,39 @@
+{
+  "name": "demo-react-rspack",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A anypack-plugin-serve Recipe",
+  "repository": "onigoetz/anypack-plugin-serve/recipes/react",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 10.11.0"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=development rp --config ./rspack.config",
+    "build": "cross-env NODE_ENV=production rp --config ./rspack.config",
+    "format": "biome format",
+    "lint": "biome check --write",
+    "ci:lint": "biome check"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@biomejs/biome": "2.3.10",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
+    "@rspack/plugin-react-refresh": "^1.5.3",
+    "anypack-plugin-serve": "workspace:*",
+    "babel-loader": "^10.0.0",
+    "cross-env": "10.1.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-refresh": "^0.18.0",
+    "rspack-nano": "workspace:*",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.104.1",
+    "webpack-nano": "^1.1.0"
+  }
+}

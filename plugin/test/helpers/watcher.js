@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const rspack = require('@rspack/core');
 const { onTestFinished } = require('@rstest/core');
 
 const { findServe } = require('./config.js');
@@ -21,10 +22,10 @@ function finished(compiler) {
   };
 }
 
-async function startWatcher(webpackConfig) {
+async function startWatcher(config, implementation) {
   const deferred = defer();
 
-  const serve = findServe(webpackConfig);
+  const serve = findServe(config);
 
   let watchCallback = deferred.resolve;
   if (serve) {
@@ -32,7 +33,7 @@ async function startWatcher(webpackConfig) {
     serve.on('listening', deferred.resolve);
   }
 
-  const compiler = webpack(webpackConfig);
+  const compiler = implementation(config);
   const watcher = compiler.watch({}, watchCallback);
 
   onTestFinished(async () => {
@@ -54,6 +55,18 @@ async function startWatcher(webpackConfig) {
   return { compiler, watcher, onCompilationDone: finished(compiler) };
 }
 
+async function startWebpackWatcher(config) {
+  return startWatcher(config, webpack);
+}
+
+async function startRspackWatcher(config) {
+  return startWatcher(config, rspack);
+}
+
 module.exports = {
-  startWatcher,
+  startWatcher(config) {
+    return startWebpackWatcher(config);
+  },
+  startWebpackWatcher,
+  startRspackWatcher,
 };

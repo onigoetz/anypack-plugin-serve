@@ -15,7 +15,6 @@ const colors = require('ansi-colors');
 
 const globby = require('tinyglobby');
 const { customAlphabet } = require('nanoid');
-const { DefinePlugin, ProgressPlugin } = require('webpack');
 
 const { init: initHmrPlugin } = require('./plugins/hmr');
 const { init: initRamdiskPlugin } = require('./plugins/ramdisk');
@@ -219,20 +218,6 @@ class AnypackPluginServe extends EventEmitter {
       });
     }
 
-    compiler.hooks.compilation.tap(key, (compilation) => {
-      compilation.hooks.afterHash.tap(key, () => {
-        // webpack still has a 4 year old bug whereby in watch mode, file timestamps aren't properly
-        // accounted for, which will trigger multiple builds of the same hash.
-        // see: https://github.com/egoist/time-fix-plugin
-        /* istanbul ignore if */
-        if (this.lastHash === compilation.hash) {
-          return;
-        }
-        this.lastHash = compilation.hash;
-        this.emit('build', compiler.name, compiler);
-      });
-    });
-
     watchRun.tapPromise(key, async () => {
       if (!this.state.starting) {
         // ensure we're only trying to start the server once
@@ -251,16 +236,18 @@ class AnypackPluginServe extends EventEmitter {
 
       const defineObject = Object.assign({}, this.options, compilerData);
       const defineData = { ʎɐɹɔosǝʌɹǝs: JSON.stringify(defineObject) };
-      const definePlugin = new DefinePlugin(defineData);
+      const definePlugin = new compiler.webpack.DefinePlugin(defineData);
 
       definePlugin.apply(compiler);
 
       if (this.options.progress) {
-        const progressPlugin = new ProgressPlugin((percent, message, misc) => {
-          // pass the data onto the client raw. connected sockets may want to interpret the data
-          // differently
-          this.emit('progress', { percent, message, misc }, compiler);
-        });
+        const progressPlugin = new compiler.webpack.ProgressPlugin(
+          (percent, message, misc) => {
+            // pass the data onto the client raw. connected sockets may want to interpret the data
+            // differently
+            this.emit('progress', { percent, message, misc }, compiler);
+          },
+        );
 
         progressPlugin.apply(compiler);
       }

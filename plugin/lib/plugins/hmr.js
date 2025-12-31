@@ -8,29 +8,22 @@
   The above copyright notice and this permission notice shall be
   included in all copies or substantial portions of this Source Code Form.
 */
-const { HotModuleReplacementPlugin, version } = require('webpack');
-
-const { getMajorVersion } = require('../helpers');
 
 const { PluginExistsError } = require('../errors');
 
 const addPlugin = (compiler) => {
-  const hmrPlugin = new HotModuleReplacementPlugin();
+  const hmrPlugin = new compiler.webpack.HotModuleReplacementPlugin();
   hmrPlugin.apply(compiler);
 };
 
 const init = function init(compiler, log) {
-  const webpackMajorVersion = getMajorVersion(version);
   compiler.options.output = Object.assign(compiler.options.output, {
     hotUpdateChunkFilename: `${compiler.wpsId}-[id]-wps-hmr.js`,
-    hotUpdateMainFilename:
-      webpackMajorVersion >= 5
-        ? `[runtime]-${compiler.wpsId}-wps-hmr.json`
-        : `${compiler.wpsId}-wps-hmr.json`,
+    hotUpdateMainFilename: `[runtime]-${compiler.wpsId}-wps-hmr.json`,
   });
 
   const hasHMRPlugin = compiler.options.plugins.some(
-    (plugin) => plugin instanceof HotModuleReplacementPlugin,
+    (plugin) => plugin instanceof compiler.webpack.HotModuleReplacementPlugin,
   );
 
   /* istanbul ignore else */

@@ -1,9 +1,3 @@
-function getMajorVersion(version) {
-  return typeof version === 'string' && version.includes('.')
-    ? version.split('.')[0]
-    : false;
-}
-
 function defer() {
   /** @type {{ promise: Promise, resolve: () => {}, reject: () => {}  }} */
   const deferred = {};
@@ -17,6 +11,5 @@ function defer() {
 }
 
 module.exports = {
-  getMajorVersion,
   defer,
 };
