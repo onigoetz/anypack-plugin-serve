@@ -11,13 +11,17 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development wp --config ./webpack.config",
     "build": "cross-env NODE_ENV=production wp --config ./webpack.config",
-    "prod": "npm run build && node ./server"
+    "prod": "npm run build && node ./server",
+    "format": "biome format",
+    "lint": "biome check --write",
+    "ci:lint": "biome check"
   },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "7.28.5",
     "@babel/preset-env": "7.28.5",
     "@babel/preset-react": "7.28.5",
+    "@biomejs/biome": "2.3.10",
     "anypack-plugin-serve": "workspace:*",
     "babel-loader": "10.0.0",
     "cross-env": "10.1.0",

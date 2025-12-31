@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 
 const polka = require('polka');
 const sirv = require('sirv');

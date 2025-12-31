@@ -1,17 +1,5 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "files": {
-    "includes": [
-      "plugin/lib/**",
-      "plugin/test/**",
-      "!dist",
-      "!*.snap",
-      "!**/output.js",
-      "!*-wps-hm4.*",
-      "!*.hot-update.js",
-      "!test/**/output"
-    ]
-  },
   "formatter": {
     "indentStyle": "space",
     "indentWidth": 2

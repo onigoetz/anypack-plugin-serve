@@ -7,9 +7,9 @@
     "test": "yarn workspaces foreach --all -pt run test",
     "ci:test": "yarn workspaces foreach --all -pt run ci:test",
     "lint-staged": "lint-staged",
-    "format": "biome format plugin/lib plugin/test",
-    "lint": "biome check --write plugin/lib plugin/test",
-    "ci:lint": "biome check plugin/lib plugin/test"
+    "format": "yarn workspaces foreach --all -pt run format",
+    "lint": "yarn workspaces foreach --all -pt run lint",
+    "ci:lint": "yarn workspaces foreach --all -pt run ci:lint"
   },
   "private": true,
   "devDependencies": {

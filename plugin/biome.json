@@ -1,0 +1,16 @@
+{
+  "$schema": "../node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": "//",
+  "files": {
+    "includes": [
+      "**",
+      "!dist",
+      "!coverage",
+      "!*.snap",
+      "!**/output.js",
+      "!*-wps-hm4.*",
+      "!*.hot-update.js",
+      "!test/**/output"
+    ]
+  }
+}

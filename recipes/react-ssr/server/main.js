@@ -1,7 +1,6 @@
-import React from "react";
-import { renderToString } from "react-dom/server";
+import { renderToString } from 'react-dom/server';
 
-import Root from "../client/Root";
+import Root from '../client/Root';
 
 function render() {
   const markup = renderToString(<Root />);
@@ -17,7 +16,7 @@ function render() {
   `;
 }
 
-export default async function renderHome(req, res) {
+export default async function renderHome(_req, res) {
   res.statusCode = 200;
   res.end(render());
 }

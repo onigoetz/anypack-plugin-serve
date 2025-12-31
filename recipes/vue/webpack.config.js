@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+const { resolve } = require('node:path');
 
 const { AnypackPluginServe } = require('anypack-plugin-serve');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -17,18 +17,18 @@ module.exports = {
       {
         test: /\.vue$/,
         exclude: /node_modules/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
       },
       {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
-      }
-    ]
+        use: ['vue-style-loader', 'css-loader'],
+      },
+    ],
   },
   output: {
     path: outputPath,
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   plugins: [
     new VueLoaderPlugin(),
@@ -39,10 +39,10 @@ module.exports = {
             // note: this value is true by default
             hmr: true,
             historyFallback: true,
-            static: [outputPath]
-          })
+            static: [outputPath],
+          }),
         ]
-      : [])
+      : []),
   ],
-  watch: isDev
+  watch: isDev,
 };

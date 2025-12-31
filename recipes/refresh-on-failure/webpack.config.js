@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { MiniHtmlWebpackPlugin } = require('mini-html-webpack-plugin');
@@ -11,25 +11,25 @@ module.exports = {
   plugins: [
     new Serve({ hmr: 'refresh-on-failure', static: ['./dist'], status: false }),
     new ReactRefreshPlugin({
-      overlay: false
+      overlay: false,
     }),
     new MiniHtmlWebpackPlugin({
       context: {
-        body: '<div id="app"></div>'
-      }
-    })
+        body: '<div id="app"></div>',
+      },
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'src'),
-        use: 'babel-loader'
-      }
-    ]
+        use: 'babel-loader',
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
-  watch: true
+  watch: true,
 };

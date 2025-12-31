@@ -16,30 +16,30 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
   output: {
     path: outputPath,
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   plugins: [
     new HtmlWebpackPlugin(),
     new ReactRefreshPlugin({
-          overlay: false
-        }),
+      overlay: false,
+    }),
     new AnypackPluginServe({
       // note: this value is true by default
       hmr: true,
       historyFallback: true,
       static: [outputPath],
-    })
+    }),
   ],
-  watch
+  watch,
 };

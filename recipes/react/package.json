@@ -10,13 +10,17 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development wp --config ./webpack.config",
-    "build": "cross-env NODE_ENV=production wp --config ./webpack.config"
+    "build": "cross-env NODE_ENV=production wp --config ./webpack.config",
+    "format": "biome format",
+    "lint": "biome check --write",
+    "ci:lint": "biome check"
   },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@biomejs/biome": "2.3.10",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "anypack-plugin-serve": "workspace:*",
     "babel-loader": "^10.0.0",
@@ -26,6 +30,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-refresh": "^0.18.0",
+    "style-loader": "^4.0.0",
     "webpack": "^5.104.1",
     "webpack-nano": "^1.1.0"
   }

@@ -7,10 +7,14 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development wp --config ./webpack.config",
-    "build": "cross-env NODE_ENV=production wp --config ./webpack.config"
+    "build": "cross-env NODE_ENV=production wp --config ./webpack.config",
+    "format": "biome format",
+    "lint": "biome check --write",
+    "ci:lint": "biome check"
   },
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "2.3.10",
     "anypack-plugin-serve": "workspace:*",
     "cross-env": "10.1.0",
     "css-loader": "^7.1.2",

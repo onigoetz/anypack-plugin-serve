@@ -1,18 +1,15 @@
-const { defineConfig } = require("@rstest/core");
+const { defineConfig } = require('@rstest/core');
 
 module.exports = defineConfig({
-  include: ["**/*.{test,spec}.?(c|m)[jt]s?(x)"],
+  include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
   exclude: [
-    "**/node_modules/**",
-    "**/recipes/**",
-    "**/fixtures/**",
-    "**/helpers/**",
+    '**/node_modules/**',
+    '**/recipes/**',
+    '**/fixtures/**',
+    '**/helpers/**',
   ],
   coverage: {
     include: ['lib/**/*.{js,mjs}'],
-    reporters: [
-      "html",
-      ["text", { skipFull: true }],
-    ],
+    reporters: ['html', ['text', { skipFull: true }]],
   },
 });

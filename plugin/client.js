@@ -19,16 +19,16 @@
   let options;
   try {
     options = ʎɐɹɔosǝʌɹǝs;
-  } catch (e) {
+  } catch (_e) {
     const { log } = require('./lib/client/log.js');
     log.error(
-      'The entry for anypack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.'
+      'The entry for anypack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.',
     );
   }
 
   try {
     hash = __webpack_hash__;
-  } catch (e) {}
+  } catch (_e) {}
 
   run(hash, options);
 })();
