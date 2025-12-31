@@ -1,0 +1,31 @@
+// Rstest Snapshot v1
+
+exports[`--help 1`] = `
+"
+  A teensy, squeaky 🐤 clean Rspack CLI
+
+  Usage
+    $ rp [...options]
+
+  Options
+    --config          A path to a rspack config file
+    --config.{name}   A path to a rspack config file, and the config name to run
+    --json            Emit bundle information as JSON
+    --help            Displays this message
+    --silent          Instruct the CLI to produce no console output
+    --version         Displays rspack-nano and rspack versions
+
+  Examples
+    $ rp
+    $ rp --help
+    $ rp --config rspack.config.js
+    $ rp --config.serve rspack.config.js
+
+"
+`;
+
+exports[`argv export 1`] = `
+{
+  "_": [],
+}
+`;

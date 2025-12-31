@@ -24,6 +24,7 @@
   },
   "workspaces": [
     "plugin",
+    "rspack-nano",
     "recipes/*"
   ],
   "pre-commit": "lint-staged",
