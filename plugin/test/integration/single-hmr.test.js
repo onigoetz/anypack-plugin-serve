@@ -33,8 +33,9 @@ test('single compiler', async () => {
   await onCompilationDone();
 
   await expect
-    .poll(async () =>
-      page.evaluate(() => document.querySelector('main').innerHTML),
+    .poll(
+      async () => page.evaluate(() => document.querySelector('main').innerHTML),
+      { timeout: 3000 },
     )
     .toBe('test');
 });
