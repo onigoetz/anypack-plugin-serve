@@ -4,8 +4,6 @@ Proxying some URLs can be useful when you have an API backend server and you wan
 
 Proxying is supported via [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) module but it doesn't contain any fancy options processing for proxying it just provides access directly.
 
-_Note: The `app.use(...)` call here is slightly different than what Express users are used to seeing with `http-proxy-middleware`. This is due to subtle differences in how the module interacts with `Koa`, which is used under the hood in this plugin._
-
 ### Meat and Potatoes
 
 To get started, your `webpack` configuration should be setup and building successfully. Next, you have to know which local path you wan't to proxy to which location target. We are going to setup this using the middleware option.
@@ -23,7 +21,8 @@ module.exports = {
   ...,
   plugins: [new Serve({
     middleware: (app, builtins) => {
-      app.use(builtins.proxy('/api', {
+      app.use(builtins.proxy({
+        pathFilter: '/api',
         target: 'http://localhost:3000'
       }))
     }
@@ -33,24 +32,22 @@ module.exports = {
 
 ```
 
-Since `builtins.proxy` gives you access to `http-proxy-middleware`, you can doanything `http-proxy-middleware` accepts.
+Since `builtins.proxy` gives you access to `http-proxy-middleware`, you can do anything `http-proxy-middleware` accepts.
 
 This will proxy everything from `localhost:55555/api` to `localhost:3000/api`
 
 #### Path Rewrite
 
-Now, let's say you don't want to proxy to the same path that your local path, when requesting to `/api` you want to proxy to `localhost:3000` directly instead. You are looking for one of the `http-proxy-middleware` options that is called `pathRewrite`.
+Now, let's say you don't want to proxy to the same path that your local path, when requesting to `/api` you want to proxy to `localhost:3000` directly instead.
+In this case it's best to use a add another argument before the proxy in your `app.use` call.
 
 ```js
 module.exports = {
   ...,
   plugins: [new Serve({
     middleware: (app, builtins) => {
-      app.use(builtins.proxy('/api', {
-        target: 'http://localhost:3000',
-        pathRewrite: {
-          '/api': ''
-        }
+      app.use('/api', builtins.proxy({
+        target: 'http://localhost:3000'
       }))
     }
   })],

@@ -298,14 +298,12 @@ module.exports = {
   plugins: [
     new AnypackPluginServe({
       middleware: (app, builtins) => {
-        app.use(builtins.proxy('/api', { target: 'http://10.10.10.1:1337' }));
+        app.use('/api', builtins.proxy({ target: 'http://10.10.10.1:1337' }));
       }
     })
   ]
 };
 ```
-
-_Note: The `app.use(...)` call here is slightly different than what Express users are used to seeing with `http-proxy-middleware`. This is due to subtle differences in how the module interacts with `Koa`, which is used under the hood in this plugin._
 
 ## TypeScript Types
 

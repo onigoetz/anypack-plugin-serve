@@ -19,19 +19,8 @@ module.exports = {
       log: { level: logLevel },
       middleware: (app, builtins) => {
         app.use(
-          builtins.proxy('/api', {
-            logLevel,
-            target: 'http://localhost:8888',
-          }),
-        );
-        app.use(
-          builtins.proxy('/wps', {
-            logLevel,
-            target: 'http://localhost:8888',
-          }),
-        );
-        app.use(
-          builtins.proxy('/wp', {
+          builtins.proxy({
+            pathFilter: '/api',
             logLevel,
             target: 'http://localhost:8888',
           }),

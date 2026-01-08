@@ -19,10 +19,10 @@ module.exports = {
       port: 55557,
       middleware: (app, builtins) => {
         app.use(
-          builtins.proxy('/api', {
+          '/api',
+          builtins.proxy({
             logLevel,
             target: 'http://localhost:8889',
-            pathRewrite: { '^/api': '' },
           }),
         );
       },
