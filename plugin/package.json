@@ -1,6 +1,6 @@
 {
   "name": "anypack-plugin-serve",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-beta.1",
   "description": "A Development Server in a Webpack Plugin",
   "license": "MPL-2.0",
   "repository": "onigoetz/anypack-plugin-serve",

@@ -27,12 +27,12 @@ Be sure to [browse our recipes](./recipes/README.md) and peruse the [FAQ](./.git
 
 ## Goals of this fork
 
-1. Be compatible with both Webpack and Rspack (in progress)
-2. Be very lightweight (in progress)
+1. Be compatible with both Webpack and Rspack
+2. Be very lightweight
 
 ### Current effort on size
 
-1. `anypack-plugin-serve@0.1.0-alpha.2`: 60.5kB Publish / 3.86MB Install
+1. `anypack-plugin-serve@0.1.0-beta.1`: 59.2kB Publish / 3.92MB Install
 2. `webpack-plugin-serve@1.6.0`: 89.2kB Publish / 5.00MB Install
 3. `webpack-dev-server@5.2.2`: 536kB Publish / 13.7MB Install
 4. `@rspack/dev-server@1.1.4`: 42.5kB Publish / 15.5MB Install
