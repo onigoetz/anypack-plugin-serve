@@ -25,6 +25,9 @@ const { validate } = require('./validate');
 const defaults = {
   // leave `client` undefined
   // client: null,
+  client: {
+    retry: true,
+  },
   compress: null,
   headers: null,
   historyFallback: false,
@@ -151,7 +154,8 @@ class AnypackPluginServe extends EventEmitter {
   }
 
   hook(compiler) {
-    const { done, invalid, watchClose, watchRun } = compiler.hooks;
+    const { done, invalid, watchClose, watchRun, beforeCompile } =
+      compiler.hooks;
 
     if (!compiler.wpsId) {
       compiler.wpsId = nanoid();
@@ -199,6 +203,7 @@ class AnypackPluginServe extends EventEmitter {
 
     // we do this emit because webpack caches and optimizes the hooks, so there's no way to detach
     // a listener/hook.
+    beforeCompile.tap(key, () => this.emit('build', compiler.name, compiler));
     done.tap(key, (stats) => this.emit('done', stats, compiler));
     invalid.tap(key, (filePath) => this.emit('invalid', filePath, compiler));
     watchClose.tap(key, () => this.emit('close', compiler));

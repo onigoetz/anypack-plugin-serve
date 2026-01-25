@@ -1,0 +1,25 @@
+{
+  "name": "anypack-plugin-serve-overlay",
+  "version": "0.1.0-beta.1",
+  "description": "Overlay for anypack-plugin-serve",
+  "license": "MPL-2.0",
+  "repository": "onigoetz/anypack-plugin-serve",
+  "author": "onigoetz",
+  "homepage": "https://github.com/onigoetz/anypack-plugin-serve",
+  "bugs": "https://github.com/onigoetz/anypack-plugin-serve/issues",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">= 20.0.0"
+  },
+  "devDependencies": {
+    "@rsbuild/plugin-preact": "^1.7.1",
+    "@rslib/core": "^0.19.3",
+    "clsx": "^2.1.1",
+    "preact": "^10.28.2"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "NODE_ENV=production rslib",
+    "build:dev": "NODE_ENV=development rslib"
+  }
+}

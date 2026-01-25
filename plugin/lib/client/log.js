@@ -9,17 +9,21 @@
   included in all copies or substantial portions of this Source Code Form.
 */
 const { error, info, warn } = console;
+
+const refresh = 'Please refresh the page';
+
 const log = {
   error: error.bind(console, '⬡ aps:'),
   info: info.bind(console, '⬡ aps:'),
-  refresh: 'Please refresh the page',
   warn: warn.bind(console, '⬡ aps:'),
+  refresh,
 };
 const noop = () => {};
 const silent = {
   error: noop,
   info: noop,
   warn: noop,
+  refresh,
 };
 
 module.exports = () => (window.anypackPluginServe.silent ? silent : log);
