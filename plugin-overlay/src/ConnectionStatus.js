@@ -3,11 +3,14 @@ import styles from './ConnectionStatus.module.css';
 
 export default function ConnectionStatus({ isConnected }) {
   return (
-    <div
+    <output
+      data-testid="connection-status"
+      data-connected={isConnected}
+      aria-label={isConnected ? 'Connected' : 'Disconnected'}
       class={clsx(
         styles.status,
         isConnected ? styles.statusConnected : styles.statusDisconnected,
       )}
-    ></div>
+    ></output>
   );
 }

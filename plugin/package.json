@@ -49,8 +49,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.11",
-    "@rstest/core": "^0.7.7",
-    "@rstest/coverage-istanbul": "^0.1.4",
+    "@rstest/core": "^0.8.1",
+    "@rstest/coverage-istanbul": "^0.2.0",
     "del-cli": "7.0.0",
     "get-port": "^7.1.0",
     "node-fetch": "^3.3.2",

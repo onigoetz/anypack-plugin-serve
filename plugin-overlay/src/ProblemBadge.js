@@ -2,8 +2,16 @@ import clsx from 'clsx';
 import styles from './ProblemBadge.module.css';
 
 export default function ProblemBadge({ count, warning, error, size }) {
+  const type = error ? 'error' : warning ? 'warning' : 'problem';
+  const pluralized = count === 1 ? type : `${type}s`;
+  const ariaLabel = `${count} ${pluralized}`;
+
   return (
-    <div
+    <output
+      data-testid="problem-badge"
+      data-type={type}
+      aria-label={ariaLabel}
+      aria-live="polite"
       class={clsx(
         styles.container,
         warning && styles.warning,
@@ -12,6 +20,6 @@ export default function ProblemBadge({ count, warning, error, size }) {
       )}
     >
       {count}
-    </div>
+    </output>
   );
 }

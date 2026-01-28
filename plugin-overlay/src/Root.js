@@ -18,8 +18,8 @@ export default function Root({ manager }) {
   }, []);
 
   return (
-    <div>
+    <aside data-testid="overlay-root" aria-label="Build overlay">
       <MiniStatus compilers={compilers} errors={errors} />
-    </div>
+    </aside>
   );
 }

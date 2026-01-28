@@ -2,19 +2,9 @@ import { render } from 'preact';
 
 import Root from './Root.js';
 
-class OverlayManager {
+export class OverlayManager {
   compilers = [];
   listeners = [];
-
-  constructor() {
-    this.init();
-  }
-
-  init() {
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    render(<Root manager={this} />, container);
-  }
 
   addCompiler(compiler) {
     this.compilers.push(compiler);
@@ -37,5 +27,12 @@ class OverlayManager {
 }
 
 export function init() {
-  return new OverlayManager();
+  const manager = new OverlayManager();
+
+  const container = document.createElement('div');
+  container.setAttribute('data-testid', 'overlay-container');
+  document.body.appendChild(container);
+  render(<Root manager={manager} />, container);
+
+  return manager;
 }
