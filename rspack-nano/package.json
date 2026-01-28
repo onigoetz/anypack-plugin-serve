@@ -41,8 +41,8 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.11",
     "@rspack/core": "^1.0.0",
-    "@rstest/core": "^0.7.7",
-    "@rstest/coverage-istanbul": "^0.1.4",
+    "@rstest/core": "^0.8.1",
+    "@rstest/coverage-istanbul": "^0.2.0",
     "tinyexec": "^1.0.2"
   },
   "keywords": [

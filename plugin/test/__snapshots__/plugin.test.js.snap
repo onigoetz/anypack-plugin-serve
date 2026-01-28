@@ -3,6 +3,9 @@
 exports[`allow https null 1`] = `
 {
   "allowMany": true,
+  "client": {
+    "retry": true,
+  },
   "compress": null,
   "headers": null,
   "historyFallback": false,
@@ -27,6 +30,9 @@ exports[`allow https null 1`] = `
 
 exports[`defaults 1`] = `
 {
+  "client": {
+    "retry": true,
+  },
   "compress": null,
   "headers": null,
   "historyFallback": false,
@@ -51,6 +57,9 @@ exports[`defaults 1`] = `
 exports[`options manipulation 1`] = `
 {
   "allowMany": true,
+  "client": {
+    "retry": true,
+  },
   "compress": {},
   "headers": null,
   "historyFallback": {},
