@@ -1,6 +1,7 @@
 import { afterEach, expect, test } from '@rstest/core';
-import { init, OverlayManager } from '../../src/index.js';
-import { createMockCompiler } from '../helpers/mock-compiler.js';
+import { init } from '../../src/index';
+import OverlayManager from '../../src/OverlayManager';
+import { createMockCompiler } from '../helpers/mock-compiler';
 
 // Clean up document.body after each test since init() appends directly to it
 afterEach(() => {
@@ -18,10 +19,10 @@ test('init creates OverlayManager with DOM container', () => {
     '[data-testid="overlay-container"]',
   );
   expect(container).not.toBeNull();
-  expect(container.tagName).toBe('DIV');
+  expect(container?.tagName).toBe('DIV');
 
   // Root should be inside container
-  const root = container.querySelector('[data-testid="overlay-root"]');
+  const root = container?.querySelector('[data-testid="overlay-root"]');
   expect(root).not.toBeNull();
 });
 
@@ -69,7 +70,7 @@ test('addListener returns unsubscribe function', () => {
 
 test('render calls all listeners with current compilers', () => {
   const manager = new OverlayManager();
-  const calls = [];
+  const calls: { listener: number; compilers: unknown }[] = [];
 
   manager.addListener((compilers) => {
     calls.push({ listener: 1, compilers });

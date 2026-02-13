@@ -1,8 +1,8 @@
 import { afterEach, expect, test } from '@rstest/core';
 import { act, cleanup, render, screen } from '@testing-library/preact';
-import { OverlayManager } from '../../src/index.js';
-import Root from '../../src/Root.js';
-import { createMockCompiler } from '../helpers/mock-compiler.js';
+import OverlayManager from '../../src/OverlayManager';
+import Root from '../../src/Root';
+import { createMockCompiler } from '../helpers/mock-compiler';
 
 // Clean up after each test
 afterEach(() => {
@@ -36,8 +36,8 @@ test('complete overlay lifecycle with single compiler', async () => {
   const compilerStatus = container.querySelector(
     '[data-testid="compiler-status"]',
   );
-  expect(compilerStatus.textContent).toContain('0%');
-  expect(compilerStatus.getAttribute('aria-label')).toBe(
+  expect(compilerStatus?.textContent).toContain('0%');
+  expect(compilerStatus?.getAttribute('aria-label')).toBe(
     'Compiler 1: 0% complete',
   );
 
@@ -50,8 +50,8 @@ test('complete overlay lifecycle with single compiler', async () => {
     compiler.triggerChange();
   });
 
-  expect(compilerStatus.textContent).toContain('50%');
-  expect(compilerStatus.getAttribute('aria-label')).toBe(
+  expect(compilerStatus?.textContent).toContain('50%');
+  expect(compilerStatus?.getAttribute('aria-label')).toBe(
     'Compiler 1: 50% complete',
   );
 
@@ -69,7 +69,7 @@ test('complete overlay lifecycle with single compiler', async () => {
     compiler.triggerChange();
   });
 
-  expect(compilerStatus.textContent).not.toContain('%');
+  expect(compilerStatus?.textContent).not.toContain('%');
 
   const badges = container.querySelectorAll('[data-testid="problem-badge"]');
   const errorBadge = Array.from(badges).find(
@@ -79,10 +79,10 @@ test('complete overlay lifecycle with single compiler', async () => {
     (b) => b.getAttribute('data-type') === 'warning',
   );
 
-  expect(errorBadge.textContent).toBe('2');
-  expect(errorBadge.getAttribute('aria-label')).toBe('2 errors');
-  expect(warningBadge.textContent).toBe('1');
-  expect(warningBadge.getAttribute('aria-label')).toBe('1 warning');
+  expect(errorBadge?.textContent).toBe('2');
+  expect(errorBadge?.getAttribute('aria-label')).toBe('2 errors');
+  expect(warningBadge?.textContent).toBe('1');
+  expect(warningBadge?.getAttribute('aria-label')).toBe('1 warning');
 });
 
 test('handles multiple compilers with different states', async () => {
@@ -116,7 +116,7 @@ test('handles multiple compilers with different states', async () => {
   const errorBadge = container.querySelector(
     '[data-testid="problem-badge"][data-type="error"]',
   );
-  expect(errorBadge.textContent).toBe('1');
+  expect(errorBadge?.textContent).toBe('1');
 
   // Update first compiler
   act(() => {
@@ -128,7 +128,7 @@ test('handles multiple compilers with different states', async () => {
   });
 
   expect(compilerStatuses[0].textContent).toContain('75%');
-  expect(errorBadge.textContent).toBe('1');
+  expect(errorBadge?.textContent).toBe('1');
 });
 
 test('multiple compilers update independently', async () => {
@@ -237,8 +237,8 @@ test('connection state changes reflect in UI', async () => {
     '[data-testid="connection-status"]',
   );
 
-  expect(connectionStatus.getAttribute('data-connected')).toBe('true');
-  expect(connectionStatus.getAttribute('aria-label')).toBe('Connected');
+  expect(connectionStatus?.getAttribute('data-connected')).toBe('true');
+  expect(connectionStatus?.getAttribute('aria-label')).toBe('Connected');
 
   // Disconnect
   act(() => {
@@ -249,8 +249,8 @@ test('connection state changes reflect in UI', async () => {
     compiler.triggerChange();
   });
 
-  expect(connectionStatus.getAttribute('data-connected')).toBe('false');
-  expect(connectionStatus.getAttribute('aria-label')).toBe('Disconnected');
+  expect(connectionStatus?.getAttribute('data-connected')).toBe('false');
+  expect(connectionStatus?.getAttribute('aria-label')).toBe('Disconnected');
 });
 
 test('adding compiler after initialization updates UI', async () => {
@@ -297,7 +297,7 @@ test('adding compiler after initialization updates UI', async () => {
   const errorBadge = container.querySelector(
     '[data-testid="problem-badge"][data-type="error"]',
   );
-  expect(errorBadge.textContent).toBe('1');
+  expect(errorBadge?.textContent).toBe('1');
 });
 
 test('rapid state updates are handled correctly', async () => {
@@ -323,5 +323,5 @@ test('rapid state updates are handled correctly', async () => {
   const compilerStatus = container.querySelector(
     '[data-testid="compiler-status"]',
   );
-  expect(compilerStatus.textContent).toContain('100%');
+  expect(compilerStatus?.textContent).toContain('100%');
 });

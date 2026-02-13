@@ -1,7 +1,7 @@
 import { afterEach, expect, test } from '@rstest/core';
 import { cleanup, render, screen } from '@testing-library/preact';
 
-import ConnectionStatus from '../../src/ConnectionStatus.js';
+import ConnectionStatus from '../../src/ConnectionStatus';
 
 // Clean up after each test
 afterEach(() => {

@@ -1,9 +1,15 @@
-import ConnectionStatus from './ConnectionStatus.js';
-import RuntimeIcon from './icons/RuntimeIcon.js';
+import ConnectionStatus from './ConnectionStatus';
+import RuntimeIcon from './icons/RuntimeIcon';
 import styles from './MiniStatus.module.css';
-import ProblemBadge from './ProblemBadge.js';
+import ProblemBadge from './ProblemBadge';
+import type { CompilerEntry } from './types';
 
-export default function MiniStatus({ compilers, errors }) {
+interface MiniStatusProps {
+  compilers: CompilerEntry[];
+  errors: unknown[];
+}
+
+export default function MiniStatus({ compilers, errors }: MiniStatusProps) {
   const errorLabel =
     errors.length === 1 ? '1 runtime error' : `${errors.length} runtime errors`;
 
@@ -22,12 +28,12 @@ export default function MiniStatus({ compilers, errors }) {
         <RuntimeIcon />
         {errors.length}
       </output>
-      <div class={styles.separator}></div>
+      <div class={styles.separator} />
       <div class={styles.statuses}>
         {compilers.map((compiler, index) => {
           const hasErrors = compiler.compiler.errors.length > 0;
           const hasWarnings = compiler.compiler.warnings.length > 0;
-          const statusParts = [];
+          const statusParts: string[] = [];
 
           if (!compiler.compiler.done) {
             statusParts.push(`${compiler.compiler.progress}% complete`);

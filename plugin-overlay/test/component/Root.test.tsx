@@ -1,7 +1,9 @@
 import { afterEach, expect, test } from '@rstest/core';
 import { act, cleanup, render, screen } from '@testing-library/preact';
-import Root from '../../src/Root.js';
-import { createMockCompiler } from '../helpers/mock-compiler.js';
+import OverlayManager from '../../src/OverlayManager';
+import Root from '../../src/Root';
+import type { Compiler } from '../../src/types';
+import { createMockCompiler } from '../helpers/mock-compiler';
 
 // Clean up after each test
 afterEach(() => {
@@ -14,12 +16,10 @@ test('initializes with managers current compilers', () => {
     compiler: { done: true, progress: 100, errors: [], warnings: [] },
   });
 
-  const mockManager = {
-    compilers: [mockCompiler],
-    addListener: () => () => {},
-  };
+  const manager = new OverlayManager();
+  manager.addCompiler(mockCompiler);
 
-  render(<Root manager={mockManager} />);
+  render(<Root manager={manager} />);
 
   const root = screen.getByTestId('overlay-root');
   expect(root).toBeTruthy();
@@ -27,11 +27,14 @@ test('initializes with managers current compilers', () => {
 });
 
 test('subscribes to manager via addListener', async () => {
-  let subscribedCallback = null;
+  let subscribedCallback: ((compilers: Compiler[]) => void) | null = null;
 
-  const mockManager = {
+  const mockManager: OverlayManager = {
+    listeners: [],
     compilers: [],
-    addListener: (callback) => {
+    addCompiler() {},
+    render() {},
+    addListener: (callback: (compilers: Compiler[]) => void) => {
       subscribedCallback = callback;
       return () => {};
     },
@@ -44,16 +47,19 @@ test('subscribes to manager via addListener', async () => {
 });
 
 test('updates state when manager calls listener', async () => {
-  let subscribedCallback = null;
+  let subscribedCallback: ((compilers: Compiler[]) => void) | null = null;
 
   const mockCompiler1 = createMockCompiler({
     connected: true,
     compiler: { done: false, progress: 50, errors: [], warnings: [] },
   });
 
-  const mockManager = {
+  const mockManager: OverlayManager = {
+    listeners: [],
     compilers: [],
-    addListener: (callback) => {
+    addCompiler() {},
+    render() {},
+    addListener: (callback: (compilers: Compiler[]) => void) => {
       subscribedCallback = callback;
       return () => {};
     },
@@ -62,7 +68,7 @@ test('updates state when manager calls listener', async () => {
   const { container } = render(<Root manager={mockManager} />);
 
   act(() => {
-    subscribedCallback([mockCompiler1]);
+    subscribedCallback?.([mockCompiler1]);
   });
 
   expect(container.textContent).toContain('50%');
@@ -71,8 +77,11 @@ test('updates state when manager calls listener', async () => {
 test('returns cleanup function that unsubscribes', async () => {
   let unsubscribeCalled = false;
 
-  const mockManager = {
+  const mockManager: OverlayManager = {
+    listeners: [],
     compilers: [],
+    addCompiler() {},
+    render() {},
     addListener: () => {
       return () => {
         unsubscribeCalled = true;
@@ -95,12 +104,10 @@ test('renders MiniStatus with compilers and errors', () => {
     compiler: { done: true, progress: 100, errors: ['Error'], warnings: [] },
   });
 
-  const mockManager = {
-    compilers: [mockCompiler],
-    addListener: () => () => {},
-  };
+  const manager = new OverlayManager();
+  manager.addCompiler(mockCompiler);
 
-  render(<Root manager={mockManager} />);
+  render(<Root manager={manager} />);
 
   const miniStatus = screen.getByTestId('mini-status');
   expect(miniStatus).toBeTruthy();
@@ -111,12 +118,9 @@ test('renders MiniStatus with compilers and errors', () => {
 });
 
 test('handles empty compilers array', () => {
-  const mockManager = {
-    compilers: [],
-    addListener: () => () => {},
-  };
+  const manager = new OverlayManager();
 
-  render(<Root manager={mockManager} />);
+  render(<Root manager={manager} />);
 
   const root = screen.getByTestId('overlay-root');
   expect(root).toBeTruthy();

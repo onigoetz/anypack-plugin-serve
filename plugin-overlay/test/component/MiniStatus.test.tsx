@@ -1,7 +1,8 @@
 import { afterEach, expect, test } from '@rstest/core';
 import { cleanup, render, screen } from '@testing-library/preact';
 
-import MiniStatus from '../../src/MiniStatus.js';
+import MiniStatus from '../../src/MiniStatus';
+import type { CompilerEntry } from '../../src/types';
 
 // Clean up after each test
 afterEach(() => {
@@ -28,7 +29,7 @@ test('renders single runtime error with singular label', () => {
 });
 
 test('renders single compiler with progress', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: { done: false, progress: 45, errors: [], warnings: [] },
@@ -46,7 +47,7 @@ test('renders single compiler with progress', () => {
 });
 
 test('hides progress when compiler is done', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: { done: true, progress: 100, errors: [], warnings: [] },
@@ -63,7 +64,7 @@ test('hides progress when compiler is done', () => {
 });
 
 test('shows error badge when compiler has errors', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: {
@@ -87,7 +88,7 @@ test('shows error badge when compiler has errors', () => {
 });
 
 test('shows warning badge when compiler has warnings', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: {
@@ -111,7 +112,7 @@ test('shows warning badge when compiler has warnings', () => {
 });
 
 test('does not show badges when no errors or warnings', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: { done: true, progress: 100, errors: [], warnings: [] },
@@ -125,7 +126,7 @@ test('does not show badges when no errors or warnings', () => {
 });
 
 test('renders multiple compilers independently', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: { done: false, progress: 30, errors: [], warnings: [] },
@@ -155,7 +156,7 @@ test('renders multiple compilers independently', () => {
   const errorBadge = compilerStatuses[2].querySelector(
     '[data-testid="problem-badge"]',
   );
-  expect(errorBadge.textContent).toBe('1');
+  expect(errorBadge?.textContent).toBe('1');
 });
 
 test('handles empty compilers array', () => {
@@ -169,7 +170,7 @@ test('handles empty compilers array', () => {
 });
 
 test('shows both errors and warnings for same compiler', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: {
@@ -193,12 +194,12 @@ test('shows both errors and warnings for same compiler', () => {
     (b) => b.getAttribute('data-type') === 'warning',
   );
 
-  expect(errorBadge.textContent).toBe('2');
-  expect(warningBadge.textContent).toBe('1');
+  expect(errorBadge?.textContent).toBe('2');
+  expect(warningBadge?.textContent).toBe('1');
 });
 
 test('shows connection status for each compiler', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: { done: true, progress: 100, errors: [], warnings: [] },
@@ -218,7 +219,7 @@ test('shows connection status for each compiler', () => {
 });
 
 test('has proper accessibility structure', () => {
-  const compilers = [
+  const compilers: CompilerEntry[] = [
     {
       connected: true,
       compiler: { done: false, progress: 50, errors: [], warnings: [] },

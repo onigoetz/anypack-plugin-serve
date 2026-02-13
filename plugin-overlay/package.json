@@ -8,6 +8,13 @@
   "homepage": "https://github.com/onigoetz/anypack-plugin-serve",
   "bugs": "https://github.com/onigoetz/anypack-plugin-serve/issues",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "engines": {
     "node": ">= 20.0.0"
   },
@@ -18,9 +25,11 @@
     "@rstest/core": "^0.8.1",
     "@rstest/coverage-istanbul": "^0.2.0",
     "@testing-library/preact": "^3.2.4",
+    "@types/node": "^22.0.0",
     "clsx": "^2.1.1",
     "happy-dom": "^20.0.0",
-    "preact": "^10.28.2"
+    "preact": "^10.28.2",
+    "typescript": "^5.7.0"
   },
   "type": "module",
   "scripts": {
@@ -30,6 +39,7 @@
     "ci:test": "npm run test -- --coverage",
     "format": "biome format",
     "lint": "biome check --write",
-    "ci:lint": "biome check"
+    "ci:lint": "biome check",
+    "typecheck": "tsc --noEmit"
   }
 }

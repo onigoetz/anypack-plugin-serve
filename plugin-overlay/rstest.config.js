@@ -10,8 +10,8 @@ export default defineConfig({
   ],
   testEnvironment: 'happy-dom',
   coverage: {
-    include: ['src/**/*.{js,jsx}'],
-    exclude: ['src/**/*.css', 'src/**/*.module.css'],
+    include: ['src/**/*.{ts,tsx}'],
+    exclude: ['src/**/*.css', 'src/**/*.module.css', 'src/**/*.d.ts'],
     reporters: ['html', ['text', { skipFull: true }]],
   },
   resolve: {
@@ -24,8 +24,8 @@ export default defineConfig({
     swc: {
       jsc: {
         parser: {
-          syntax: 'ecmascript',
-          jsx: true,
+          syntax: 'typescript',
+          tsx: true,
         },
         transform: {
           react: {

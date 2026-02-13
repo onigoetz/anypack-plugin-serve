@@ -1,7 +1,13 @@
 import clsx from 'clsx';
 import styles from './ConnectionStatus.module.css';
 
-export default function ConnectionStatus({ isConnected }) {
+interface ConnectionStatusProps {
+  isConnected: boolean;
+}
+
+export default function ConnectionStatus({
+  isConnected,
+}: ConnectionStatusProps) {
   return (
     <output
       data-testid="connection-status"
@@ -11,6 +17,6 @@ export default function ConnectionStatus({ isConnected }) {
         styles.status,
         isConnected ? styles.statusConnected : styles.statusDisconnected,
       )}
-    ></output>
+    />
   );
 }

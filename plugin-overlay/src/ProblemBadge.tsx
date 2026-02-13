@@ -1,7 +1,19 @@
 import clsx from 'clsx';
 import styles from './ProblemBadge.module.css';
 
-export default function ProblemBadge({ count, warning, error, size }) {
+interface ProblemBadgeProps {
+  count: number;
+  warning?: boolean;
+  error?: boolean;
+  size?: 'small' | 'normal';
+}
+
+export default function ProblemBadge({
+  count,
+  warning,
+  error,
+  size,
+}: ProblemBadgeProps) {
   const type = error ? 'error' : warning ? 'warning' : 'problem';
   const pluralized = count === 1 ? type : `${type}s`;
   const ariaLabel = `${count} ${pluralized}`;

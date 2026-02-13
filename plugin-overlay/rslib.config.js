@@ -6,6 +6,11 @@ const mode = process.env.NODE_ENV || 'development';
 /** @type {import('@rspack/cli').Configuration} */
 export default defineConfig({
   plugins: [pluginPreact()],
+  source: {
+    entry: {
+      index: './src/index.tsx',
+    },
+  },
   lib: [
     {
       format: 'esm',
@@ -14,6 +19,7 @@ export default defineConfig({
         target: 'web',
         injectStyles: true,
       },
+      dts: {},
       mode,
     },
   ],
