@@ -19,6 +19,7 @@ class ClientSocket {
     this.args = args;
     this.attempts = 0;
     this.eventHandlers = [];
+    this.disconnectHandler = false;
     this.options = options;
     this.retrying = false;
 
@@ -32,6 +33,10 @@ class ClientSocket {
 
   close() {
     this.socket.close();
+  }
+
+  onDisconnect(handler) {
+    this.disconnectHandler = handler;
   }
 
   connect() {
@@ -53,11 +58,20 @@ class ClientSocket {
           warn(`The WebSocket was closed and will attempt to reconnect`);
         }
 
+        if (this.disconnectHandler) {
+          this.disconnectHandler();
+        }
+
         this.reconnect();
       });
     } else {
-      this.socket.onclose = () =>
+      this.socket.onclose = () => {
         warn(`The client WebSocket was closed. ${refresh}`);
+
+        if (this.disconnectHandler) {
+          this.disconnectHandler();
+        }
+      };
     }
 
     this.socket.addEventListener('open', () => {
@@ -84,7 +98,7 @@ class ClientSocket {
 
     const timeout = 1000 * this.attempts ** 2;
 
-    setTimeout(() => this.connect(this.args), timeout);
+    setTimeout(() => this.connect(), timeout);
   }
 
   removeEventListener(...args) {
