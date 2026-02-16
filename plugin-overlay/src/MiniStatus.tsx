@@ -20,19 +20,19 @@ export default function MiniStatus({
 
   const content = (
     <>
-      <output
-        data-testid="runtime-status"
-        aria-label={errorLabel}
-        class={styles.runtimeStatus}
-      >
-        <RuntimeIcon />
-        {errors.length === 0 ? (
-          0
-        ) : (
-          <ProblemBadge size="small" error count={errors.length} />
-        )}
-      </output>
-      <div class={styles.separator} />
+      {errors.length > 0 && (
+        <>
+          <output
+            data-testid="runtime-status"
+            aria-label={errorLabel}
+            class={styles.runtimeStatus}
+          >
+            <RuntimeIcon />
+            <ProblemBadge size="small" error count={errors.length} />
+          </output>
+          <div class={styles.separator} />
+        </>
+      )}
       <div class={styles.statuses}>
         {compilers.map((compiler, index) => {
           const hasErrors = compiler.compiler.errors.length > 0;
