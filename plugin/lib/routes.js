@@ -68,8 +68,12 @@ const setupRoutes = function setupRoutes() {
           send('problems', {
             hash,
             wpsId,
-            errors: errors.slice(0).map((e) => unstyle(e)),
-            warnings: warnings.slice(0).map((e) => unstyle(e)),
+            errors: errors
+              .slice(0)
+              .map((e) => ({ ...e, message: unstyle(e.message) })),
+            warnings: warnings
+              .slice(0)
+              .map((e) => ({ ...e, message: unstyle(e.message) })),
           });
 
           if (errors.length) {

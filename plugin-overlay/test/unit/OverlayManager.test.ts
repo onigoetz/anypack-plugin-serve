@@ -1,7 +1,7 @@
 import { afterEach, expect, test } from '@rstest/core';
 import { init } from '../../src/index';
 import OverlayManager from '../../src/OverlayManager';
-import { createMockCompiler } from '../helpers/mock-compiler';
+import { createMockCompiler, createMockError } from '../helpers/mock-compiler';
 
 // Clean up document.body after each test since init() appends directly to it
 afterEach(() => {
@@ -42,13 +42,13 @@ test('addCompiler registers compiler', () => {
 test('addCompiler sets up onChange listener', () => {
   const manager = new OverlayManager();
   const compiler = createMockCompiler();
-  let callCount = 0;
 
+  manager.addCompiler(compiler);
+
+  let callCount = 0;
   manager.addListener(() => {
     callCount++;
   });
-
-  manager.addCompiler(compiler);
 
   compiler.triggerChange();
 
@@ -108,21 +108,19 @@ test('unsubscribed listeners are not called', () => {
 
 test('compiler onChange triggers render', () => {
   const manager = new OverlayManager();
-  let renderCount = 0;
-
-  manager.addListener(() => {
-    renderCount++;
-  });
 
   const compiler = createMockCompiler();
   manager.addCompiler(compiler);
 
-  compiler.triggerChange();
+  let renderCount = 0;
+  manager.addListener(() => {
+    renderCount++;
+  });
 
+  compiler.triggerChange();
   expect(renderCount).toBe(1);
 
   compiler.triggerChange();
-
   expect(renderCount).toBe(2);
 });
 
@@ -138,7 +136,12 @@ test('multiple compilers can be registered', () => {
   });
   const compiler3 = createMockCompiler({
     connected: true,
-    compiler: { done: true, progress: 100, errors: ['Error'], warnings: [] },
+    compiler: {
+      done: true,
+      progress: 100,
+      errors: [createMockError('Error')],
+      warnings: [],
+    },
   });
 
   manager.addCompiler(compiler1);
@@ -155,15 +158,15 @@ test('each compiler change triggers render independently', () => {
   const manager = new OverlayManager();
   let renderCount = 0;
 
-  manager.addListener(() => {
-    renderCount++;
-  });
-
   const compiler1 = createMockCompiler();
   const compiler2 = createMockCompiler();
 
   manager.addCompiler(compiler1);
   manager.addCompiler(compiler2);
+
+  manager.addListener(() => {
+    renderCount++;
+  });
 
   compiler1.triggerChange();
   expect(renderCount).toBe(1);

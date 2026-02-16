@@ -7,26 +7,30 @@ import type { CompilerEntry } from './types';
 interface MiniStatusProps {
   compilers: CompilerEntry[];
   errors: unknown[];
+  onClick?: () => void;
 }
 
-export default function MiniStatus({ compilers, errors }: MiniStatusProps) {
+export default function MiniStatus({
+  compilers,
+  errors,
+  onClick,
+}: Readonly<MiniStatusProps>) {
   const errorLabel =
     errors.length === 1 ? '1 runtime error' : `${errors.length} runtime errors`;
 
-  return (
-    <section
-      data-testid="mini-status"
-      aria-label="Build status"
-      class={styles.container}
-    >
+  const content = (
+    <>
       <output
         data-testid="runtime-status"
         aria-label={errorLabel}
         class={styles.runtimeStatus}
       >
-        {/* TODO: red when there is an error */}
         <RuntimeIcon />
-        {errors.length}
+        {errors.length === 0 ? (
+          0
+        ) : (
+          <ProblemBadge size="small" error count={errors.length} />
+        )}
       </output>
       <div class={styles.separator} />
       <div class={styles.statuses}>
@@ -80,6 +84,30 @@ export default function MiniStatus({ compilers, errors }: MiniStatusProps) {
           );
         })}
       </div>
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        data-testid="mini-status"
+        aria-label="Build status - click to view details"
+        class={styles.container}
+        onClick={onClick}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <section
+      data-testid="mini-status"
+      aria-label="Build status"
+      class={styles.container}
+    >
+      {content}
     </section>
   );
 }

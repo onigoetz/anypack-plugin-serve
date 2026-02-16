@@ -3,7 +3,7 @@ import { act, cleanup, render, screen } from '@testing-library/preact';
 import OverlayManager from '../../src/OverlayManager';
 import Root from '../../src/Root';
 import type { Compiler } from '../../src/types';
-import { createMockCompiler } from '../helpers/mock-compiler';
+import { createMockCompiler, createMockError } from '../helpers/mock-compiler';
 
 // Clean up after each test
 afterEach(() => {
@@ -30,8 +30,10 @@ test('subscribes to manager via addListener', async () => {
   let subscribedCallback: ((compilers: Compiler[]) => void) | null = null;
 
   const mockManager: OverlayManager = {
+    errors: [],
     listeners: [],
     compilers: [],
+    addError() {},
     addCompiler() {},
     render() {},
     addListener: (callback: (compilers: Compiler[]) => void) => {
@@ -55,8 +57,10 @@ test('updates state when manager calls listener', async () => {
   });
 
   const mockManager: OverlayManager = {
+    errors: [],
     listeners: [],
     compilers: [],
+    addError() {},
     addCompiler() {},
     render() {},
     addListener: (callback: (compilers: Compiler[]) => void) => {
@@ -78,8 +82,10 @@ test('returns cleanup function that unsubscribes', async () => {
   let unsubscribeCalled = false;
 
   const mockManager: OverlayManager = {
+    errors: [],
     listeners: [],
     compilers: [],
+    addError() {},
     addCompiler() {},
     render() {},
     addListener: () => {
@@ -101,7 +107,12 @@ test('returns cleanup function that unsubscribes', async () => {
 test('renders MiniStatus with compilers and errors', () => {
   const mockCompiler = createMockCompiler({
     connected: true,
-    compiler: { done: true, progress: 100, errors: ['Error'], warnings: [] },
+    compiler: {
+      done: true,
+      progress: 100,
+      errors: [createMockError('Error')],
+      warnings: [],
+    },
   });
 
   const manager = new OverlayManager();
@@ -112,9 +123,9 @@ test('renders MiniStatus with compilers and errors', () => {
   const miniStatus = screen.getByTestId('mini-status');
   expect(miniStatus).toBeTruthy();
 
-  // Check that error badge is rendered
-  const errorBadge = screen.getByTestId('problem-badge');
-  expect(errorBadge.textContent).toBe('1');
+  // Check that error badge is rendered in the mini-status
+  const errorBadge = miniStatus.querySelector('[data-testid="problem-badge"]');
+  expect(errorBadge?.textContent).toBe('1');
 });
 
 test('handles empty compilers array', () => {

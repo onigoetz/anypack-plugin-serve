@@ -3,6 +3,7 @@ import { cleanup, render, screen } from '@testing-library/preact';
 
 import MiniStatus from '../../src/MiniStatus';
 import type { CompilerEntry } from '../../src/types';
+import { createMockError } from '../helpers/mock-compiler';
 
 // Clean up after each test
 afterEach(() => {
@@ -70,7 +71,7 @@ test('shows error badge when compiler has errors', () => {
       compiler: {
         done: true,
         progress: 100,
-        errors: ['Error 1', 'Error 2'],
+        errors: [createMockError('Error 1'), createMockError('Error 2')],
         warnings: [],
       },
     },
@@ -95,7 +96,11 @@ test('shows warning badge when compiler has warnings', () => {
         done: true,
         progress: 100,
         errors: [],
-        warnings: ['Warning 1', 'Warning 2', 'Warning 3'],
+        warnings: [
+          createMockError('Warning 1'),
+          createMockError('Warning 2'),
+          createMockError('Warning 3'),
+        ],
       },
     },
   ];
@@ -137,7 +142,12 @@ test('renders multiple compilers independently', () => {
     },
     {
       connected: true,
-      compiler: { done: true, progress: 100, errors: ['Error'], warnings: [] },
+      compiler: {
+        done: true,
+        progress: 100,
+        errors: [createMockError('Error')],
+        warnings: [],
+      },
     },
   ];
 
@@ -176,8 +186,8 @@ test('shows both errors and warnings for same compiler', () => {
       compiler: {
         done: true,
         progress: 100,
-        errors: ['Error 1', 'Error 2'],
-        warnings: ['Warning 1'],
+        errors: [createMockError('Error 1'), createMockError('Error 2')],
+        warnings: [createMockError('Warning 1')],
       },
     },
   ];

@@ -8,7 +8,9 @@ export type {
   CompilerEntry,
   CompilerState,
   OverlayListener,
+  RuntimeError,
   Unsubscribe,
+  WarningOrError,
 } from './types';
 
 export function init(): OverlayManager {

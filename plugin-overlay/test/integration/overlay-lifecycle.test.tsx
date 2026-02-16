@@ -2,7 +2,7 @@ import { afterEach, expect, test } from '@rstest/core';
 import { act, cleanup, render, screen } from '@testing-library/preact';
 import OverlayManager from '../../src/OverlayManager';
 import Root from '../../src/Root';
-import { createMockCompiler } from '../helpers/mock-compiler';
+import { createMockCompiler, createMockError } from '../helpers/mock-compiler';
 
 // Clean up after each test
 afterEach(() => {
@@ -62,8 +62,11 @@ test('complete overlay lifecycle with single compiler', async () => {
       compiler: {
         done: true,
         progress: 100,
-        errors: ['Build error 1', 'Build error 2'],
-        warnings: ['Warning 1'],
+        errors: [
+          createMockError('Build error 1'),
+          createMockError('Build error 2'),
+        ],
+        warnings: [createMockError('Warning 1')],
       },
     });
     compiler.triggerChange();
@@ -95,7 +98,12 @@ test('handles multiple compilers with different states', async () => {
 
   const compiler2 = createMockCompiler({
     connected: true,
-    compiler: { done: true, progress: 100, errors: ['Error'], warnings: [] },
+    compiler: {
+      done: true,
+      progress: 100,
+      errors: [createMockError('Error')],
+      warnings: [],
+    },
   });
 
   act(() => {
@@ -184,41 +192,6 @@ test('multiple compilers update independently', async () => {
   expect(compilerStatuses[1].textContent).toContain('60%');
 });
 
-test('listener notifications trigger UI updates', async () => {
-  const manager = init();
-  let listenerCallCount = 0;
-
-  manager.addListener(() => {
-    listenerCallCount++;
-  });
-
-  const compiler = createMockCompiler({
-    connected: true,
-    compiler: { done: false, progress: 10, errors: [], warnings: [] },
-  });
-
-  act(() => {
-    manager.addCompiler(compiler);
-  });
-
-  expect(listenerCallCount).toBe(0);
-
-  act(() => {
-    compiler.triggerChange();
-  });
-
-  expect(listenerCallCount).toBe(1);
-  act(() => {
-    compiler.setState({
-      connected: true,
-      compiler: { done: false, progress: 50, errors: [], warnings: [] },
-    });
-    compiler.triggerChange();
-  });
-
-  expect(listenerCallCount).toBe(2);
-});
-
 test('connection state changes reflect in UI', async () => {
   const manager = init();
 
@@ -280,7 +253,12 @@ test('adding compiler after initialization updates UI', async () => {
 
   const compiler2 = createMockCompiler({
     connected: true,
-    compiler: { done: true, progress: 100, errors: ['Error'], warnings: [] },
+    compiler: {
+      done: true,
+      progress: 100,
+      errors: [createMockError('Error')],
+      warnings: [],
+    },
   });
 
   act(() => {

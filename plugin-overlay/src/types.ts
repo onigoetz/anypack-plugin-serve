@@ -1,17 +1,57 @@
+interface Dependency {
+  loc: string;
+}
+interface ModuleTrace {
+  originIdentifier: string;
+  originName: string;
+  moduleIdentifier: string;
+  moduleName: string;
+  dependencies: Dependency[];
+  originId: number;
+  moduleId: number;
+}
+
+export interface WarningOrError {
+  message: string;
+  code: string;
+  moduleIdentifier: string;
+  moduleName: string;
+
+  loc?: string;
+
+  moduleId?: string;
+  moduleTrace?: ModuleTrace[];
+  details?: string;
+  stack?: string;
+}
+
+/**
+ * Represents a captured runtime error from window error events
+ */
+export interface RuntimeError {
+  message: string;
+  filename?: string;
+  lineno?: number;
+  colno?: number;
+  stack?: string;
+  timestamp: number;
+}
+
 /**
  * Represents the state of a single compiler
  */
 export interface CompilerState {
   done: boolean;
   progress: number;
-  errors: unknown[];
-  warnings: unknown[];
+  errors: WarningOrError[];
+  warnings: WarningOrError[];
 }
 
 /**
  * Represents the full state of an overlay compiler entry
  */
 export interface CompilerEntry {
+  name?: string;
   connected: boolean;
   compiler: CompilerState;
 }
