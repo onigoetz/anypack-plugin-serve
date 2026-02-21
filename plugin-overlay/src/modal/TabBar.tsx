@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import ConnectionStatus from '../ConnectionStatus';
 import RuntimeIcon from '../icons/RuntimeIcon';
 import ProblemBadge from '../ProblemBadge';
-import type { CompilerEntry } from '../types';
 import styles from './TabBar.module.css';
 import type { Tab } from './types';
 
@@ -10,7 +9,6 @@ export interface TabBarProps {
   tabs: Tab[];
   activeTabId: string;
   onTabChange: (tabId: string) => void;
-  compilers: CompilerEntry[];
   runtimeErrorCount: number;
 }
 
@@ -18,7 +16,6 @@ export default function TabBar({
   tabs,
   activeTabId,
   onTabChange,
-  compilers,
   runtimeErrorCount,
 }: Readonly<TabBarProps>) {
   const handleKeyDown = (
@@ -57,13 +54,12 @@ export default function TabBar({
       );
     }
 
-    const compiler = compilers[tab.compilerIndex!];
-    const errorCount = compiler?.compiler.errors.length || 0;
-    const warningCount = compiler?.compiler.warnings.length || 0;
+    const errorCount = tab.compiler.compiler.errors.length || 0;
+    const warningCount = tab.compiler.compiler.warnings.length || 0;
 
     return (
       <>
-        <ConnectionStatus isConnected={compiler?.connected || false} />
+        <ConnectionStatus isConnected={tab.compiler.connected || false} />
         <span>{tab.label}</span>
         {errorCount > 0 && (
           <ProblemBadge count={errorCount} type="error" size="small" />

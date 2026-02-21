@@ -24,12 +24,12 @@ export default function Modal({
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const tabs: Tab[] = [
-    { id: 'runtime', type: 'runtime', label: 'Runtime Errors' },
+    { id: 'runtime', type: 'runtime', label: 'Runtime Errors', runtimeErrors },
     ...compilers.map((compiler, index) => ({
       id: `compiler-${index}`,
       type: 'compiler' as const,
       label: compiler.name || `Compiler ${index + 1}`,
-      compilerIndex: index,
+      compiler,
     })),
   ];
 
@@ -107,7 +107,6 @@ export default function Modal({
             tabs={tabs}
             activeTabId={activeTabId}
             onTabChange={setActiveTabId}
-            compilers={compilers}
             runtimeErrorCount={runtimeErrors.length}
           />
           <button
@@ -121,11 +120,7 @@ export default function Modal({
           </button>
         </header>
 
-        <TabContent
-          activeTab={activeTab}
-          runtimeErrors={runtimeErrors}
-          compilers={compilers}
-        />
+        <TabContent activeTab={activeTab} />
       </dialog>
     </div>,
     document.body,

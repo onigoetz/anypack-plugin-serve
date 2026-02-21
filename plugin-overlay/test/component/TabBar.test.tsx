@@ -2,7 +2,7 @@ import { afterEach, expect, test } from '@rstest/core';
 import { cleanup, render, screen } from '@testing-library/preact';
 
 import TabBar from '../../src/modal/TabBar';
-import type { Tab } from '../../src/modal/types';
+import type { RuntimeTab, Tab } from '../../src/modal/types';
 import type { CompilerEntry } from '../../src/types';
 import { createMockError } from '../helpers/mock-compiler';
 
@@ -22,18 +22,23 @@ afterEach(() => {
   cleanup();
 });
 
-const runtimeTab: Tab = {
+const runtimeTab: RuntimeTab = {
   id: 'runtime',
   type: 'runtime',
   label: 'Runtime Errors',
+  runtimeErrors: [],
 };
 
-function createCompilerTab(index: number, name?: string): Tab {
+function createCompilerTab(
+  index: number,
+  name: string,
+  compiler: CompilerEntry,
+): Tab {
   return {
     id: `compiler-${index}`,
     type: 'compiler',
     label: name || `Compiler ${index + 1}`,
-    compilerIndex: index,
+    compiler,
   };
 }
 
@@ -48,15 +53,16 @@ function createCompilerEntry(
 }
 
 test('renders runtime errors tab first', () => {
-  const tabs = [runtimeTab, createCompilerTab(0)];
-  const compilers = [createCompilerEntry()];
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(0, 'first tab', createCompilerEntry()),
+  ];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={() => {}}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -74,7 +80,6 @@ test('renders runtime icon in runtime tab', () => {
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={() => {}}
-      compilers={[]}
       runtimeErrorCount={0}
     />,
   );
@@ -84,15 +89,20 @@ test('renders runtime icon in runtime tab', () => {
 });
 
 test('renders compiler tabs with ConnectionStatus', () => {
-  const tabs = [runtimeTab, createCompilerTab(0, 'API Server')];
-  const compilers = [createCompilerEntry({ connected: true })];
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(
+      0,
+      'API Server',
+      createCompilerEntry({ connected: true }),
+    ),
+  ];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={() => {}}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -115,7 +125,6 @@ test('shows ProblemBadge with error count for runtime tab', () => {
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={() => {}}
-      compilers={[]}
       runtimeErrorCount={3}
     />,
   );
@@ -126,16 +135,20 @@ test('shows ProblemBadge with error count for runtime tab', () => {
 });
 
 test('shows ProblemBadge with error count for compiler tab', () => {
-  const tabs = [runtimeTab, createCompilerTab(0)];
-  const compilers = [
-    createCompilerEntry({
-      compiler: {
-        done: true,
-        progress: 100,
-        errors: [createMockError('Error 1'), createMockError('Error 2')],
-        warnings: [],
-      },
-    }),
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(
+      0,
+      'tab',
+      createCompilerEntry({
+        compiler: {
+          done: true,
+          progress: 100,
+          errors: [createMockError('Error 1'), createMockError('Error 2')],
+          warnings: [],
+        },
+      }),
+    ),
   ];
 
   render(
@@ -143,7 +156,6 @@ test('shows ProblemBadge with error count for compiler tab', () => {
       tabs={tabs}
       activeTabId="compiler-0"
       onTabChange={() => {}}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -154,16 +166,20 @@ test('shows ProblemBadge with error count for compiler tab', () => {
 });
 
 test('shows ProblemBadge with warning count for compiler tab', () => {
-  const tabs = [runtimeTab, createCompilerTab(0)];
-  const compilers = [
-    createCompilerEntry({
-      compiler: {
-        done: true,
-        progress: 100,
-        errors: [],
-        warnings: [createMockError('Warning 1')],
-      },
-    }),
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(
+      0,
+      'compiler',
+      createCompilerEntry({
+        compiler: {
+          done: true,
+          progress: 100,
+          errors: [],
+          warnings: [createMockError('Warning 1')],
+        },
+      }),
+    ),
   ];
 
   render(
@@ -171,7 +187,6 @@ test('shows ProblemBadge with warning count for compiler tab', () => {
       tabs={tabs}
       activeTabId="compiler-0"
       onTabChange={() => {}}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -182,15 +197,13 @@ test('shows ProblemBadge with warning count for compiler tab', () => {
 });
 
 test('active tab has aria-selected="true"', () => {
-  const tabs = [runtimeTab, createCompilerTab(0)];
-  const compilers = [createCompilerEntry()];
+  const tabs = [runtimeTab, createCompilerTab(0, 'tab', createCompilerEntry())];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={() => {}}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -203,15 +216,13 @@ test('active tab has aria-selected="true"', () => {
 });
 
 test('inactive tabs have tabIndex="-1"', () => {
-  const tabs = [runtimeTab, createCompilerTab(0)];
-  const compilers = [createCompilerEntry()];
+  const tabs = [runtimeTab, createCompilerTab(0, 'tab', createCompilerEntry())];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={() => {}}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -225,15 +236,13 @@ test('inactive tabs have tabIndex="-1"', () => {
 
 test('click changes active tab', () => {
   const onTabChange = createMockFn();
-  const tabs = [runtimeTab, createCompilerTab(0)];
-  const compilers = [createCompilerEntry()];
+  const tabs = [runtimeTab, createCompilerTab(0, 'tab', createCompilerEntry())];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={onTabChange}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -246,15 +255,17 @@ test('click changes active tab', () => {
 
 test('arrow right moves to next tab', () => {
   const onTabChange = createMockFn();
-  const tabs = [runtimeTab, createCompilerTab(0), createCompilerTab(1)];
-  const compilers = [createCompilerEntry(), createCompilerEntry()];
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(0, 'tab1', createCompilerEntry()),
+    createCompilerTab(1, 'tab2', createCompilerEntry()),
+  ];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={onTabChange}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -269,15 +280,16 @@ test('arrow right moves to next tab', () => {
 
 test('arrow left moves to previous tab', () => {
   const onTabChange = createMockFn();
-  const tabs = [runtimeTab, createCompilerTab(0)];
-  const compilers = [createCompilerEntry()];
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(0, 'name', createCompilerEntry()),
+  ];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="compiler-0"
       onTabChange={onTabChange}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -292,15 +304,17 @@ test('arrow left moves to previous tab', () => {
 
 test('home key moves to first tab', () => {
   const onTabChange = createMockFn();
-  const tabs = [runtimeTab, createCompilerTab(0), createCompilerTab(1)];
-  const compilers = [createCompilerEntry(), createCompilerEntry()];
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(0, 'name', createCompilerEntry()),
+    createCompilerTab(1, 'name', createCompilerEntry()),
+  ];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="compiler-1"
       onTabChange={onTabChange}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -315,15 +329,17 @@ test('home key moves to first tab', () => {
 
 test('end key moves to last tab', () => {
   const onTabChange = createMockFn();
-  const tabs = [runtimeTab, createCompilerTab(0), createCompilerTab(1)];
-  const compilers = [createCompilerEntry(), createCompilerEntry()];
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(0, 'name', createCompilerEntry()),
+    createCompilerTab(1, 'name', createCompilerEntry()),
+  ];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={onTabChange}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );
@@ -344,7 +360,6 @@ test('has tablist role', () => {
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={() => {}}
-      compilers={[]}
       runtimeErrorCount={0}
     />,
   );
@@ -354,15 +369,16 @@ test('has tablist role', () => {
 });
 
 test('tabs have tab role', () => {
-  const tabs = [runtimeTab, createCompilerTab(0)];
-  const compilers = [createCompilerEntry()];
+  const tabs = [
+    runtimeTab,
+    createCompilerTab(0, 'name', createCompilerEntry()),
+  ];
 
   render(
     <TabBar
       tabs={tabs}
       activeTabId="runtime"
       onTabChange={() => {}}
-      compilers={compilers}
       runtimeErrorCount={0}
     />,
   );

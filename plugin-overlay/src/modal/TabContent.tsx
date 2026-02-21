@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'preact/hooks';
-import type { CompilerEntry, RuntimeError, WarningOrError } from '../types';
+import type { RuntimeError, WarningOrError } from '../types';
 import Pagination from './Pagination';
 import styles from './TabContent.module.css';
 import type { Tab } from './types';
@@ -94,15 +94,9 @@ export function ProblemDisplay({
 
 export interface TabContentProps {
   activeTab: Tab;
-  runtimeErrors: RuntimeError[];
-  compilers: CompilerEntry[];
 }
 
-export default function TabContent({
-  activeTab,
-  runtimeErrors,
-  compilers,
-}: Readonly<TabContentProps>) {
+export default function TabContent({ activeTab }: Readonly<TabContentProps>) {
   const [paginationState, setPaginationState] = useState({
     currentIndex: 0,
     tabId: activeTab.id,
@@ -121,9 +115,12 @@ export default function TabContent({
   let problems: ProblemOrRuntime[] = [];
 
   if (activeTab.type === 'runtime') {
-    problems = runtimeErrors.map((problem) => ({ type: 'runtime', problem }));
+    problems = activeTab.runtimeErrors.map((problem) => ({
+      type: 'runtime',
+      problem,
+    }));
   } else {
-    const compiler = compilers[activeTab.compilerIndex!];
+    const compiler = activeTab.compiler;
 
     problems = [
       ...(compiler?.compiler.errors || []).map((problem) => ({
