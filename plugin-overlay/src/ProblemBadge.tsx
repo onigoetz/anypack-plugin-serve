@@ -3,18 +3,15 @@ import styles from './ProblemBadge.module.css';
 
 interface ProblemBadgeProps {
   count: number;
-  warning?: boolean;
-  error?: boolean;
+  type: 'warning' | 'error';
   size?: 'small' | 'normal';
 }
 
 export default function ProblemBadge({
   count,
-  warning,
-  error,
+  type,
   size,
-}: ProblemBadgeProps) {
-  const type = error ? 'error' : warning ? 'warning' : 'problem';
+}: Readonly<ProblemBadgeProps>) {
   const pluralized = count === 1 ? type : `${type}s`;
   const ariaLabel = `${count} ${pluralized}`;
 
@@ -26,8 +23,8 @@ export default function ProblemBadge({
       aria-live="polite"
       class={clsx(
         styles.container,
-        warning && styles.warning,
-        error && styles.error,
+        type === 'warning' && styles.warning,
+        type === 'error' && styles.error,
         size === 'small' && styles.small,
       )}
     >

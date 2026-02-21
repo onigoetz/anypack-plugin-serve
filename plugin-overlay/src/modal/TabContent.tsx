@@ -157,7 +157,7 @@ export default function TabContent({
         </div>
       ) : (
         <>
-          <div className={styles.header}>
+          <div class={styles.header}>
             <h3
               class={clsx(
                 styles.title,

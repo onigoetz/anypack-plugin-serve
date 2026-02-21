@@ -3,7 +3,10 @@ import { cleanup, render, screen } from '@testing-library/preact';
 
 import MiniStatus from '../../src/MiniStatus';
 import type { CompilerEntry } from '../../src/types';
-import { createMockError } from '../helpers/mock-compiler';
+import {
+  createMockError,
+  createMockRuntimeError,
+} from '../helpers/mock-compiler';
 
 // Clean up after each test
 afterEach(() => {
@@ -11,7 +14,11 @@ afterEach(() => {
 });
 
 test('renders runtime errors count', () => {
-  const errors = ['Runtime error 1', 'Runtime error 2', 'Runtime error 3'];
+  const errors = [
+    createMockRuntimeError('error 1'),
+    createMockRuntimeError('error 2'),
+    createMockRuntimeError('error 3'),
+  ];
 
   render(<MiniStatus compilers={[]} errors={errors} />);
 
@@ -21,7 +28,7 @@ test('renders runtime errors count', () => {
 });
 
 test('renders single runtime error with singular label', () => {
-  const errors = ['Runtime error 1'];
+  const errors = [createMockRuntimeError('error 1')];
 
   render(<MiniStatus compilers={[]} errors={errors} />);
 

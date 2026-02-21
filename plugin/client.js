@@ -22,11 +22,15 @@
     console.error(
       'The entry for anypack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.',
     );
+    return;
   }
 
   try {
     hash = __webpack_hash__;
-  } catch {}
+  } catch {
+    console.error('The entry does not contain __webpack_hash__');
+    return;
+  }
 
   // Initialize overlay singleton
   if (!window.anypackPluginServe) {

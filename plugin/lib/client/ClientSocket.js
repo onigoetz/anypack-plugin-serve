@@ -103,7 +103,7 @@ class ClientSocket {
 
   removeEventListener(...args) {
     const [, handler] = args;
-    this.eventHandlers = this.eventHandlers.filter(([, fn]) => fn === handler);
+    this.eventHandlers = this.eventHandlers.filter(([, fn]) => fn !== handler);
     this.socket.removeEventListener(...args);
   }
 }

@@ -7,8 +7,8 @@ import type {
 
 export default class OverlayManager {
   compilers: Compiler[] = [];
-  listeners: OverlayListener[] = [];
   errors: RuntimeError[] = [];
+  listeners: OverlayListener[] = [];
 
   constructor() {
     const handleErrorEvent = (event: ErrorEvent) => {
@@ -57,7 +57,11 @@ export default class OverlayManager {
 
   render(): void {
     for (const listener of this.listeners) {
-      listener(this.compilers);
+      try {
+        listener(this.compilers);
+      } catch (e) {
+        console.error('Failed to call listener', e);
+      }
     }
   }
 }

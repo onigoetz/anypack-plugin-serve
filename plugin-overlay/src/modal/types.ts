@@ -1,6 +1,14 @@
-export interface Tab {
+export interface RuntimeTab {
+  type: 'runtime';
   id: string;
-  type: 'runtime' | 'compiler';
   label: string;
-  compilerIndex?: number;
 }
+
+export interface CompilerTab {
+  type: 'compiler';
+  id: string;
+  label: string;
+  compilerIndex: number;
+}
+
+export type Tab = RuntimeTab | CompilerTab;

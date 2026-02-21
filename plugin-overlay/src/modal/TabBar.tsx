@@ -51,7 +51,7 @@ export default function TabBar({
           <RuntimeIcon />
           <span>{tab.label}</span>
           {runtimeErrorCount > 0 && (
-            <ProblemBadge count={runtimeErrorCount} error size="small" />
+            <ProblemBadge count={runtimeErrorCount} type="error" size="small" />
           )}
         </>
       );
@@ -66,10 +66,10 @@ export default function TabBar({
         <ConnectionStatus isConnected={compiler?.connected || false} />
         <span>{tab.label}</span>
         {errorCount > 0 && (
-          <ProblemBadge count={errorCount} error size="small" />
+          <ProblemBadge count={errorCount} type="error" size="small" />
         )}
         {warningCount > 0 && (
-          <ProblemBadge count={warningCount} warning size="small" />
+          <ProblemBadge count={warningCount} type="warning" size="small" />
         )}
       </>
     );

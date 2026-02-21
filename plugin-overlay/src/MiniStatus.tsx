@@ -2,11 +2,11 @@ import ConnectionStatus from './ConnectionStatus';
 import RuntimeIcon from './icons/RuntimeIcon';
 import styles from './MiniStatus.module.css';
 import ProblemBadge from './ProblemBadge';
-import type { CompilerEntry } from './types';
+import type { CompilerEntry, RuntimeError } from './types';
 
 interface MiniStatusProps {
   compilers: CompilerEntry[];
-  errors: unknown[];
+  errors: RuntimeError[];
   onClick?: () => void;
 }
 
@@ -28,7 +28,7 @@ export default function MiniStatus({
             class={styles.runtimeStatus}
           >
             <RuntimeIcon />
-            <ProblemBadge size="small" error count={errors.length} />
+            <ProblemBadge size="small" type="error" count={errors.length} />
           </output>
           <div class={styles.separator} />
         </>
@@ -68,7 +68,7 @@ export default function MiniStatus({
               {hasErrors && (
                 <ProblemBadge
                   size="small"
-                  error
+                  type="error"
                   count={compiler.compiler.errors.length}
                 />
               )}
@@ -76,7 +76,7 @@ export default function MiniStatus({
               {hasWarnings && (
                 <ProblemBadge
                   size="small"
-                  warning
+                  type="warning"
                   count={compiler.compiler.warnings.length}
                 />
               )}

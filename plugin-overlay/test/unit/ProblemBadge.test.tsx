@@ -9,7 +9,7 @@ afterEach(() => {
 });
 
 test('renders error badge with count', () => {
-  render(<ProblemBadge count={5} error />);
+  render(<ProblemBadge count={5} type="error" />);
 
   const badge = screen.getByTestId('problem-badge');
   expect(badge.textContent).toBe('5');
@@ -19,7 +19,7 @@ test('renders error badge with count', () => {
 });
 
 test('renders warning badge with count', () => {
-  render(<ProblemBadge count={3} warning />);
+  render(<ProblemBadge count={3} type="warning" />);
 
   const badge = screen.getByTestId('problem-badge');
   expect(badge.textContent).toBe('3');
@@ -28,7 +28,7 @@ test('renders warning badge with count', () => {
 });
 
 test('renders small size badge', () => {
-  render(<ProblemBadge count={1} error size="small" />);
+  render(<ProblemBadge count={1} type="error" size="small" />);
 
   const badge = screen.getByTestId('problem-badge');
   expect(badge.textContent).toBe('1');
@@ -37,7 +37,7 @@ test('renders small size badge', () => {
 });
 
 test('renders zero count', () => {
-  render(<ProblemBadge count={0} warning />);
+  render(<ProblemBadge count={0} type="warning" />);
 
   const badge = screen.getByTestId('problem-badge');
   expect(badge.textContent).toBe('0');
@@ -45,7 +45,7 @@ test('renders zero count', () => {
 });
 
 test('renders large count', () => {
-  render(<ProblemBadge count={999} error />);
+  render(<ProblemBadge count={999} type="error" />);
 
   const badge = screen.getByTestId('problem-badge');
   expect(badge.textContent).toBe('999');
@@ -53,7 +53,7 @@ test('renders large count', () => {
 });
 
 test('applies only error type when error prop is true', () => {
-  render(<ProblemBadge count={2} error />);
+  render(<ProblemBadge count={2} type="error" />);
 
   const badge = screen.getByTestId('problem-badge');
   expect(badge.getAttribute('data-type')).toBe('error');
@@ -62,7 +62,7 @@ test('applies only error type when error prop is true', () => {
 });
 
 test('applies only warning type when warning prop is true', () => {
-  render(<ProblemBadge count={2} warning />);
+  render(<ProblemBadge count={2} type="warning" />);
 
   const badge = screen.getByTestId('problem-badge');
   expect(badge.getAttribute('data-type')).toBe('warning');
@@ -71,14 +71,14 @@ test('applies only warning type when warning prop is true', () => {
 });
 
 test('can be found by accessible role and name', () => {
-  render(<ProblemBadge count={3} error />);
+  render(<ProblemBadge count={3} type="error" />);
 
   const badge = screen.getByRole('status', { name: '3 errors' });
   expect(badge).toBeTruthy();
 });
 
 test('uses singular form for count of 1', () => {
-  render(<ProblemBadge count={1} warning />);
+  render(<ProblemBadge count={1} type="warning" />);
 
   const badge = screen.getByRole('status', { name: '1 warning' });
   expect(badge).toBeTruthy();

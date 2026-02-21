@@ -38,7 +38,7 @@
 
 .closeButton,
 .closeButton:hover,
-.clostButton:focus {
+.closeButton:focus {
   background: transparent;
   border: none;
   color: #888;
