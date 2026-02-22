@@ -48,7 +48,7 @@ export function createMockCompiler(initialState?: CompilerEntry): MockCompiler {
   let changeCallback: (() => void) | null = null;
 
   return {
-    get state() {
+    getState() {
       return state;
     },
     onChange(callback: () => void) {

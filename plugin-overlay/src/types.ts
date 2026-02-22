@@ -61,7 +61,7 @@ export interface CompilerEntry {
  * with the OverlayManager
  */
 export interface Compiler {
-  state: CompilerEntry;
+  getState(): CompilerEntry;
   onChange(callback: () => void): void;
 }
 

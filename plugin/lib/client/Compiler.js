@@ -20,14 +20,23 @@ class Compiler {
     this.init();
   }
 
-  init() {
-    const { address, client = {}, secure, liveReload } = this.options;
+  getState() {
+    return {
+      name: this.getUrl(),
+      ...this.state,
+    };
+  }
 
+  getUrl() {
+    const { address, client = {}, secure } = this.options;
     const protocol = secure ? 'wss' : 'ws';
-    this.socket = new ClientSocket(
-      client,
-      `${client.protocol || protocol}://${client.address || address}/wps`,
-    );
+    return `${client.protocol || protocol}://${client.address || address}/wps`;
+  }
+
+  init() {
+    const { client = {}, liveReload } = this.options;
+
+    this.socket = new ClientSocket(client, this.getUrl());
 
     // prevents ECONNRESET errors on the server
     window.addEventListener('beforeunload', () => this.socket.close());

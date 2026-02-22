@@ -5,7 +5,7 @@ import type OverlayManager from './OverlayManager';
 import type { Compiler, CompilerEntry } from './types';
 
 function toState(compilers: Compiler[]): CompilerEntry[] {
-  return JSON.parse(JSON.stringify(compilers.map((s) => s.state)));
+  return JSON.parse(JSON.stringify(compilers.map((s) => s.getState())));
 }
 
 interface RootProps {
