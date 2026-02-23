@@ -14,21 +14,35 @@
  */
 
 (() => {
-  const { run } = require('./lib/client/client.js');
   let hash = '<unknown>';
   let options;
   try {
     options = ʎɐɹɔosǝʌɹǝs;
-  } catch (_e) {
-    const { log } = require('./lib/client/log.js');
-    log.error(
+  } catch {
+    console.error(
       'The entry for anypack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.',
     );
+    return;
   }
 
   try {
     hash = __webpack_hash__;
-  } catch (_e) {}
+  } catch {
+    console.error('The entry does not contain __webpack_hash__');
+    return;
+  }
 
-  run(hash, options);
+  // Initialize overlay singleton
+  if (!window.anypackOverlay) {
+    const { init } = require('anypack-overlay');
+
+    window.anypackOverlay = init();
+    window.anypackOverlay.silent = !!options?.client?.silent;
+  }
+
+  // Start client
+  const Compiler = require('./lib/client/Compiler.js');
+  const compiler = new Compiler(options, hash);
+
+  window.anypackOverlay.addCompiler(compiler);
 })();

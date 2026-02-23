@@ -7,6 +7,7 @@
     "test": "yarn workspaces foreach --all -pt run test",
     "ci:test": "yarn workspaces foreach --all -pt run ci:test",
     "lint-staged": "lint-staged",
+    "build": "yarn workspaces foreach --all -t run build",
     "format": "yarn workspaces foreach --all -pt run format",
     "lint": "yarn workspaces foreach --all -pt run lint",
     "ci:lint": "yarn workspaces foreach --all -pt run ci:lint"
@@ -24,6 +25,7 @@
   },
   "workspaces": [
     "plugin",
+    "anypack-overlay",
     "rspack-nano",
     "recipes/*"
   ],

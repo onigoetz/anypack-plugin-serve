@@ -11,60 +11,70 @@
 const { unstyle } = require('ansi-colors');
 const stringify = require('json-stringify-safe');
 
-const prep = (data) => stringify(data);
+function registerEvent(ee, socket, event, handler) {
+  ee.on(event, handler);
 
-const statsOptions = {
-  all: false,
-  cached: true,
-  children: true,
-  hash: true,
-  modules: true,
-  timings: true,
-  exclude: ['node_modules', 'bower_components', 'components'],
-};
+  socket.on('close', () => {
+    ee.removeListener(event, handler);
+  });
+}
 
 const setupRoutes = function setupRoutes() {
   const { app, options } = this;
-  const events = ['build', 'done', 'invalid', 'progress'];
+
+  let buildDone = false;
+  this.on('build', () => {
+    buildDone = false;
+  });
+  this.on('done', () => {
+    buildDone = true;
+  });
+
   const connect = async (req, _res) => {
     if (req.ws) {
       const socket = await req.ws();
-      const send = (data) => {
+      let lastHash = null;
+      const send = (action, data) => {
         if (socket.readyState !== 1) {
           return;
         }
-        socket.send(data);
+        socket.send(stringify({ action, data }));
       };
 
-      socket.build = (compilerName = '<unknown>', { wpsId }) => {
-        send(prep({ action: 'build', data: { compilerName, wpsId } }));
-      };
+      registerEvent(
+        this,
+        socket,
+        'build',
+        (compilerName = '<unknown>', { wpsId }) => {
+          send('build', { compilerName, wpsId });
+        },
+      );
 
-      socket.done = (stats, { wpsId }) => {
+      registerEvent(this, socket, 'done', (stats, { wpsId }) => {
         const { hash } = stats;
 
-        if (socket.lastHash === hash) {
+        if (lastHash === hash) {
           return;
         }
 
-        send(prep({ action: 'done', data: { hash, wpsId } }));
+        send('done', { hash, wpsId });
 
-        socket.lastHash = hash;
+        lastHash = hash;
 
-        const { errors = [], warnings = [] } = stats.toJson(statsOptions);
+        if (stats.hasErrors() || stats.hasWarnings()) {
+          const renderedStats = stats.toJson('errors-warnings');
+          const { errors = [], warnings = [] } = renderedStats;
 
-        if (errors.length || warnings.length) {
-          send(
-            prep({
-              action: 'problems',
-              data: {
-                errors: errors.slice(0).map((e) => unstyle(e)),
-                hash,
-                warnings: warnings.slice(0).map((e) => unstyle(e)),
-                wpsId,
-              },
-            }),
-          );
+          send('problems', {
+            hash,
+            wpsId,
+            errors: errors
+              .slice(0)
+              .map((e) => ({ ...e, message: unstyle(e.message) })),
+            warnings: warnings
+              .slice(0)
+              .map((e) => ({ ...e, message: unstyle(e.message) })),
+          });
 
           if (errors.length) {
             return;
@@ -73,41 +83,35 @@ const setupRoutes = function setupRoutes() {
 
         if (options.hmr || options.liveReload) {
           const action = options.liveReload ? 'reload' : 'replace';
-          send(prep({ action, data: { hash, wpsId } }));
+          send(action, { hash, wpsId });
         }
-      };
+      });
 
-      socket.invalid = (filePath = '<unknown>', compiler) => {
-        const context =
-          compiler.context || compiler.options.context || process.cwd();
-        const fileName = filePath?.replace?.(context, '') || filePath;
-        const { wpsId } = compiler;
+      registerEvent(
+        this,
+        socket,
+        'invalid',
+        (filePath = '<unknown>', compiler) => {
+          const context =
+            compiler.context || compiler.options.context || process.cwd();
+          const fileName = filePath?.replace?.(context, '') || filePath;
+          const { wpsId } = compiler;
 
-        send(prep({ action: 'invalid', data: { fileName, wpsId } }));
-      };
+          send('invalid', { fileName, wpsId });
+        },
+      );
 
-      socket.progress = (data) => {
-        send(prep({ action: 'progress', data }));
-      };
-
-      for (const event of events) {
-        this.on(event, socket[event]);
-
-        socket.on('close', () => {
-          this.removeListener(event, socket[event]);
-        });
-      }
+      registerEvent(this, socket, 'progress', (data) => {
+        send('progress', data);
+      });
 
       // #138. handle emitted events that don't have a listener registered, and forward the message
       // onto the client via the socket
-      const unhandled = ({ eventName, data }) =>
-        send(prep({ action: eventName, data }));
-      this.on('unhandled', unhandled);
-      socket.on('close', () => {
-        this.off('unhandled', unhandled);
+      registerEvent(this, socket, 'unhandled', ({ eventName, data }) => {
+        send(eventName, data);
       });
 
-      send(prep({ action: 'connected' }));
+      send('connected', { buildDone });
     }
   };
 

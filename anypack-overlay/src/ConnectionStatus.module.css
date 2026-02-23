@@ -1,0 +1,15 @@
+.status {
+  border-radius: 20px;
+
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+.statusConnected {
+  background: #00c889;
+}
+
+.statusDisconnected {
+  background: #ef5e61;
+}

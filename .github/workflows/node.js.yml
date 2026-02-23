@@ -33,5 +33,5 @@ jobs:
     - run: yarn install
     - run: yarn ci:lint
     #- run: yarn audit
-    #- run: yarn build
+    - run: yarn build
     - run: yarn ci:test
