@@ -2626,19 +2626,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"anypack-plugin-serve-aggregator@workspace:.":
+"anypack-overlay@workspace:*, anypack-overlay@workspace:anypack-overlay":
   version: 0.0.0-use.local
-  resolution: "anypack-plugin-serve-aggregator@workspace:."
-  dependencies:
-    "@biomejs/biome": "npm:2.3.11"
-    lint-staged: "npm:^16.2.7"
-    pre-commit: "npm:^1.2.2"
-  languageName: unknown
-  linkType: soft
-
-"anypack-plugin-serve-overlay@workspace:*, anypack-plugin-serve-overlay@workspace:plugin-overlay":
-  version: 0.0.0-use.local
-  resolution: "anypack-plugin-serve-overlay@workspace:plugin-overlay"
+  resolution: "anypack-overlay@workspace:anypack-overlay"
   dependencies:
     "@biomejs/biome": "npm:2.3.11"
     "@rsbuild/plugin-preact": "npm:^1.7.1"
@@ -2654,6 +2644,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"anypack-plugin-serve-aggregator@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "anypack-plugin-serve-aggregator@workspace:."
+  dependencies:
+    "@biomejs/biome": "npm:2.3.11"
+    lint-staged: "npm:^16.2.7"
+    pre-commit: "npm:^1.2.2"
+  languageName: unknown
+  linkType: soft
+
 "anypack-plugin-serve@workspace:*, anypack-plugin-serve@workspace:plugin":
   version: 0.0.0-use.local
   resolution: "anypack-plugin-serve@workspace:plugin"
@@ -2663,7 +2663,7 @@ __metadata:
     "@rstest/core": "npm:^0.8.1"
     "@rstest/coverage-istanbul": "npm:^0.2.0"
     ansi-colors: "npm:^4.1.3"
-    anypack-plugin-serve-overlay: "workspace:*"
+    anypack-overlay: "workspace:*"
     connect-history-api-fallback: "npm:^2.0.0"
     del-cli: "npm:7.0.0"
     empathic: "npm:^2.0.0"

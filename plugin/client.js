@@ -33,16 +33,16 @@
   }
 
   // Initialize overlay singleton
-  if (!window.anypackPluginServe) {
-    const { init } = require('anypack-plugin-serve-overlay');
+  if (!window.anypackOverlay) {
+    const { init } = require('anypack-overlay');
 
-    window.anypackPluginServe = init();
-    window.anypackPluginServe.silent = !!options?.client?.silent;
+    window.anypackOverlay = init();
+    window.anypackOverlay.silent = !!options?.client?.silent;
   }
 
   // Start client
   const Compiler = require('./lib/client/Compiler.js');
   const compiler = new Compiler(options, hash);
 
-  window.anypackPluginServe.addCompiler(compiler);
+  window.anypackOverlay.addCompiler(compiler);
 })();

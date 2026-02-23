@@ -19,29 +19,29 @@ yarn ci:lint      # Lint without auto-fix (CI mode)
 ### Per-workspace
 ```bash
 yarn workspace anypack-plugin-serve test
-yarn workspace anypack-plugin-serve-overlay test
-yarn workspace anypack-plugin-serve-overlay build    # Must run before plugin tests
+yarn workspace anypack-overlay test
+yarn workspace anypack-overlay build    # Must run before plugin tests
 ```
 
 ### Running a single test file
 From within a workspace directory:
 ```bash
 cd plugin && npx rstest test/plugin.test.js
-cd plugin-overlay && npx rstest test/component/Modal.test.tsx
+cd anypack-overlay && npx rstest test/component/Modal.test.tsx
 ```
 
 ### Overlay build variants
 ```bash
-cd plugin-overlay && yarn build       # Production build (NODE_ENV=production)
-cd plugin-overlay && yarn build:dev   # Development build
-cd plugin-overlay && yarn typecheck   # TypeScript type-check only
+cd anypack-overlay && yarn build       # Production build (NODE_ENV=production)
+cd anypack-overlay && yarn build:dev   # Development build
+cd anypack-overlay && yarn typecheck   # TypeScript type-check only
 ```
 
 ## Architecture
 
 ### Monorepo structure (Yarn 4 workspaces)
 - **`plugin/`** — Main webpack plugin (`anypack-plugin-serve`, CommonJS, no build step)
-- **`plugin-overlay/`** — Browser overlay UI (`anypack-plugin-serve-overlay`, TypeScript + Preact, **requires build**)
+- **`anypack-overlay/`** — Browser overlay UI (`anypack-overlay`, TypeScript + Preact, **requires build**)
 - **`rspack-nano/`** — Tiny Rspack CLI utility (`rp` binary, private)
 - **`recipes/`** — Example configurations (not published)
 
@@ -65,13 +65,13 @@ Plugin options are passed to the browser via webpack's `DefinePlugin` under the 
 
 Users add `anypack-plugin-serve/client` to their webpack `entry` array. This IIFE:
 1. Reads the `ʎɐɹɔosǝʌɹǝs` global for options
-2. Calls `init()` from `anypack-plugin-serve-overlay` to create the overlay singleton
+2. Calls `init()` from `anypack-overlay` to create the overlay singleton
 3. Creates a `Compiler` instance (`lib/client/Compiler.js`) that manages the WebSocket connection
 4. Registers the compiler with `OverlayManager`
 
 `ClientSocket` (`lib/client/ClientSocket.js`) wraps the browser `WebSocket` with exponential-backoff reconnection (up to 10 attempts). `Compiler` handles incoming WebSocket messages and triggers HMR (`lib/client/hmr.js`) or live reload.
 
-### plugin-overlay/ — Browser overlay UI
+### anypack-overlay/ — Browser overlay UI
 
 Built with [rslib](https://github.com/web-infra-dev/rslib) into a single ESM file (`dist/index.js`) with CSS inlined (no separate stylesheet).
 
@@ -92,12 +92,12 @@ browser: ClientSocket → Compiler.handleMessage() → OverlayManager.render() �
 
 - **Test runner**: `rstest` (`@rstest/core`) — vitest-compatible API
   - `plugin/` tests: CommonJS, some integration tests use puppeteer
-  - `plugin-overlay/` tests: TypeScript/TSX with happy-dom environment, `@testing-library/preact`
+  - `anypack-overlay/` tests: TypeScript/TSX with happy-dom environment, `@testing-library/preact`
 - **Linter/formatter**: Biome — single quotes, 2-space indent
 - **Node requirement**: >= 20.0.0 (`.nvmrc` says `14`, but `package.json` engines say `>= 20.0.0`)
 
 ## Important notes
 
-- `plugin-overlay` **must be built** (`yarn build`) before `plugin` tests run, since `plugin` depends on `anypack-plugin-serve-overlay: workspace:*` resolved from `dist/`
+- `anypack-overlay` **must be built** (`yarn build`) before `plugin` tests run, since `plugin` depends on `anypack-overlay: workspace:*` resolved from `dist/`
 - The plugin enforces a singleton: only one `AnypackPluginServe` instance is active per process (use undocumented `allowMany: true` option in tests to bypass)
 - Multi-compiler support: each compiler gets a unique `wpsId` (nanoid); the `replace` WebSocket action is only applied by the matching compiler instance in the browser

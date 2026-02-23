@@ -26,4 +26,4 @@ const silent = {
   refresh,
 };
 
-module.exports = () => (window.anypackPluginServe.silent ? silent : log);
+module.exports = () => (window.anypackOverlay.silent ? silent : log);

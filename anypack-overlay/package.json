@@ -1,5 +1,5 @@
 {
-  "name": "anypack-plugin-serve-overlay",
+  "name": "anypack-overlay",
   "version": "0.1.0-beta.1",
   "description": "Overlay for anypack-plugin-serve",
   "license": "MPL-2.0",

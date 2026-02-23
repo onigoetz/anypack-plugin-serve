@@ -25,7 +25,7 @@
   },
   "workspaces": [
     "plugin",
-    "plugin-overlay",
+    "anypack-overlay",
     "rspack-nano",
     "recipes/*"
   ],
