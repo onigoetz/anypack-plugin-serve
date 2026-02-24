@@ -14,7 +14,7 @@
   },
   "private": true,
   "devDependencies": {
-    "@biomejs/biome": "2.3.11",
+    "@biomejs/biome": "2.4.4",
     "lint-staged": "^16.2.7",
     "pre-commit": "^1.2.2"
   },

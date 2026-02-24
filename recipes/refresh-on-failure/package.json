@@ -17,7 +17,7 @@
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
-    "@biomejs/biome": "2.3.11",
+    "@biomejs/biome": "2.4.4",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "anypack-plugin-serve": "workspace:*",
     "babel-loader": "^10.0.0",
