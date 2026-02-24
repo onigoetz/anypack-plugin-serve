@@ -30,5 +30,5 @@
     "recipes/*"
   ],
   "pre-commit": "lint-staged",
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.12.0"
 }
