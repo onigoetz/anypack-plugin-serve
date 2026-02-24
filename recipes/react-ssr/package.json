@@ -18,8 +18,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "7.28.5",
-    "@babel/preset-env": "7.28.5",
+    "@babel/core": "7.29.0",
+    "@babel/preset-env": "7.29.0",
     "@babel/preset-react": "7.28.5",
     "@biomejs/biome": "2.4.4",
     "anypack-plugin-serve": "workspace:*",
@@ -32,8 +32,8 @@
   },
   "dependencies": {
     "polka": "^0.5.2",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "sirv": "^3.0.2"
   }
 }
