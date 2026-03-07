@@ -39,10 +39,10 @@
     "yargs-parser": "^22.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.4",
+    "@biomejs/biome": "2.4.5",
     "@rspack/core": "^1.0.0",
-    "@rstest/core": "^0.8.1",
-    "@rstest/coverage-istanbul": "^0.2.0",
+    "@rstest/core": "^0.9.0",
+    "@rstest/coverage-istanbul": "^0.3.0",
     "tinyexec": "^1.0.2"
   },
   "keywords": [
