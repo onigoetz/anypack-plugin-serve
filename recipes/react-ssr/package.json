@@ -23,7 +23,7 @@
     "@babel/preset-react": "7.28.5",
     "@biomejs/biome": "2.4.6",
     "anypack-plugin-serve": "workspace:*",
-    "babel-loader": "10.0.0",
+    "babel-loader": "10.1.1",
     "cross-env": "10.1.0",
     "import-fresh": "3.3.1",
     "webpack": "^5.104.1",
