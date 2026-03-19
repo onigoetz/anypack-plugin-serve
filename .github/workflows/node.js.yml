@@ -3,10 +3,6 @@
 
 name: Node.JS CI
 
-permissions:
-  id-token: write
-  contents: read
-
 on:
   push:
     branches: [ master ]
@@ -16,6 +12,7 @@ on:
 
 jobs:
   build:
+    permissions: {}
 
     strategy:
       matrix:
@@ -39,6 +36,35 @@ jobs:
     #- run: yarn audit
     - run: yarn build
     - run: yarn ci:test
+
+  coverage:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+    - uses: actions/checkout@v6
+    - name: Use Node.js 24.x
+      uses: actions/setup-node@v6
+      with:
+        node-version: 24.x
+        cache: 'yarn'
+    - run: yarn install
+    - run: yarn build
+    - run: yarn ci:test
+    - uses: actions/upload-artifact@v4
+      with:
+        name: coverage
+        path: "**/coverage/lcov.info"
+
+  coverage_upload:
+    needs: coverage
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: coverage
     - uses: qltysh/qlty-action/coverage@v2
       with:
         oidc: true
