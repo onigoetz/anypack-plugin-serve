@@ -42,4 +42,22 @@ jobs:
     - uses: qltysh/qlty-action/coverage@v2
       with:
         oidc: true
-        files: "**/coverage/lcov.info"
+        incomplete: true
+        files: "anypack-overlay/coverage/lcov.info"
+        add-prefix: anypack-overlay
+    - uses: qltysh/qlty-action/coverage@v2
+      with:
+        oidc: true
+        incomplete: true
+        files: "plugin/coverage/lcov.info"
+        add-prefix: plugin
+    - uses: qltysh/qlty-action/coverage@v2
+      with:
+        oidc: true
+        incomplete: true
+        files: "rspack-nano/coverage/lcov.info"
+        add-prefix: rspack-nano
+    - uses: qltysh/qlty-action/coverage@v2
+      with:
+        oidc: true
+        command: complete
