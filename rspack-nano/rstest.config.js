@@ -12,6 +12,7 @@ module.exports = defineConfig({
     include: ['lib/**/*.{js,mjs}'],
     reporters: [
       "html",
+      "lcov",
       ["text", { skipFull: true }],
     ],
   },

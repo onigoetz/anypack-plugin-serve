@@ -35,3 +35,7 @@ jobs:
     #- run: yarn audit
     - run: yarn build
     - run: yarn ci:test
+    - uses: qltysh/qlty-action/coverage@v2
+      with:
+        oidc: true
+        files: "**/coverage/lcov.info"

@@ -12,7 +12,7 @@ export default defineConfig({
   coverage: {
     include: ['src/**/*.{ts,tsx}'],
     exclude: ['src/**/*.css', 'src/**/*.module.css', 'src/**/*.d.ts'],
-    reporters: ['html', ['text', { skipFull: true }]],
+    reporters: ['html', 'lcov', ['text', { skipFull: true }]],
   },
   resolve: {
     alias: {
