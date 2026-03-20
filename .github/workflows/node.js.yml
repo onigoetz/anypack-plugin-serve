@@ -56,7 +56,7 @@ jobs:
     - uses: actions/download-artifact@v8
       with:
         pattern: coverage-*
-    - run: ls -R
+    - run: find . -name "lcov.info"
     - uses: qltysh/qlty-action/coverage@v2
       with:
         oidc: true
