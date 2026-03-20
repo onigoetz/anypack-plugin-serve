@@ -10,6 +10,10 @@ module.exports = defineConfig({
   ],
   coverage: {
     include: ['lib/**/*.{js,mjs}'],
-    reporters: ['html', 'lcov', ['text', { skipFull: true }]],
+    reporters: [
+      'html',
+      ['lcovonly', { projectRoot: '..' }],
+      ['text', { skipFull: true }],
+    ],
   },
 });

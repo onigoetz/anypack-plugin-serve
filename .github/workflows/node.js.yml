@@ -36,54 +36,26 @@ jobs:
     #- run: yarn audit
     - run: yarn build
     - run: yarn ci:test
-
-  coverage:
-    runs-on: ubuntu-latest
-    permissions: {}
-    steps:
-    - uses: actions/checkout@v6
-    - name: Use Node.js 24.x
-      uses: actions/setup-node@v6
+    - uses: actions/upload-artifact@v6
       with:
-        node-version: 24.x
-        cache: 'yarn'
-    - run: yarn install
-    - run: yarn build
-    - run: yarn ci:test
-    - uses: actions/upload-artifact@v4
-      with:
-        name: coverage
-        path: "**/coverage/lcov.info"
+        name: coverage-${{ matrix.os }}-${{ matrix.node-version }}
+        retention-days: 1
+        path: |
+          **/coverage/lcov.info
+          !node_modules/**/coverage/lcov.info
 
   coverage_upload:
-    needs: coverage
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
     steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v8
       with:
-        name: coverage
+        pattern: coverage-*
+    - run: ls -R
     - uses: qltysh/qlty-action/coverage@v2
       with:
         oidc: true
-        incomplete: true
-        files: "anypack-overlay/coverage/lcov.info"
-        add-prefix: anypack-overlay
-    - uses: qltysh/qlty-action/coverage@v2
-      with:
-        oidc: true
-        incomplete: true
-        files: "plugin/coverage/lcov.info"
-        add-prefix: plugin
-    - uses: qltysh/qlty-action/coverage@v2
-      with:
-        oidc: true
-        incomplete: true
-        files: "rspack-nano/coverage/lcov.info"
-        add-prefix: rspack-nano
-    - uses: qltysh/qlty-action/coverage@v2
-      with:
-        oidc: true
-        command: complete
+        files: "**/coverage/lcov.info"

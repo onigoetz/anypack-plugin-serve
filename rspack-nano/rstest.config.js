@@ -12,7 +12,7 @@ module.exports = defineConfig({
     include: ['lib/**/*.{js,mjs}'],
     reporters: [
       "html",
-      "lcov",
+      ["lcovonly", { projectRoot: ".."}],
       ["text", { skipFull: true }],
     ],
   },
