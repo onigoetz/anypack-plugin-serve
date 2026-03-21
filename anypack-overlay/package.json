@@ -20,7 +20,7 @@
     "node": ">= 20.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.7",
+    "@biomejs/biome": "2.4.8",
     "@rsbuild/plugin-preact": "^1.7.1",
     "@rslib/core": "^0.20.0",
     "@rstest/core": "^0.9.0",
