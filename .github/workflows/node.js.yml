@@ -6,14 +6,13 @@ name: Node.JS CI
 on:
   push:
     branches: [ master ]
-  pull_request:
+  pull_request_target:
     types: [ opened, synchronize, reopened ]
     branches: [ master ]
 
 jobs:
+  # ─── Job 1: runs PR code, NO secrets, NO write permissions ───────────────
   build:
-    permissions: {}
-
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -23,9 +22,13 @@ jobs:
           node-version: 24.x
 
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
 
     steps:
     - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v6
       with:
@@ -37,6 +40,7 @@ jobs:
     - run: yarn build
     - run: yarn ci:test
     - uses: actions/upload-artifact@v6
+      if: matrix.node-version == '24.x'
       with:
         name: coverage-${{ matrix.os }}-${{ matrix.node-version }}
         retention-days: 1
@@ -44,15 +48,20 @@ jobs:
           **/coverage/lcov.info
           !node_modules/**/coverage/lcov.info
 
-  coverage_upload:
+  # ─── Job 2: uploads coverage using secrets, does NOT run PR code ─────────
+  static_analysis:
+    name: "🔬 Static Analysis"
     needs: build
     runs-on: ubuntu-latest
+    if: success()
     permissions:
       id-token: write
       contents: read
     steps:
     # Commit is needed to check coverage files against content
     - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
     - uses: actions/download-artifact@v8
       with:
         pattern: coverage-*
