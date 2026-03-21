@@ -61,6 +61,8 @@ jobs:
     - uses: actions/checkout@v6
       with:
         ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+        # Disabling shallow clone is needed by SonarQube
+        fetch-depth: 0
     - uses: actions/download-artifact@v8
       with:
         pattern: coverage-*
@@ -69,3 +71,7 @@ jobs:
       with:
         oidc: true
         files: "**/coverage/lcov.info"
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarqube-scan-action@v6
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
