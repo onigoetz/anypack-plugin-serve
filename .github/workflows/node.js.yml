@@ -38,7 +38,7 @@ jobs:
     #- run: yarn audit
     - run: yarn build
     - run: yarn ci:test
-    - uses: actions/upload-artifact@v6
+    - uses: actions/upload-artifact@v7
       if: matrix.node-version == '24.x'
       with:
         name: reports-${{ matrix.os }}-${{ matrix.node-version }}
