@@ -72,7 +72,7 @@ jobs:
     - name: Collect Sonar report paths
       id: sonar_reports
       run: |
-        echo "test_reports=$(find . -name "sonar-report.xml" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
+        echo "test_reports=$(find __reports -name "sonar-report.xml" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
         echo "project_version=$(git tag -l --sort=-creatordate --format='%(refname:short)' | head -n1)" >> $GITHUB_OUTPUT
     - uses: qltysh/qlty-action/coverage@v2
       with:

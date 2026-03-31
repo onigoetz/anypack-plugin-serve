@@ -30,6 +30,7 @@
     "clsx": "^2.1.1",
     "happy-dom": "^20.0.0",
     "preact": "^10.28.2",
+    "rstest-sonar-reporter": "^0.1.0",
     "typescript": "^5.7.0"
   },
   "type": "module",

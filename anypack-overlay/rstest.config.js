@@ -1,4 +1,5 @@
 import { defineConfig } from '@rstest/core';
+import { SonarReporter } from 'rstest-sonar-reporter';
 
 export default defineConfig({
   include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
@@ -7,6 +8,15 @@ export default defineConfig({
     '**/dist/**',
     '**/fixtures/**',
     '**/helpers/**',
+  ],
+  reporters: [
+    'default',
+    new SonarReporter({
+      outputFile: './coverage/sonar-report.xml',
+      onWritePath(file) {
+        return `anypack-overlay/${file}`;
+      },
+    }),
   ],
   testEnvironment: 'happy-dom',
   coverage: {
