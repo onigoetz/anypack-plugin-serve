@@ -14,7 +14,7 @@ module.exports = defineConfig({
     new SonarReporter({
       outputFile: "./coverage/sonar-report.xml",
       onWritePath(file) {
-        return `plugin/${file}`;
+        return `rspack-nano/${file}`;
       },
     }),
   ],
