@@ -29,8 +29,9 @@ const readPkgName = () => {
   try {
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
     return pkg.name;
-  } catch (_error) {
+  } catch (error) {
     // istanbul ignore next
+    console.warn(`Could not read package name: ${error.message}`);
     return null;
   }
 };

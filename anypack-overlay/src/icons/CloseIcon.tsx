@@ -1,13 +1,8 @@
-import { useId } from 'preact/hooks';
-
 export default function CloseIcon() {
-  const titleId = useId();
-
   return (
     <svg
       data-testid="close-icon"
-      role="img"
-      aria-labelledby={titleId}
+      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -24,7 +19,7 @@ export default function CloseIcon() {
         display: 'block',
       }}
     >
-      <title id={titleId}>Close</title>
+      <title>Close</title>
       <line x1="18" y1="6" x2="6" y2="18" />
       <line x1="6" y1="6" x2="18" y2="18" />
     </svg>

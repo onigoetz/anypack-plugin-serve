@@ -7,7 +7,7 @@ interface ConnectionStatusProps {
 
 export default function ConnectionStatus({
   isConnected,
-}: ConnectionStatusProps) {
+}: Readonly<ConnectionStatusProps>) {
   return (
     <output
       data-testid="connection-status"

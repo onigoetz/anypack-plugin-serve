@@ -71,9 +71,8 @@ export default function TabBar({
     );
   };
 
-  /* biome-ignore-start lint/a11y/noNoninteractiveElementToInteractiveRole: not sure what to do instead */
   return (
-    <nav class={styles.tabBar} role="tablist" aria-label="Error categories">
+    <div class={styles.tabBar} role="tablist" aria-label="Error categories">
       {tabs.map((tab, index) => (
         <button
           key={tab.id}
@@ -91,7 +90,6 @@ export default function TabBar({
           {getTabTitle(tab)}
         </button>
       ))}
-    </nav>
+    </div>
   );
-  /* biome-ignore-end lint/a11y/noNoninteractiveElementToInteractiveRole: ^ */
 }

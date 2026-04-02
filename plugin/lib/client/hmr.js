@@ -49,8 +49,8 @@ const replace = async (buildHash, hash, refreshOnFailure) => {
 
     try {
       modules = await check(false);
-    } catch (_e) {
-      // noop. this typically happens when a MultiCompiler has more than one compiler that includes
+    } catch {
+      // This typically happens when a MultiCompiler has more than one compiler that includes
       // this script, and an update happens with a hash that isn't part of the compiler/module this
       // instance was loaded for.
       return;

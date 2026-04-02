@@ -27,15 +27,15 @@ const init = function init(compiler, log) {
   );
 
   /* istanbul ignore else */
-  if (!hasHMRPlugin) {
-    addPlugin(compiler);
-  } else {
+  if (hasHMRPlugin) {
     log.error(
       'anypack-plugin-serve adds HotModuleReplacementPlugin automatically. Please remove it from your config.',
     );
     throw new PluginExistsError(
       'HotModuleReplacementPlugin exists in the specified configuration.',
     );
+  } else {
+    addPlugin(compiler);
   }
 };
 

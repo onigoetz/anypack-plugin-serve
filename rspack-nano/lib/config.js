@@ -55,7 +55,7 @@ async function loadConfig(argv) {
 
     const configType = typeof configExport;
     const config = await configTypes[configType](configExport, argv);
-    const watchConfig = [].concat(config).find((c) => !!c.watch);
+    const watchConfig = [config].flat().find((c) => !!c.watch);
 
     return { config, watchConfig, emitJson: argv.json };
   }

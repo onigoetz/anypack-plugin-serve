@@ -41,14 +41,9 @@ const setupRoutes = function setupRoutes() {
         socket.send(stringify({ action, data }));
       };
 
-      registerEvent(
-        this,
-        socket,
-        'build',
-        (compilerName = '<unknown>', { wpsId }) => {
-          send('build', { compilerName, wpsId });
-        },
-      );
+      registerEvent(this, socket, 'build', (compilerName, { wpsId }) => {
+        send('build', { compilerName: compilerName ?? '<unknown>', wpsId });
+      });
 
       registerEvent(this, socket, 'done', (stats, { wpsId }) => {
         const { hash } = stats;
@@ -87,19 +82,15 @@ const setupRoutes = function setupRoutes() {
         }
       });
 
-      registerEvent(
-        this,
-        socket,
-        'invalid',
-        (filePath = '<unknown>', compiler) => {
-          const context =
-            compiler.context || compiler.options.context || process.cwd();
-          const fileName = filePath?.replace?.(context, '') || filePath;
-          const { wpsId } = compiler;
+      registerEvent(this, socket, 'invalid', (filePath, compiler) => {
+        const path = filePath ?? '<unknown>';
+        const context =
+          compiler.context || compiler.options.context || process.cwd();
+        const fileName = path?.replace?.(context, '') || path;
+        const { wpsId } = compiler;
 
-          send('invalid', { fileName, wpsId });
-        },
-      );
+        send('invalid', { fileName, wpsId });
+      });
 
       registerEvent(this, socket, 'progress', (data) => {
         send('progress', data);

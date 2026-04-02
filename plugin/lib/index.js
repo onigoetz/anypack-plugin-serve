@@ -49,7 +49,8 @@ const defaults = {
 const key = 'anypack-plugin-serve';
 const nanoid = customAlphabet('1234567890abcdef', 7);
 
-let instance = null;
+let activeInstanceId = null;
+let activeLog = null;
 
 class AnypackPluginServe extends EventEmitter {
   constructor(opts = {}) {
@@ -68,16 +69,18 @@ class AnypackPluginServe extends EventEmitter {
     // of the plugin to be tested within the same context. If you find this, use this at your own
     // peril.
     /* istanbul ignore if */
-    if (!opts.allowMany && instance) {
-      instance.log.error(
+    if (!opts.allowMany && activeInstanceId !== null) {
+      activeLog.error(
         'Duplicate instances created. Only the first instance of this plugin will be active.',
       );
       return;
     }
 
-    instance = this;
+    const instanceId = Symbol();
+    this._instanceId = instanceId;
+    activeInstanceId = instanceId;
 
-    const options = Object.assign({}, defaults, opts);
+    const options = { ...defaults, ...opts };
 
     if (options.compress === true) {
       options.compress = {};
@@ -110,6 +113,7 @@ class AnypackPluginServe extends EventEmitter {
     }
 
     this.log = getLogger(options.log || {});
+    activeLog = this.log;
     this.options = options;
     this.compilers = [];
     this.state = {};
@@ -120,7 +124,7 @@ class AnypackPluginServe extends EventEmitter {
 
     // only allow once instance of the plugin to run for a build
     /* istanbul ignore if */
-    if (instance !== this) {
+    if (activeInstanceId !== this._instanceId) {
       return;
     }
 
@@ -128,13 +132,9 @@ class AnypackPluginServe extends EventEmitter {
   }
 
   attach() {
-    const self = this;
-    const result = {
-      apply(compiler) {
-        return self.hook(compiler);
-      },
+    return {
+      apply: (compiler) => this.hook(compiler),
     };
-    return result;
   }
 
   // #138. handle emitted events that don't have a listener registered so they can be sent via WebSocket
@@ -239,7 +239,7 @@ class AnypackPluginServe extends EventEmitter {
         wpsId: compiler.wpsId,
       };
 
-      const defineObject = Object.assign({}, this.options, compilerData);
+      const defineObject = { ...this.options, ...compilerData };
       const defineData = { ʎɐɹɔosǝʌɹǝs: JSON.stringify(defineObject) };
       const definePlugin = new compiler.webpack.DefinePlugin(defineData);
 

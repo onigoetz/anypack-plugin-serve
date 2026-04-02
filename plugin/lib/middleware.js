@@ -126,11 +126,11 @@ const getBuiltins = (app, options) => {
     }
   };
 
-  const statik = (root, opts = { dev: true }) => {
-    const paths = [].concat(root || options.static);
+  const statik = (root, opts) => {
+    const paths = [root || options.static].flat();
     staticPaths = paths;
     for (const path of paths) {
-      app.use(sirv(path, opts));
+      app.use(sirv(path, opts ?? { dev: true }));
     }
   };
 

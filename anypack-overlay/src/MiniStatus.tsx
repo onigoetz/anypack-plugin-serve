@@ -56,7 +56,7 @@ export default function MiniStatus({
 
           return (
             <output
-              key={index}
+              key={compiler.name ?? String(index)}
               data-testid="compiler-status"
               data-compiler-index={index}
               aria-label={statusLabel}

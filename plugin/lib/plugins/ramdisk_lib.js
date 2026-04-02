@@ -102,17 +102,16 @@ function run(command, ...args) {
 
 class Ramdisk {
   constructor(opts = {}) {
-    const partialOpts = Object.assign({}, defaults, opts);
-    const options = Object.assign({}, partialOpts, {
+    const partialOpts = { ...defaults, ...opts };
+    const options = {
+      ...partialOpts,
       blocks: partialOpts.bytes / partialOpts.blockSize,
-    });
+    };
 
     this.options = options;
 
     this.commands = getCommands();
     this.options.diskPath = this.commands?.root(this.options);
-
-    // const options = Object.assign({}, opts, { root: commands.root });
 
     this.init();
   }

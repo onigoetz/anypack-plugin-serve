@@ -14,26 +14,6 @@ test('renders with data-testid', () => {
   expect(icon).toBeTruthy();
 });
 
-test('has role="img" for accessibility', () => {
-  render(<CloseIcon />);
-
-  const icon = screen.getByTestId('close-icon');
-  expect(icon.getAttribute('role')).toBe('img');
-});
-
-test('has aria-labelledby pointing to title', () => {
-  render(<CloseIcon />);
-
-  const icon = screen.getByTestId('close-icon');
-  const labelledBy = icon.getAttribute('aria-labelledby');
-  expect(labelledBy).toBeTruthy();
-
-  const title = icon.querySelector('title');
-  expect(title).toBeTruthy();
-  expect(title?.id).toBe(labelledBy);
-  expect(title?.textContent).toBe('Close');
-});
-
 test('renders as SVG element', () => {
   render(<CloseIcon />);
 

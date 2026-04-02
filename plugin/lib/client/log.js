@@ -26,4 +26,6 @@ const silent = {
   refresh,
 };
 
-module.exports = () => (window.anypackOverlay.silent ? silent : log);
+module.exports = function getLogger() {
+  return window.anypackOverlay.silent ? silent : log;
+};

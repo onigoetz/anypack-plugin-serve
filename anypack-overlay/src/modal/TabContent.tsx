@@ -63,7 +63,7 @@ export function ProblemDisplay({
         {error.moduleTrace && error.moduleTrace.length > 0 && (
           <ul class={styles.traceList} data-testid="module-trace">
             {error.moduleTrace.map((trace, i) => (
-              <li key={i} class={styles.traceItem}>
+              <li key={trace.moduleName || String(i)} class={styles.traceItem}>
                 {trace.moduleName}
                 {trace.dependencies.length > 0 && (
                   <span class={styles.traceLoc}>

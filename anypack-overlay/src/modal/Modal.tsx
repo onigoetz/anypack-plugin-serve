@@ -19,7 +19,7 @@ export default function Modal({
   onClose,
   runtimeErrors,
   compilers,
-}: ModalProps) {
+}: Readonly<ModalProps>) {
   const [activeTabId, setActiveTabId] = useState('runtime');
   const modalRef = useRef<HTMLDialogElement>(null);
 
@@ -92,6 +92,7 @@ export default function Modal({
   return createPortal(
     <div
       class={styles.backdrop}
+      tabIndex={-1}
       onClick={(e) => e.target === e.currentTarget && onClose()}
       data-testid="modal-backdrop"
     >

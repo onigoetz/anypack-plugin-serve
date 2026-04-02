@@ -1,13 +1,8 @@
-import { useId } from 'preact/hooks';
-
 export default function RuntimeIcon() {
-  const titleId = useId();
-
   return (
     <svg
       data-testid="runtime-icon"
-      role="img"
-      aria-labelledby={titleId}
+      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -24,7 +19,7 @@ export default function RuntimeIcon() {
         display: 'block',
       }}
     >
-      <title id={titleId}>Runtime Errors</title>
+      <title>Runtime Errors</title>
       <circle cx="12" cy="12" r="10" />
       <line x1="12" x2="12" y1="8" y2="12" />
       <line x1="12" x2="12.01" y1="16" y2="16" />
