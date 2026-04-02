@@ -22,17 +22,17 @@ Initializing overlay.
 It's done conditionally because we only need one instance initialized.
 
 ```javascript
-if (!window.anypackOverlay) {
+if (!globalThis.anypackOverlay) {
   const { init } = require("anypack-overlay");
 
-  window.anypackOverlay = init();
+  globalThis.anypackOverlay = init();
 }
 ```
 
 You can register many compilers
 
 ```javascript
-window.anypackOverlay.addCompiler(compiler);
+globalThis.anypackOverlay.addCompiler(compiler);
 ```
 
 (Following the interface defined in `src/types.ts`)

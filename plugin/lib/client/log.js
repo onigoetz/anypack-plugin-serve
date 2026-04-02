@@ -27,5 +27,5 @@ const silent = {
 };
 
 module.exports = function getLogger() {
-  return window.anypackOverlay.silent ? silent : log;
+  return globalThis.anypackOverlay.silent ? silent : log;
 };
