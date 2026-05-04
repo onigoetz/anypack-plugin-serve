@@ -20,7 +20,7 @@
     "node": ">= 20.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.12",
+    "@biomejs/biome": "2.4.14",
     "@rsbuild/plugin-preact": "^1.7.1",
     "@rslib/core": "^0.21.0",
     "@rstest/core": "^0.9.0",
@@ -30,7 +30,7 @@
     "happy-dom": "^20.0.0",
     "preact": "^10.28.2",
     "rstest-sonar-reporter": "1.0.0",
-    "typescript": "6.0.2"
+    "typescript": "6.0.3"
   },
   "type": "module",
   "scripts": {
