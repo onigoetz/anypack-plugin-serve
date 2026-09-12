@@ -48,15 +48,15 @@
     "ws": "^8.18.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.12",
-    "@rstest/core": "^0.9.0",
-    "@rstest/coverage-istanbul": "^0.3.0",
+    "@biomejs/biome": "2.5.12",
+    "@rstest/core": "^0.11.0",
+    "@rstest/coverage-istanbul": "^0.11.0",
     "del-cli": "7.0.0",
     "get-port": "^7.1.0",
     "node-fetch": "^3.3.2",
     "puppeteer": "^24.34.0",
     "random-js": "^2.1.0",
-    "rstest-sonar-reporter": "1.0.0",
+    "rstest-sonar-reporter": "1.0.1",
     "webpack": "^5.0.0",
     "webpack-nano": "^1.0.0"
   },
