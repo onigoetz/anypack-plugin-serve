@@ -18,10 +18,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "7.29.0",
-    "@babel/preset-env": "7.29.2",
-    "@babel/preset-react": "7.28.5",
-    "@biomejs/biome": "2.4.12",
+    "@babel/core": "7.29.7",
+    "@babel/preset-env": "7.29.7",
+    "@babel/preset-react": "7.29.7",
+    "@biomejs/biome": "2.5.12",
     "anypack-plugin-serve": "workspace:*",
     "babel-loader": "10.1.1",
     "cross-env": "10.1.0",
@@ -32,8 +32,8 @@
   },
   "dependencies": {
     "polka": "^0.5.2",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "sirv": "^3.0.2"
   }
 }
