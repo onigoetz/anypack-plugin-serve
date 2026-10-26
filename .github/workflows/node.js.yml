@@ -25,11 +25,11 @@ jobs:
       contents: read
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       with:
         ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
@@ -38,7 +38,7 @@ jobs:
     #- run: yarn audit
     - run: yarn build
     - run: yarn ci:test
-    - uses: actions/upload-artifact@v7
+    - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
       if: matrix.node-version == '24.x'
       with:
         name: reports-${{ matrix.os }}-${{ matrix.node-version }}
@@ -59,12 +59,12 @@ jobs:
       contents: read
     steps:
     # Commit is needed to check coverage files against content
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       with:
         ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
         # Disabling shallow clone is needed by SonarQube
         fetch-depth: 0
-    - uses: actions/download-artifact@v8
+    - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
       with:
         pattern: reports-*
         path: __reports
@@ -74,12 +74,12 @@ jobs:
       run: |
         echo "test_reports=$(find __reports -name "sonar-report.xml" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
         echo "project_version=$(git tag -l --sort=-creatordate --format='%(refname:short)' | head -n1)" >> $GITHUB_OUTPUT
-    - uses: qltysh/qlty-action/coverage@v2
+    - uses: qltysh/qlty-action/coverage@ebcd284bf32e36a030afe15f1e136c7be08b9506 # v2
       with:
         oidc: true
         files: "**/coverage/lcov.info"
     - name: SonarCloud Scan
-      uses: SonarSource/sonarqube-scan-action@v7
+      uses: SonarSource/sonarqube-scan-action@c7ee0f9df90b7aa20e8dcf9695dcfe2e7da5b4f2 # v7
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
